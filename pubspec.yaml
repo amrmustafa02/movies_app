@@ -35,7 +35,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  cached_network_image: ^3.2.3
   flutter_launcher_icons: ^0.13.1
+  dot_navigation_bar: ^1.0.1+4
+#  http: ^1.1.0
+  flutter_bloc: ^8.1.3
+  carousel_slider: ^4.2.1
+  flutter_rating_bar: ^4.0.1
+  smooth_page_indicator: ^1.1.0
+#  simple_gradient_text: ^1.2.4
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +90,9 @@ flutter:
      - family: Romanesco
        fonts:
          - asset: assets/fonts/Romanesco-Regular.ttf
+     - family: IndieFlower
+       fonts:
+         - asset: assets/fonts/IndieFlower-Regular.ttf
 
   #   - family: Trajan Pro
   #     fonts:
