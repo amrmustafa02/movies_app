@@ -27,7 +27,9 @@ class _MainScreenState extends State<MainScreen> {
             child: Text("Nautics SideBar", style: TextStyle(fontSize: 30))),
       ),
       TabItem(
-        onTap: () {},
+        onTap: () {
+          print("");
+        },
         title: const Text("Public Events"),
         tab: const Center(
             child: Text("Public Events", style: TextStyle(fontSize: 30))),
