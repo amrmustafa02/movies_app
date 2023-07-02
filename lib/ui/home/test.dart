@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/ui/shared/text_utils.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Home extends StatefulWidget {
   static String routeName = "test-screen";
@@ -21,6 +22,14 @@ class _HomeState extends State<Home> {
       _selectedTab = _SelectedTab.values[i];
     });
   }
+
+  final _controller = YoutubePlayerController(
+    initialVideoId: 'iLnmTe5Q2Qw',
+    flags: const YoutubePlayerFlags(
+      autoPlay: true,
+      mute: false,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -64,101 +73,27 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Text("Treding",style: TextStyle(
-                        //   color: Colors.white,fontSize: 34
-                        // ),)
-
-                        TextUtils.showText("Treding", 30),
-                        const Spacer(),
-                        TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "View All",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
-                            ))
-                      ],
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          width: 150,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.asset(
-                                    "assets/images/test.jpg",
-                                    width: 150,
-                                    height: 200,
-                                    fit: BoxFit.fill,
-                                  )),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                "Extraction 2",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    "2023",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: const Icon(
-                                      Icons.more_horiz,
-                                      size: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+      body: Column(
+        children: [
+          YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: Colors.amber,
+            progressColors: const ProgressBarColors(
+              playedColor: Colors.amber,
+              handleColor: Colors.amberAccent,
+            ),
+            onReady: () {
+              _controller.addListener(() {
+                if(mounted){
+                  setState(() {
+                    print("test");
+                  });
+                }
+              });
+            },
           ),
-        ),
+        ],
       ),
     );
   }

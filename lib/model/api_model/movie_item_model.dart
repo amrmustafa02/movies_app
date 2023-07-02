@@ -18,7 +18,6 @@ import 'dart:convert';
 MovieItemModel movieItemModelFromJson(String str) =>
     MovieItemModel.fromJson(json.decode(str));
 
-
 class MovieItemModel {
   MovieItemModel({
     this.adult,
@@ -56,16 +55,16 @@ class MovieItemModel {
 
   bool? adult;
   String? backdropPath;
-  List<int>? genreIds;
-  int? id;
+  List<dynamic>? genreIds;
+  dynamic id;
   String? originalLanguage;
   String? originalTitle;
   String? overview;
-  double? popularity;
+  dynamic popularity;
   String? posterPath;
   String? releaseDate;
   String? title;
   bool? video;
   dynamic voteAverage;
-  int? voteCount;
+  dynamic voteCount;
 }

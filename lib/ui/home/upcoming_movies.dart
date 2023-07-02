@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/ui/shared/components/one_row/film_item.dart';
+import 'package:movies/ui/shared/components/film_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../shared/components/boster_pages/bostar_item.dart';
+import '../shared/components/back_poster_item.dart';
 
 // ignore: must_be_immutable
 class UpComingMovies extends StatelessWidget {
@@ -23,7 +23,7 @@ class UpComingMovies extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             children: [
               PageView(
-                allowImplicitScrolling: true,
+                scrollDirection: Axis.horizontal,
                 controller: controller,
                 children: movies,
               ),
@@ -34,12 +34,12 @@ class UpComingMovies extends StatelessWidget {
           margin: const EdgeInsets.all(16),
           child: SmoothPageIndicator(
               controller: controller, // PageController
-              count: 10,
+              count: 5,
               effect: ExpandingDotsEffect(
                   spacing: 8.0,
                   radius: 4.0,
-                  dotWidth: 10.0,
-                  dotHeight: 10.0,
+                  dotWidth: 8.0,
+                  dotHeight: 8.0,
                   paintStyle: PaintingStyle.fill,
                   dotColor: Colors.grey.withOpacity(0.3),
                   activeDotColor:
