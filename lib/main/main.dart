@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/ui/home/all_movies_screen.dart';
 import 'package:movies/ui/home/main_screen.dart';
 import 'package:movies/main/my_theme.dart';
 import 'package:movies/main/splash_screen.dart';

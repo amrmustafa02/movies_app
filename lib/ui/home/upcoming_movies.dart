@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/ui/shared/components/film_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../shared/components/back_poster_item.dart';

@@ -1,7 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/ui/shared/components/film_item.dart';
+import 'package:movies/ui/home/all_movies_screen.dart';
+import 'package:movies/ui/shared/components/movie_item.dart';
 
 import '../text_utils.dart';
 
@@ -30,8 +31,16 @@ class TypeOfMovies extends StatelessWidget {
               TextUtils.showText(type, 28),
               const Spacer(),
               TextButton(
-                onPressed: () {},
-                child:  Row(
+                onPressed: () {
+                  String apiType = convertTypeToApiHint(type);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            AllMoviesScreen(type: type,apiType: apiType, movies: movies),
+                      ));
+                },
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -39,14 +48,17 @@ class TypeOfMovies extends StatelessWidget {
                       "View All ",
                       style: TextStyle(color: Colors.grey, fontSize: 12),
                     ),
-                    Icon(Icons.arrow_forward_ios,size: 10,color: Theme.of(context).primaryColor,)
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 10,
+                      color: Theme.of(context).primaryColor,
+                    )
                   ],
                 ),
               )
             ],
           ),
         ),
-
         SizedBox(
           height: 300,
           child: ListView.builder(
@@ -59,5 +71,9 @@ class TypeOfMovies extends StatelessWidget {
         )
       ],
     );
+  }
+
+  String convertTypeToApiHint(String type) {
+    return type.toLowerCase().replaceAll(" ", "_");
   }
 }

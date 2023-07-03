@@ -1,9 +1,7 @@
 import 'package:floating_tabbar/Models/tab_item.dart';
-import 'package:floating_tabbar/Widgets/top_tabbar.dart';
 import 'package:floating_tabbar/floating_tabbar.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import '../../controllers/viewModel/home_view_model.dart';
+
 import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -54,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
                   fontSize: 34, color: Colors.white, fontFamily: "Romanesco")),
         ),
         extendBody: true,
-        body: floatingTabBarPageView());
+        body: HomeScreen());
   }
 
   getBottom() {
