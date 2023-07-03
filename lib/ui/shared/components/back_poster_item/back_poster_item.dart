@@ -1,26 +1,34 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/constants/api_data.dart';
+import 'package:movies/model/api_model/movie_item_model.dart';
+import 'package:movies/ui/shared/components/back_poster_item/up_poster_item.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import 'glass_item.dart';
+import '../glass_item.dart';
+import '../icon_play_video.dart';
 
 // ignore: must_be_immutable
 class BackPosterItem extends StatefulWidget {
-  String imageUrl;
-  String movieName;
+  MovieItemModel movieItemModel;
 
-  BackPosterItem({required this.imageUrl, required this.movieName, super.key});
+  BackPosterItem({required this.movieItemModel, super.key});
 
   @override
   State<BackPosterItem> createState() => _BackPosterItemState();
 }
 
 class _BackPosterItemState extends State<BackPosterItem> {
+  late Widget iconBody;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.topLeft,
+      alignment: Alignment.bottomLeft,
       children: [
         Stack(
           alignment: Alignment.bottomCenter,
@@ -31,7 +39,8 @@ class _BackPosterItemState extends State<BackPosterItem> {
                 width: MediaQuery.of(context).size.width,
                 height: 200,
                 fit: BoxFit.fill,
-                imageUrl: ApiData.basePosterUrl + widget.imageUrl,
+                imageUrl:
+                    ApiData.basePosterUrl + widget.movieItemModel.backdropPath!,
                 placeholder: (context, url) =>
                     const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -44,7 +53,7 @@ class _BackPosterItemState extends State<BackPosterItem> {
                     colors: [
                       // Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
                       // Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
-                      Colors.black.withOpacity(0.4),
+                      Colors.black.withOpacity(0.8),
                       Colors.black.withOpacity(0.4),
                     ],
                     begin: Alignment.bottomCenter,
@@ -53,28 +62,19 @@ class _BackPosterItemState extends State<BackPosterItem> {
             ),
           ],
         ),
+        // UpBaseItem(
+        //   movieItemModel: widget.movieItemModel,
+        // ),
+
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: Text(
-            widget.movieName,
+            widget.movieItemModel.title!,
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
-        // Center(
-        //   child: InkWell(
-        //     onTap: () {
-        //
-        //     },
-        //     child: GlassItem(
-        //       theChild: Icon(
-        //         Icons.play_arrow,
-        //         color: Theme.of(context).primaryColor,
-        //       ),
-        //       theHeight: 50.0,
-        //       theWidth: 50.0,
-        //     ),
-        //   ),
-        // ),
+
+        // IconPlayVideo(),
       ],
     );
   }

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../shared/components/back_poster_item.dart';
+import '../shared/components/back_poster_item/back_poster_item.dart';
 
 // ignore: must_be_immutable
 class UpComingMovies extends StatelessWidget {
   final PageController controller = PageController();
   List<BackPosterItem> movies = [];
+
   UpComingMovies({super.key, required this.movies});
   @override
   Widget build(BuildContext context) {
-
-
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Column(
       children: [
         SizedBox(
           height: 200,
