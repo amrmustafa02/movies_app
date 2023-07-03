@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movies/ui/home/upcoming_movies.dart';
 
 import '../../controllers/viewModel/home_view_model.dart';
@@ -21,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
      builder: (context, state) {
        if (state is LoadingState) {
          return Center(
-           child: CircularProgressIndicator(
-             color: Theme.of(context).primaryColor,
+           child:  LoadingAnimationWidget.staggeredDotsWave(
+             color: Theme.of(context).primaryColor, size: 45,
            ),
          );
        }

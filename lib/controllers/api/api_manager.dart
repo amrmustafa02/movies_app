@@ -5,8 +5,8 @@ import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 
 class ApiManager {
-  static getMoivesByType(String type) async {
-    Uri uri = getPopularFilmsUri(1,type);
+  static getMoviesByType(String type, {int page = 1}) async {
+    Uri uri = getPopularFilmsUri(page,type);
     // print("=======================done============");
     var response =
         await http.get(uri, headers: {'Authorization': ApiData.token});
@@ -37,7 +37,7 @@ class ApiManager {
 
   static getPopularFilmsUri(int page,String type) {
     return Uri.https(ApiData.baseUrl, "/3/movie/$type",
-        {"page": '1', "language": 'en-US'});
+        {"page": "$page", "language": 'en-US'});
   }
   static getTrendingMoviesUri(String type){
    return Uri.https(ApiData.baseUrl, "/3/trending/movie/$type",

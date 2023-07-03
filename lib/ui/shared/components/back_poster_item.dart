@@ -20,7 +20,7 @@ class _BackPosterItemState extends State<BackPosterItem> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.bottomLeft,
+      alignment: Alignment.topLeft,
       children: [
         Stack(
           alignment: Alignment.bottomCenter,
@@ -44,8 +44,8 @@ class _BackPosterItemState extends State<BackPosterItem> {
                     colors: [
                       // Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
                       // Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
-                      Colors.black.withOpacity(0.9),
-                      Colors.black.withOpacity(0.3),
+                      Colors.black.withOpacity(0.4),
+                      Colors.black.withOpacity(0.4),
                     ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
@@ -60,21 +60,21 @@ class _BackPosterItemState extends State<BackPosterItem> {
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
-        Center(
-          child: InkWell(
-            onTap: () {
-
-            },
-            child: GlassItem(
-              theChild: Icon(
-                Icons.play_arrow,
-                color: Theme.of(context).primaryColor,
-              ),
-              theHeight: 50.0,
-              theWidth: 50.0,
-            ),
-          ),
-        ),
+        // Center(
+        //   child: InkWell(
+        //     onTap: () {
+        //
+        //     },
+        //     child: GlassItem(
+        //       theChild: Icon(
+        //         Icons.play_arrow,
+        //         color: Theme.of(context).primaryColor,
+        //       ),
+        //       theHeight: 50.0,
+        //       theWidth: 50.0,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

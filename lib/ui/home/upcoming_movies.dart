@@ -12,7 +12,8 @@ class UpComingMovies extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return Column(
+    return Stack(
+      alignment: Alignment.bottomCenter,
       children: [
         SizedBox(
           height: 200,

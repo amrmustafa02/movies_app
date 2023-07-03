@@ -10,17 +10,25 @@ class HomeViewModel extends Cubit<HomeState> {
   }
 
   getMovies() async {
-    List<MovieItemModel> popular = await ApiManager.getMoivesByType("popular");
-    List<MovieItemModel> upcoming = await ApiManager.getMoivesByType("upcoming");
-    List<MovieItemModel> nowPlaying = await ApiManager.getMoivesByType("now_playing");
-    List<MovieItemModel> topRated = await ApiManager.getMoivesByType("top_rated");
+    List<MovieItemModel> popular = await ApiManager.getMoviesByType("popular");
+
+    List<MovieItemModel> upcoming = await ApiManager.getMoviesByType("upcoming");
+
+    List<MovieItemModel> nowPlaying = await ApiManager.getMoviesByType("now_playing");
+
+    List<MovieItemModel> topRated = await ApiManager.getMoviesByType("top_rated");
+
     List<MovieItemModel> trendingRated = await ApiManager.getTrendingMovies("day");
+
     List<BackPosterItem> posterMovies = [];
-    for (int i =0;i<5;i++) {
+
+    for (int i =0;i<10;i++) {
       posterMovies.add(BackPosterItem(
           imageUrl: trendingRated[i].backdropPath!, movieName: trendingRated[i].title!));
     }
+
     emit(SuccessState(posterMovies: posterMovies, upcomingMovies: upcoming, nowPlayingMovies: nowPlaying, topRatedMovies: topRated, popularMovies: popular));
+
   }
   getTrendingMovies(String type){
 
@@ -41,4 +49,6 @@ class SuccessState extends HomeState {
   SuccessState({required this.popularMovies,required this.posterMovies,required this.upcomingMovies,required this.nowPlayingMovies,required this.topRatedMovies});
 }
 
-class FailState extends HomeState {}
+class FailState extends HomeState {
+
+}

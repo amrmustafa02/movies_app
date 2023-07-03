@@ -48,6 +48,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   floating_tabbar: ^0.0.9
   infinite_scroll_pagination: ^3.2.0
+  loading_animation_widget: ^1.2.0+4
 #  simple_gradient_text: ^1.2.4
 
 dev_dependencies:
