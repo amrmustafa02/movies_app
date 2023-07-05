@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
@@ -11,9 +12,53 @@ class ApiManager {
         {"page": "$page", "language": 'en-US'});
   }
 
+  static getUpcomingUri(int page, String startDate, String endDate) {
+    //   return Uri.https(ApiData.baseUrl, "/3/movie/$type",
+    //       {"page": "$page", "language": 'en-US'});
+    // }
+    return Uri.https(ApiData.baseUrl, "/3/discover/movie", {
+      "page": "$page",
+      "language": 'en-US',
+      "primary_release_date.gte": startDate,
+      "primary_release_date.lte": startDate,
+      "sort_by": "primary_release_date.asc"
+    });
+  }
+
   static getTrendingMoviesUri(String type) {
     return Uri.https(
         ApiData.baseUrl, "/3/trending/movie/$type", {"language": 'en-US'});
+  }
+
+  static getUpcomingMovies(int page) async {
+    DateTime startDateTime = DateTime.now().subtract(const Duration(days: 1));
+    // ignore: prefer_const_constructors
+    DateTime endDateTime = DateTime.now().add(Duration(days: 30));
+
+    String startDate = DateFormat("yyyy-MM-dd").format(startDateTime);
+    String endDate = DateFormat("yyyy-MM-dd").format(endDateTime);
+
+    Uri uri = getUpcomingUri(page, startDate, endDate);
+
+    // run request
+    var response =
+    await http.get(uri, headers: {'Authorization': ApiData.token});
+
+    // convert string to map
+    var jsonResponse = jsonDecode(response.body);
+
+    // get  all movies
+    List<dynamic> list = jsonResponse["results"];
+
+    List<MovieItemModel> movies = [];
+
+    // full list of movies model
+    for (int i = 0; i < list.length; i++) {
+      if (list[i]["poster_path"] != null)
+        movies.add(MovieItemModel.fromJson(list[i]));
+    }
+
+    return movies;
   }
 
   static getVideosUri(int id) {
@@ -21,17 +66,16 @@ class ApiManager {
         ApiData.baseUrl, "/3/movie/$id/videos", {"language": 'en-US'});
   }
 
-  // /3/movie/385687?language=en-US&append_to_response=credits
   static getMoviesDetailsUri(int id) {
     print("============$id");
-    return Uri.https(ApiData.baseUrl, "/3/movie/$id",
-        {"append_to_response": "credits"});
+    return Uri.https(
+        ApiData.baseUrl, "/3/movie/$id", {"append_to_response": "credits"});
   }
 
   static getTrendingMovies(String type) async {
     Uri uri = getTrendingMoviesUri(type);
     var response =
-        await http.get(uri, headers: {'Authorization': ApiData.token});
+    await http.get(uri, headers: {'Authorization': ApiData.token});
 
     var jsonResponse = jsonDecode(response.body);
 
@@ -46,13 +90,17 @@ class ApiManager {
   }
 
   static getMoviesByType(String type, {int page = 1}) async {
-    // create uri
+    // spacial case
+    if (type == "upcoming") {
+      return getUpcomingMovies(page);
+    }
 
+    // create uri
     Uri uri = getMoviesTypeUri(page, type);
 
     // run request
     var response =
-        await http.get(uri, headers: {'Authorization': ApiData.token});
+    await http.get(uri, headers: {'Authorization': ApiData.token});
 
     // convert string to map
     var jsonResponse = jsonDecode(response.body);
@@ -79,13 +127,11 @@ class ApiManager {
 
     // run request
     var response =
-        await http.get(uri, headers: {'Authorization': ApiData.token});
+    await http.get(uri, headers: {'Authorization': ApiData.token});
 
     // convert string to map
     var jsonResponse = jsonDecode(response.body);
 
-    print("================ ${jsonResponse["title"]}");
-    print("================ ${jsonResponse["credits"]}");
     // get  all movies
     var movieDetailsModel = MovieDetailsModel.fromJson(jsonResponse);
 
