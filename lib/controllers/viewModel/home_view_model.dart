@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/controllers/api/api_manager.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 
-import '../../ui/shared/components/back_poster_item/back_poster_item.dart';
+import '../../ui/components/back_poster_item/back_poster_item.dart';
 
 class HomeViewModel extends Cubit<HomeState> {
   HomeViewModel() : super(LoadingState()) {

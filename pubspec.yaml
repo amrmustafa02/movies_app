@@ -49,6 +49,8 @@ dependencies:
   floating_tabbar: ^0.0.9
   infinite_scroll_pagination: ^3.2.0
   loading_animation_widget: ^1.2.0+4
+  anim_search_bar: ^2.0.3
+  skeletons: ^0.0.3
 #  simple_gradient_text: ^1.2.4
 
 dev_dependencies:

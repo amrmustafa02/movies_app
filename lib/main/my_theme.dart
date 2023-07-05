@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class MyTheme {
-  static const Color _primeColor = Color(0xFFD98639);
+  static const Color primeColor = Color(0xFFD98639);
 
   static var myTheme = ThemeData(
 
@@ -14,7 +14,7 @@ class MyTheme {
         elevation: 0,
         color: Colors.transparent,
         shadowColor: Colors.transparent),
-    primaryColor: _primeColor,
+    primaryColor: primeColor,
     scaffoldBackgroundColor: const Color(0xFF1E1F27),
   );
 }

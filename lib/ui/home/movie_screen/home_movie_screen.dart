@@ -1,18 +1,18 @@
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/ui/home/upcoming_movies.dart';
+import 'package:movies/ui/home/movie_screen/upcoming_movies.dart';
+import '../../../controllers/viewModel/home_view_model.dart';
+import '../../components/type_movies_row.dart';
+import '../../shared/text_utils.dart';
 
-import '../../controllers/viewModel/home_view_model.dart';
-import '../shared/components/type_movies_row.dart';
-import '../shared/text_utils.dart';
-
-class HomeScreen extends StatefulWidget{
+class HomeMovieScreen extends StatefulWidget{
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeMovieScreen> createState() => _HomeMovieScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAliveClientMixin{
   HomeViewModel viewModel = HomeViewModel();
 
   @override
@@ -32,9 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
            child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: [
-               const SizedBox(
-                 height: 10,
-               ),
                Container(
                  margin: const EdgeInsets.only(left: 8),
                  child: Row(
@@ -86,4 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
      bloc: viewModel,
    );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

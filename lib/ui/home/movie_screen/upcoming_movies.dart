@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../shared/components/back_poster_item/back_poster_item.dart';
+import '../../components/back_poster_item/back_poster_item.dart';
 
 // ignore: must_be_immutable
 class UpComingMovies extends StatelessWidget {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movies/controllers/api/api_manager.dart';
-import 'package:movies/ui/shared/components/movie_item.dart';
+import 'package:movies/ui/components/movie_item.dart';
 
-import '../../model/api_model/movie_item_model.dart';
-import '../shared/components/view_all_movie_item.dart';
+import '../../../model/api_model/movie_item_model.dart';
 
 // ignore: must_be_immutable
 class AllMoviesScreen extends StatefulWidget {
@@ -82,14 +81,6 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
     );
   }
 
-  convertModelToWidget() {
-    int len = widget.movies.length;
-    if (len % 2 == 0) {
-      for (int i = 0; i < widget.movies.length; i++) {
-        // widget.moviesWidget.add(null);
-      }
-    }
-  }
 
   refresh() async {
     iconLoad =
@@ -97,14 +88,13 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
     setState(() {});
 
     await loadMoreItems();
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     iconLoad = const Icon(Icons.refresh_rounded);
     setState(() {});
   }
 
   Future<void> loadMoreItems() async {
     widget.page++;
-    print("-====================-page");
     List<MovieItemModel> moreMovies =
         await ApiManager.getMoviesByType(widget.apiType, page: widget.page);
     widget.movies.addAll(moreMovies);

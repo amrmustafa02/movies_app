@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/constants/api_data.dart';
+import 'package:movies/ui/movie_details_screen/main_screen.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
 
@@ -27,19 +28,24 @@ class _MovieItemState extends State<MovieItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: CachedNetworkImage(
-              width: 150,
-              height: 200,
-              fit: BoxFit.fill,
-              imageUrl:
-                  "${ApiData.baseImageUrl}${widget.movieItemModel.posterPath}",
-              placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor,
-              )),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+          InkWell(
+            onTap: (){
+              Navigator.push(context,MaterialPageRoute(builder: (context) => MovieDetailsScreen(movieId: widget.movieItemModel.id),));
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: CachedNetworkImage(
+                width: 150,
+                height: 200,
+                fit: BoxFit.fill,
+                imageUrl:
+                    "${ApiData.baseImageUrl}${widget.movieItemModel.posterPath}",
+                placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor,
+                )),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
           ),
 

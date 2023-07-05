@@ -1,10 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/ui/home/all_movies_screen.dart';
-import 'package:movies/ui/shared/components/movie_item.dart';
+import 'package:movies/ui/home/movie_screen/all_movies_screen.dart';
+import 'package:movies/ui/components/movie_item.dart';
 
-import '../text_utils.dart';
 
 // ignore: must_be_immutable
 class TypeOfMovies extends StatelessWidget {
@@ -24,11 +23,11 @@ class TypeOfMovies extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              //  Text(
-              //   type,
-              //   style: const TextStyle(color: Colors.white, fontSize: 28),
-              // ),
-              TextUtils.showText(type, 28),
+               Text(
+                type,
+                style:  TextStyle(color: Theme.of(context).primaryColor, fontSize: 28),
+              ),
+              // TextUtils.showText(type, 28),
               const Spacer(),
               TextButton(
                 onPressed: () {
