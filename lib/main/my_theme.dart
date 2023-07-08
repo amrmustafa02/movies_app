@@ -7,9 +7,7 @@ class MyTheme {
 
   static var myTheme = ThemeData(
 
-    textTheme: const TextTheme(
-
-    ),
+    textTheme: const TextTheme(),
     appBarTheme: const AppBarTheme(
         elevation: 0,
         color: Colors.transparent,

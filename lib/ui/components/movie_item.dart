@@ -5,6 +5,7 @@ import 'package:movies/constants/api_data.dart';
 import 'package:movies/ui/movie_details_screen/main_screen.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
+import 'network_image.dart';
 
 // ignore: must_be_immutable
 class MovieItem extends StatefulWidget {
@@ -29,24 +30,35 @@ class _MovieItemState extends State<MovieItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: (){
-              Navigator.push(context,MaterialPageRoute(builder: (context) => MovieDetailsScreen(movieId: widget.movieItemModel.id),));
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MovieDetailsMainScreen(movieId: widget.movieItemModel.id),
+                  ));
             },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: CachedNetworkImage(
-                width: 150,
-                height: 200,
-                fit: BoxFit.fill,
-                imageUrl:
-                    "${ApiData.baseImageUrl}${widget.movieItemModel.posterPath}",
-                placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor,
-                )),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ),
+            child: MyNetworkImage(
+              imageUrl:
+                  "${ApiData.midImageSizeUrl}${widget.movieItemModel.posterPath}",
+              width: 150,
+              height: 200,
             ),
+            // child: ClipRRect(
+            //   borderRadius: BorderRadius.circular(15),
+            //   child: CachedNetworkImage(
+            //     width: 150,
+            //     height: 200,
+            //     fit: BoxFit.fill,
+            //     imageUrl:
+            //         "${ApiData.baseImageUrl}${widget.movieItemModel.posterPath}",
+            //     placeholder: (context, url) => Center(
+            //         child: CircularProgressIndicator(
+            //       color: Theme.of(context).primaryColor,
+            //     )),
+            //     errorWidget: (context, url, error) => const Icon(Icons.error),
+            //   ),
+            // ),
           ),
 
           //--------------------------------------

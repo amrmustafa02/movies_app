@@ -1,10 +1,8 @@
-import 'CollectionMovieModel.dart';
-import 'Cast.dart';
-import 'Genre.dart';
-import 'ProductionCompanies.dart';
-import 'ProductionCountries.dart';
-import 'SpokenLanguages.dart';
-
+import 'movies_details/Genre.dart';
+import 'movies_details/Cast.dart';
+import 'movies_details/CollectionMovieModel.dart';
+import 'movies_details/ProductionCompanies.dart';
+import 'movies_details/ProductionCountries.dart';
 
 class MovieDetailsModel {
   MovieDetailsModel({
@@ -26,7 +24,6 @@ class MovieDetailsModel {
     String? releaseDate,
     num? revenue,
     num? runtime,
-    List<SpokenLanguages>? spokenLanguages,
     String? status,
     String? tagline,
     String? title,
@@ -100,7 +97,7 @@ class MovieDetailsModel {
     _title = json['title'];
     _voteAverage = json['vote_average'];
     _voteCount = json['vote_count'];
-    if (json["credits"]!=null&&json["credits"]['cast'] != null) {
+    if (json["credits"] != null && json["credits"]['cast'] != null) {
       _credits = [];
       json["credits"]['cast'].forEach((v) {
         _credits?.add(Cast.fromJson(v));
@@ -138,7 +135,6 @@ class MovieDetailsModel {
 
   CollectionMovieModel? get belongsToCollection => _belongsToCollection;
 
-
   List<Genre>? get genres => _genres;
 
   String? get homepage => _homepage;
@@ -173,9 +169,9 @@ class MovieDetailsModel {
 
   String? get title => _title;
 
+  List<Cast>? get credits => _credits;
+
   num? get voteAverage => _voteAverage;
 
   num? get voteCount => _voteCount;
-
-
 }

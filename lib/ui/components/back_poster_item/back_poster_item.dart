@@ -9,6 +9,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../glass_item.dart';
 import '../icon_play_video.dart';
+import '../network_image.dart';
 
 // ignore: must_be_immutable
 class BackPosterItem extends StatefulWidget {
@@ -39,16 +40,20 @@ class _BackPosterItemState extends State<BackPosterItem> {
               borderRadius: BorderRadius.circular(10),
               child: ImageFiltered(
                 imageFilter: ImageFilter.blur(sigmaY: 2,sigmaX: 2),
-                child: CachedNetworkImage(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
-                  fit: BoxFit.fill,
-                  imageUrl:
-                      ApiData.basePosterUrl + widget.movieItemModel.backdropPath!,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                child: MyNetworkImage(
+                  imageUrl: ApiData.midImageSizeUrl + widget.movieItemModel.backdropPath!,
+                  width: MediaQuery.of(context).size.width, height: 200,
                 ),
+                // child: CachedNetworkImage(
+                //   width: MediaQuery.of(context).size.width,
+                //   height: 200,
+                //   fit: BoxFit.fill,
+                //   imageUrl:
+                //       ApiData.basePosterUrl + widget.movieItemModel.backdropPath!,
+                //   placeholder: (context, url) =>
+                //       const Center(child: CircularProgressIndicator()),
+                //   errorWidget: (context, url, error) => const Icon(Icons.error),
+                // ),
               ),
             ),
             Container(

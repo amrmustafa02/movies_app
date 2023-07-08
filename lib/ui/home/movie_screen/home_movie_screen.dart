@@ -1,8 +1,7 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/ui/home/movie_screen/upcoming_movies.dart';
+import 'package:movies/ui/home/movie_screen/trending_movies.dart';
 import '../../../controllers/viewModel/home_view_model.dart';
 import '../../components/type_movies_row.dart';
 import '../../shared/text_utils.dart';
@@ -50,7 +49,7 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAli
                ),
                Container(
                  margin: const EdgeInsets.all(8),
-                 child: UpComingMovies(
+                 child: TrendingMovies(
                    movies: state.posterMovies,
                  ),
                ),

@@ -4,11 +4,11 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../components/back_poster_item/back_poster_item.dart';
 
 // ignore: must_be_immutable
-class UpComingMovies extends StatelessWidget {
+class TrendingMovies extends StatelessWidget {
   final PageController controller = PageController();
   List<BackPosterItem> movies = [];
 
-  UpComingMovies({super.key, required this.movies});
+  TrendingMovies({super.key, required this.movies});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +31,7 @@ class UpComingMovies extends StatelessWidget {
           margin: const EdgeInsets.all(16),
           child: SmoothPageIndicator(
               controller: controller, // PageController
-              count: 5,
+              count: movies.length~/2,
               effect: ExpandingDotsEffect(
                   spacing: 8.0,
                   radius: 4.0,

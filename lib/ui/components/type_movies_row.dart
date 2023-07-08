@@ -23,21 +23,33 @@ class TypeOfMovies extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-               Text(
+              Text(
                 type,
-                style:  TextStyle(color: Theme.of(context).primaryColor, fontSize: 28),
+                style: TextStyle(color: Theme
+                    .of(context)
+                    .primaryColor, fontSize: 28),
               ),
               // TextUtils.showText(type, 28),
               const Spacer(),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
                   String apiType = convertTypeToApiHint(type);
-                  Navigator.push(
+                  // Navigator.pushNamed(
+                  //     context, AllMoviesScreen.routeName, arguments: [
+                  //   "type": type,
+                  //   "apiType": apiType,
+                  //   "movies": movies
+                  // ]);
+                  List<MovieItemModel> newList = [];
+                  newList.addAll(movies);
+                 await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            AllMoviesScreen(type: type,apiType: apiType, movies: movies),
+                            AllMoviesScreen(
+                                type: type, apiType: apiType, movies: newList),
                       ));
+
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +62,9 @@ class TypeOfMovies extends StatelessWidget {
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 10,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme
+                          .of(context)
+                          .primaryColor,
                     )
                   ],
                 ),

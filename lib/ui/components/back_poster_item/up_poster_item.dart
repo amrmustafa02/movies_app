@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 
 import '../../../../constants/api_data.dart';
+import '../network_image.dart';
 
 class UpBaseItem extends StatelessWidget {
   MovieItemModel movieItemModel;
@@ -18,18 +19,23 @@ class UpBaseItem extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.all(8),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: CachedNetworkImage(
-              width: 100,
-              height: 150,
-              fit: BoxFit.fill,
-              imageUrl: ApiData.baseImageUrl + movieItemModel.posterPath!,
-              placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
+          child: MyNetworkImage(
+            imageUrl: ApiData.midImageSizeUrl + movieItemModel.posterPath!,
+            width:100, height: 150,
           ),
+
+          // child: ClipRRect(
+          //   borderRadius: BorderRadius.circular(10),
+          //   child: CachedNetworkImage(
+          //     width: 100,
+          //     height: 150,
+          //     fit: BoxFit.fill,
+          //     imageUrl: ,
+          //     placeholder: (context, url) =>
+          //         const Center(child: CircularProgressIndicator()),
+          //     errorWidget: (context, url, error) => const Icon(Icons.error),
+          //   ),
+          // ),
         ),
         const SizedBox(
           width: 10,

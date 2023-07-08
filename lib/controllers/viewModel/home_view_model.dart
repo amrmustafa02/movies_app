@@ -21,13 +21,13 @@ class HomeViewModel extends Cubit<HomeState> {
     List<MovieItemModel> topRated =
         await ApiManager.getMoviesByType("top_rated");
 
-    List<MovieItemModel> trendingRated =
+    List<MovieItemModel> trendingMovies =
         await ApiManager.getTrendingMovies("day");
 
     List<BackPosterItem> posterMovies = [];
 
-    for (int i = 0; i < 10; i++) {
-      posterMovies.add(BackPosterItem(movieItemModel: trendingRated[i]));
+    for (int i = 0; i < trendingMovies.length; i++) {
+      posterMovies.add(BackPosterItem(movieItemModel: trendingMovies[i]));
     }
 
     emit(SuccessState(

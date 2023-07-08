@@ -5,14 +5,13 @@ import 'package:movies/ui/components/movie_item.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
 
-// ignore: must_be_immutable
 class AllMoviesScreen extends StatefulWidget {
   static const String routeName = "all-screen-movie";
   String apiType;
   String type;
   int page = 1;
   List<MovieItemModel> movies;
-  List<Widget> moviesWidget = [];
+  late List<Widget> moviesWidget;
 
   AllMoviesScreen(
       {super.key,
@@ -34,12 +33,13 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     widget.movies = [];
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("${widget.movies.length}");
     return Scaffold(
         floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -54,7 +54,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
               color: Theme.of(context).primaryColor,
             ),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
           ),
           title: Text(widget.type),
@@ -84,7 +84,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
 
   refresh() async {
     iconLoad =
-        LoadingAnimationWidget.dotsTriangle(color: Colors.white, size: 25);
+        LoadingAnimationWidget.halfTriangleDot(color: Colors.white, size: 25);
     setState(() {});
 
     await loadMoreItems();
@@ -94,6 +94,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
   }
 
   Future<void> loadMoreItems() async {
+    print("${widget.page}");
     widget.page++;
     List<MovieItemModel> moreMovies =
         await ApiManager.getMoviesByType(widget.apiType, page: widget.page);

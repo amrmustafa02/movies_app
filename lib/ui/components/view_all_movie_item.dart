@@ -19,7 +19,7 @@ class ViewAllMovieItem extends StatelessWidget{
             child: CachedNetworkImage(
               fit: BoxFit.fill,
               imageUrl:
-              "${ApiData.baseImageUrl}${movieItemModel.posterPath}",
+              "${ApiData.midImageSizeUrl}${movieItemModel.posterPath}",
               placeholder: (context, url) => Center(
                   child: CircularProgressIndicator(
                     color: Theme.of(context).primaryColor,
