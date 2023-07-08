@@ -13,9 +13,6 @@ class ApiManager {
   }
 
   static getUpcomingUri(int page, String startDate, String endDate) {
-    //   return Uri.https(ApiData.baseUrl, "/3/movie/$type",
-    //       {"page": "$page", "language": 'en-US'});
-    // }
     return Uri.https(ApiData.baseUrl, "/3/discover/movie", {
       "page": "$page",
       "language": 'en-US',
@@ -31,7 +28,7 @@ class ApiManager {
   }
 
   static getUpcomingMovies(int page) async {
-    DateTime startDateTime = DateTime.now().subtract(const Duration(days: 1));
+    DateTime startDateTime = DateTime.now().subtract(const Duration(days: 30));
     // ignore: prefer_const_constructors
     DateTime endDateTime = DateTime.now().add(Duration(days: 30));
 
@@ -42,7 +39,7 @@ class ApiManager {
 
     // run request
     var response =
-    await http.get(uri, headers: {'Authorization': ApiData.token});
+        await http.get(uri, headers: {'Authorization': ApiData.token});
 
     // convert string to map
     var jsonResponse = jsonDecode(response.body);
@@ -51,10 +48,25 @@ class ApiManager {
     List<dynamic> list = jsonResponse["results"];
 
     List<MovieItemModel> movies = [];
-
+    // adult = json['adult'];
+    // backdropPath = json['backdrop_path'];
+    // genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
+    // id = json['id'];
+    // originalLanguage = json['original_language'];
+    // originalTitle = json['original_title'];
+    // overview = json['overview'];
+    // popularity = json['popularity'];
+    // posterPath = json['poster_path'];
+    // releaseDate = json['release_date'];
+    // title = json['title'];
+    // video = json['video'];
+    // voteAverage = json['vote_average'];
+    // voteCount = json['vote_count'];
     // full list of movies model
     for (int i = 0; i < list.length; i++) {
-      if (list[i]["poster_path"] != null)
+      if (list[i]["poster_path"] != null
+      &&list[i]["backdrop_path"]!=null
+      )
         movies.add(MovieItemModel.fromJson(list[i]));
     }
 
@@ -67,7 +79,6 @@ class ApiManager {
   }
 
   static getMoviesDetailsUri(int id) {
-    print("============$id");
     return Uri.https(
         ApiData.baseUrl, "/3/movie/$id", {"append_to_response": "credits"});
   }
@@ -75,7 +86,7 @@ class ApiManager {
   static getTrendingMovies(String type) async {
     Uri uri = getTrendingMoviesUri(type);
     var response =
-    await http.get(uri, headers: {'Authorization': ApiData.token});
+        await http.get(uri, headers: {'Authorization': ApiData.token});
 
     var jsonResponse = jsonDecode(response.body);
 
@@ -100,7 +111,7 @@ class ApiManager {
 
     // run request
     var response =
-    await http.get(uri, headers: {'Authorization': ApiData.token});
+        await http.get(uri, headers: {'Authorization': ApiData.token});
 
     // convert string to map
     var jsonResponse = jsonDecode(response.body);
@@ -127,7 +138,7 @@ class ApiManager {
 
     // run request
     var response =
-    await http.get(uri, headers: {'Authorization': ApiData.token});
+        await http.get(uri, headers: {'Authorization': ApiData.token});
 
     // convert string to map
     var jsonResponse = jsonDecode(response.body);
