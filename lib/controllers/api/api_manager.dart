@@ -64,9 +64,7 @@ class ApiManager {
     // voteCount = json['vote_count'];
     // full list of movies model
     for (int i = 0; i < list.length; i++) {
-      if (list[i]["poster_path"] != null
-      &&list[i]["backdrop_path"]!=null
-      )
+      if (list[i]["poster_path"] != null && list[i]["backdrop_path"] != null)
         movies.add(MovieItemModel.fromJson(list[i]));
     }
 
