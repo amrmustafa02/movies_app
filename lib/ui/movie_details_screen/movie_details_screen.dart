@@ -6,6 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/ui/movie_details_screen/tab_bar.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../constants/api_data.dart';
 import '../components/network_image.dart';
@@ -149,6 +150,7 @@ class MovieDetailsScreen extends StatelessWidget {
             height: 8,
           ),
           Container(
+            // ignore: prefer_const_constructors
             margin: EdgeInsets.symmetric(horizontal: 4),
             height: 30,
             child: SingleChildScrollView(
@@ -197,7 +199,7 @@ class MovieDetailsScreen extends StatelessWidget {
           Container(
               margin: const EdgeInsets.all(8),
               child: DefaultTabController(
-                  length: 3, initialIndex: 0, child: MovieDetailsTabBar()))
+                  length: 3, initialIndex: 0, child: MovieDetailsTabBar(movieDetailsModel: movieDetailsModel,))),
         ],
       ),
     );

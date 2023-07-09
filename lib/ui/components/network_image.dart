@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MyNetworkImage extends StatelessWidget {
   String imageUrl;
@@ -23,9 +24,15 @@ class MyNetworkImage extends StatelessWidget {
         fit: BoxFit.fill,
         imageUrl: imageUrl,
         placeholder: (context, url) => Center(
-            child: LoadingAnimationWidget.dotsTriangle(
-          color: Theme.of(context).primaryColor, size: 20,
-        )),
+          child: Shimmer.fromColors(
+              baseColor: Colors.grey.withOpacity(0.5),
+              highlightColor: Theme.of(context).primaryColor.withOpacity(0.8),
+              child: Container(
+                color: Colors.grey.withOpacity(0.5),
+                height: height,
+                width: width,
+              )),
+        ),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );
