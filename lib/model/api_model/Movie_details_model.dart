@@ -1,3 +1,6 @@
+import 'package:movies/model/api_model/movies_details/ImagesOfMovies.dart';
+
+import 'movies_details/Crew.dart';
 import 'movies_details/Genre.dart';
 import 'movies_details/Cast.dart';
 import 'movies_details/CollectionMovieModel.dart';
@@ -5,58 +8,6 @@ import 'movies_details/ProductionCompanies.dart';
 import 'movies_details/ProductionCountries.dart';
 
 class MovieDetailsModel {
-  MovieDetailsModel({
-    bool? adult,
-    String? backdropPath,
-    CollectionMovieModel? belongsToCollection,
-    num? budget,
-    List<Genre>? genres,
-    String? homepage,
-    num? id,
-    String? imdbId,
-    String? originalLanguage,
-    String? originalTitle,
-    String? overview,
-    num? popularity,
-    String? posterPath,
-    List<ProductionCompanies>? productionCompanies,
-    List<ProductionCountries>? productionCountries,
-    String? releaseDate,
-    num? revenue,
-    num? runtime,
-    String? status,
-    String? tagline,
-    String? title,
-    bool? video,
-    num? voteAverage,
-    num? voteCount,
-    List<Cast>? credits,
-  }) {
-    _adult = adult;
-    _backdropPath = backdropPath;
-    _belongsToCollection = belongsToCollection;
-    _genres = genres;
-    _homepage = homepage;
-    _id = id;
-    _imdbId = imdbId;
-    _originalLanguage = originalLanguage;
-    _originalTitle = originalTitle;
-    _overview = overview;
-    _popularity = popularity;
-    _posterPath = posterPath;
-    _productionCompanies = productionCompanies;
-    _productionCountries = productionCountries;
-    _releaseDate = releaseDate;
-    _revenue = revenue;
-    _runtime = runtime;
-    _status = status;
-    _tagline = tagline;
-    _title = title;
-    _voteAverage = voteAverage;
-    _voteCount = voteCount;
-    _credits = credits;
-  }
-
   MovieDetailsModel.fromJson(dynamic json) {
     _adult = json['adult'];
     _backdropPath = json['backdrop_path'];
@@ -98,11 +49,18 @@ class MovieDetailsModel {
     _voteAverage = json['vote_average'];
     _voteCount = json['vote_count'];
     if (json["credits"] != null && json["credits"]['cast'] != null) {
-      _credits = [];
+      _casts = [];
       json["credits"]['cast'].forEach((v) {
-        _credits?.add(Cast.fromJson(v));
+        _casts?.add(Cast.fromJson(v));
       });
     }
+    if (json["credits"] != null && json["credits"]['crew'] != null) {
+      _crews = [];
+      json["credits"]['crew'].forEach((v) {
+        _crews?.add(Crew.fromJson(v));
+      });
+    }
+
   }
 
   bool? _adult;
@@ -127,9 +85,12 @@ class MovieDetailsModel {
   String? _title;
   num? _voteAverage;
   num? _voteCount;
-  List<Cast>? _credits;
+  List<Cast>? _casts;
+  List<Crew>? _crews;
+  ImagesOfMovies? imagesOfMovies;
 
   bool? get adult => _adult;
+
 
   String? get backdropPath => _backdropPath;
 
@@ -169,7 +130,9 @@ class MovieDetailsModel {
 
   String? get title => _title;
 
-  List<Cast>? get credits => _credits;
+  List<Cast>? get casts => _casts;
+
+  List<Crew>? get crews => _crews;
 
   num? get voteAverage => _voteAverage;
 

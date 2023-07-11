@@ -32,51 +32,40 @@ class MovieDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 125),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
-                          bottomRight: Radius.circular(8),
-                          bottomLeft: Radius.circular(8)),
-                      child: ImageFiltered(
-                        imageFilter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            // MyNetworkImage(imageUrl: ApiData.largeImageSizeUri+state.movieDetailsModel!.backdropPath!, width:MediaQuery.of(context).size.width, height: 300,),
-                            CachedNetworkImage(
-                              width: MediaQuery.of(context).size.width,
-                              height: 250,
-                              fit: BoxFit.fill,
-                              imageUrl: ApiData.largeImageSizeUri +
-                                  movieDetailsModel.backdropPath!,
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 250,
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(8),
-                                      bottomRight: Radius.circular(8)),
-                                  gradient: LinearGradient(
-                                    // colors: [
-                                    //   Theme.of(context)
-                                    //       .scaffoldBackgroundColor
-                                    //       .withOpacity(0.9),
-                                    //   Theme.of(context)
-                                    //       .scaffoldBackgroundColor
-                                    //       .withOpacity(0.9),
-                                    // ],
-                                    colors: [
-                                      Colors.black.withOpacity(0.5),
-                                      Colors.black.withOpacity(0.4),
-                                    ],
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                  )),
-                            ),
-                          ],
-                        ),
+                          bottomRight: Radius.circular(15),
+                          bottomLeft: Radius.circular(15)),
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          // MyNetworkImage(imageUrl: ApiData.largeImageSizeUri+state.movieDetailsModel!.backdropPath!, width:MediaQuery.of(context).size.width, height: 300,),
+                          CachedNetworkImage(
+                            width: MediaQuery.of(context).size.width,
+                            height: 250,
+                            fit: BoxFit.fill,
+                            imageUrl: ApiData.largeImageSizeUri +
+                                movieDetailsModel.backdropPath!,
+                            placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 250,
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(15),
+                                    bottomRight: Radius.circular(15)),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.black.withOpacity(0.5),
+                                    Colors.black.withOpacity(0.4),
+                                  ],
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                )),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -84,12 +73,14 @@ class MovieDetailsScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                             icon: Icon(
                               Icons.arrow_back_ios_new_rounded,
                               color: Theme.of(context).primaryColor,
                             )),
-                        Spacer(),
+                        const Spacer(),
                         IconButton(
                             onPressed: () {},
                             icon: Icon(
@@ -104,7 +95,7 @@ class MovieDetailsScreen extends StatelessWidget {
               MyNetworkImage(
                   imageUrl:
                       ApiData.midImageSizeUrl + movieDetailsModel.posterPath!,
-                  width: 170,
+                  width: 180,
                   height: 250),
             ],
           ),
@@ -166,18 +157,13 @@ class MovieDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "${(movieDetailsModel.voteAverage! / 2.0).toString().substring(0, 3)}/5",
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
-              ),
               RatingBar(
                 ignoreGestures: true,
                 // <---- add this
                 initialRating: movieDetailsModel.voteAverage!.toDouble() / 2.0,
                 allowHalfRating: true,
                 itemCount: 5,
-                itemSize: 20,
+                itemSize: 30,
                 ratingWidget: RatingWidget(
                   full: const Icon(
                     Icons.star_rate_rounded,
@@ -196,10 +182,15 @@ class MovieDetailsScreen extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-              margin: const EdgeInsets.all(8),
-              child: DefaultTabController(
-                  length: 3, initialIndex: 0, child: MovieDetailsTabBar(movieDetailsModel: movieDetailsModel,))),
+          const SizedBox(
+            height: 8,
+          ),
+          DefaultTabController(
+              length: 3,
+              initialIndex: 0,
+              child: MovieDetailsTabBar(
+                movieDetailsModel: movieDetailsModel,
+              )),
         ],
       ),
     );
@@ -228,4 +219,5 @@ class MovieDetailsScreen extends StatelessWidget {
     DateTime dateTime = DateTime.parse(date);
     return DateFormat('MMM d, yyyy').format(dateTime);
   }
+
 }

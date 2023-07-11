@@ -4,10 +4,11 @@ import 'package:movies/model/api_model/Movie_details_model.dart';
 
 import 'details_tab_view.dart';
 
+// ignore: must_be_immutable
 class MovieDetailsTabBar extends StatelessWidget {
   MovieDetailsModel movieDetailsModel;
 
-  MovieDetailsTabBar({required this.movieDetailsModel});
+  MovieDetailsTabBar({super.key, required this.movieDetailsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class MovieDetailsTabBar extends StatelessWidget {
           ),
           child: Container(
             height: 40,
-            padding: const EdgeInsets.all(0),
+            margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 border: Border.all(color: Colors.grey, width: 0.3)),
@@ -43,7 +44,12 @@ class MovieDetailsTabBar extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 500,
           child: TabBarView(children: [
-            DetailsTabView(overView: movieDetailsModel.overview!),
+            DetailsTabView(
+              imagesOfMovies: movieDetailsModel.imagesOfMovies!,
+              crews: movieDetailsModel.crews!,
+              overView: movieDetailsModel.overview!,
+              casts: movieDetailsModel.casts!,
+            ),
             Container(
               width: 100,
               height: 100,

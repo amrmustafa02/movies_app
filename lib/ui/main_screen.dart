@@ -1,6 +1,6 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'home/movie_screen/home_movie_screen.dart';
+
 class MainScreen extends StatefulWidget {
   static const routeName = "main-screen";
 
@@ -12,57 +12,55 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
-  int currentBottomIndex =0;
-
-
+  int currentBottomIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Moviecoo"),
-          actions: [
-            Container(
-              child: AnimSearchBar(width: MediaQuery.of(context).size.width,
-                rtl: true,
-                searchIconColor: Theme.of(context).primaryColor,
-                color: Colors.grey.withOpacity(0.0),
-                textController:TextEditingController(), onSuffixTap:(){} , onSubmitted:(p0) {
-
-                },),
-            ),
-          ],
         ),
-          bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
             currentBottomIndex = value;
-            setState(() {
-
-            });
+            setState(() {});
           },
           elevation: 0,
-
           currentIndex: currentBottomIndex,
           backgroundColor: Colors.transparent,
           selectedItemColor: Theme.of(context).primaryColor,
-          unselectedIconTheme: const IconThemeData(
-            size: 20
-          ),
-          items:  [
-          BottomNavigationBarItem(label: "Movies", backgroundColor: Theme.of(context).scaffoldBackgroundColor,icon: const Icon(Icons.movie_rounded)),
-          BottomNavigationBarItem(label: "TV Shows", backgroundColor: Theme.of(context).scaffoldBackgroundColor, icon: const Icon(Icons.tv_rounded)),
-          BottomNavigationBarItem(label: "Likes", backgroundColor: Theme.of(context).scaffoldBackgroundColor, icon: const Icon(Icons.favorite_rounded)),
-          BottomNavigationBarItem(label: "Profile", backgroundColor: Theme.of(context).scaffoldBackgroundColor, icon: const Icon(Icons.person_rounded)),
-        ],),
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: Colors.white,
+          selectedIconTheme: IconThemeData(size: 30),
+          unselectedLabelStyle: const TextStyle(color: Colors.orange),
+          unselectedIconTheme:
+              const IconThemeData(size: 24, color: Colors.white),
+          items: [
+            BottomNavigationBarItem(
+              label: "Movies",
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              // icon: const Icon(Icons.movie_rounded)
+              icon: const ImageIcon(AssetImage("assets/images/movies.png")),
+            ),
+            //assets/images/tv-show.png
+            BottomNavigationBarItem(
+                label: "TV Shows",
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                icon: const ImageIcon(AssetImage("assets/images/tv-show.png"))),
+            BottomNavigationBarItem(
+                label: "Likes",
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                // assets/images/profile.png
+                icon: const ImageIcon(AssetImage("assets/images/love.png"))),
+            BottomNavigationBarItem(
+                label: "Profile",
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                icon: const ImageIcon(AssetImage("assets/images/profile.png"))),
+          ],
+        ),
         body: Padding(
           padding: const EdgeInsets.only(top: 10),
-          child: SafeArea(
-              top: true,
-              child: HomeMovieScreen()),
-        )
-      );
-
+          child: SafeArea(top: true, child: HomeMovieScreen()),
+        ));
   }
-
 }

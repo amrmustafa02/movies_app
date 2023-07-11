@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
+import 'package:movies/model/api_model/movies_details/ImagesOfMovies.dart';
 
 class ApiManager {
   static getMoviesTypeUri(int page, String type) {
@@ -76,9 +77,14 @@ class ApiManager {
         ApiData.baseUrl, "/3/movie/$id/videos", {"language": 'en-US'});
   }
 
-  static getMoviesDetailsUri(int id) {
+  static getImagesUri(int id) {
     return Uri.https(
-        ApiData.baseUrl, "/3/movie/$id", {"append_to_response": "credits"});
+        ApiData.baseUrl, "/3/movie/$id/images");
+  }
+
+  static getMoviesDetailsUri(int id) {
+    return Uri.https(ApiData.baseUrl, "/3/movie/$id",
+        {"append_to_response": "credits,images"});
   }
 
   static getTrendingMovies(String type) async {
@@ -127,8 +133,6 @@ class ApiManager {
     return movies;
   }
 
-  static getVideosForMovie() {}
-
   static getMoviesDetails(int id) async {
     // create uri
 
@@ -143,7 +147,33 @@ class ApiManager {
 
     // get  all movies
     var movieDetailsModel = MovieDetailsModel.fromJson(jsonResponse);
+    ImagesOfMovies imagesOfMovies = await getMoviesImages(id);
+
+    movieDetailsModel.imagesOfMovies = imagesOfMovies;
 
     return movieDetailsModel;
+  }
+
+  static getReviewsOnMovie() {}
+
+  static getVideosForMovie() {}
+
+  static getMoviesImages(int id) async {
+    Uri uri = getImagesUri(id);
+
+    // run request
+    var response =
+        await http.get(uri, headers: {'Authorization': ApiData.token});
+
+    print(response.body);
+
+    var jsonResponse = jsonDecode(response.body);
+
+    print(jsonResponse);
+
+    // get all movies images
+    ImagesOfMovies imagesOfMovies = ImagesOfMovies.fromJson(jsonResponse);
+
+    return imagesOfMovies;
   }
 }

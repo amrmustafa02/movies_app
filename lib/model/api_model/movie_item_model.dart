@@ -67,4 +67,5 @@ class MovieItemModel {
   bool? video;
   dynamic voteAverage;
   dynamic voteCount;
+
 }
