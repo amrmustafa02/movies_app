@@ -16,10 +16,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
-        MainScreen.routeName: (context) => MainScreen(),
+        MainScreen.routeName: (context) => const MainScreen(),
         TestScreen.routeName: (context) => TestScreen(),
       },
       initialRoute: SplashScreen.routeName,
     );
   }
 }
+
