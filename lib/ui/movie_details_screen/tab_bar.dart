@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 
+import '../../model/api_model/movies_details/ReviewModel.dart';
+import 'reviews_tab_view.dart';
 import 'details_tab_view.dart';
 
 // ignore: must_be_immutable
 class MovieDetailsTabBar extends StatelessWidget {
   MovieDetailsModel movieDetailsModel;
+  ReviewModel reviewModel;
 
-  MovieDetailsTabBar({super.key, required this.movieDetailsModel});
+  MovieDetailsTabBar(
+      {super.key, required this.reviewModel, required this.movieDetailsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +54,7 @@ class MovieDetailsTabBar extends StatelessWidget {
               overView: movieDetailsModel.overview!,
               casts: movieDetailsModel.casts!,
             ),
-            Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
-            ),
+            ReviewsTabView(reviewModel:reviewModel),
             Container(
               width: 100,
               height: 100,

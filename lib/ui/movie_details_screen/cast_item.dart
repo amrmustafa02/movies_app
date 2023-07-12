@@ -16,7 +16,7 @@ class CastItem extends StatelessWidget {
   CastItem({super.key,
     this.putIcon = true,
     this.width = 70,
-    this.height=75,
+    this.height = 75,
     this.fontSize=16,
     required this.castModel,
     required this.imageUri});
@@ -31,14 +31,19 @@ class CastItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
+
+
+
+
           ClipRRect(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(15),
             child: MyNetworkImage(
               imageUrl: ApiData.midImageSizeUrl + (castModel.profilePath ?? ""),
               width: width,
               height: height,
             ),
           ),
+
           const SizedBox(
             width: 8,
           ),

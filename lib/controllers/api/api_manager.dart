@@ -6,6 +6,7 @@ import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/movies_details/ImagesOfMovies.dart';
+import 'package:movies/model/api_model/movies_details/ReviewModel.dart';
 
 class ApiManager {
   static getMoviesTypeUri(int page, String type) {
@@ -78,8 +79,11 @@ class ApiManager {
   }
 
   static getImagesUri(int id) {
-    return Uri.https(
-        ApiData.baseUrl, "/3/movie/$id/images");
+    return Uri.https(ApiData.baseUrl, "/3/movie/$id/images");
+  }
+
+  static getReviewUri(int id) {
+    return Uri.https(ApiData.baseUrl, "/3/movie/$id/reviews");
   }
 
   static getMoviesDetailsUri(int id) {
@@ -154,9 +158,26 @@ class ApiManager {
     return movieDetailsModel;
   }
 
-  static getReviewsOnMovie() {}
+  static getVideosOnMovie() {}
 
-  static getVideosForMovie() {}
+  static getReviewsOnMovie(int id) async {
+    Uri uri = getReviewUri(id);
+
+    // run request
+    var response =
+        await http.get(uri, headers: {'Authorization': ApiData.token});
+
+    print(response.body);
+
+    var jsonResponse = jsonDecode(response.body);
+
+    print(jsonResponse);
+
+    // get all movies images
+    ReviewModel imagesOfMovies = ReviewModel.fromJson(jsonResponse);
+
+    return imagesOfMovies;
+  }
 
   static getMoviesImages(int id) async {
     Uri uri = getImagesUri(id);

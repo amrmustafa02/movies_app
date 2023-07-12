@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -30,7 +29,11 @@ class MovieDetailsMainScreen extends StatelessWidget {
             );
           }
           if (state is SuccessMovieDetailsState) {
-            return MovieDetailsScreen(movieDetailsModel: state.movieDetailsModel!);
+            print(state.reviewModel);
+            return MovieDetailsScreen(
+              movieDetailsModel: state.movieDetailsModel!,
+              reviewItem: state.reviewModel!,
+            );
           }
           return const Text(
             "Hello",

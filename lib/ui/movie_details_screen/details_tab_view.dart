@@ -11,7 +11,7 @@ import '../../model/api_model/movies_details/Crew.dart';
 import 'cast_item.dart';
 
 // ignore: must_be_immutable
-class DetailsTabView extends StatelessWidget {
+class DetailsTabView extends StatefulWidget  {
   ImagesOfMovies imagesOfMovies;
   String overView;
   List<Cast> casts;
@@ -24,6 +24,11 @@ class DetailsTabView extends StatelessWidget {
       required this.overView,
       required this.casts});
 
+  @override
+  State<DetailsTabView> createState() => _DetailsTabViewState();
+}
+
+class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAliveClientMixin<DetailsTabView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +46,7 @@ class DetailsTabView extends StatelessWidget {
               height: 5,
             ),
             ReadMoreText(
-              overView,
+              widget.overView,
               postDataTextStyle:
                   const TextStyle(fontSize: 16, color: Colors.grey),
               preDataTextStyle:
@@ -69,7 +74,7 @@ class DetailsTabView extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return AllCastScreen(crew: crews, casts: casts);
+                          return AllCastScreen(crew: widget.crews, casts: widget.casts);
                         },
                       ));
                     },
@@ -79,11 +84,11 @@ class DetailsTabView extends StatelessWidget {
                     )),
               ],
             ),
-            CastItem(imageUri: casts[0].profilePath!, castModel: casts[0]),
-            CastItem(imageUri: casts[1].profilePath!, castModel: casts[1]),
-            CastItem(imageUri: casts[2].profilePath!, castModel: casts[2]),
-            CastItem(imageUri: casts[3].profilePath!, castModel: casts[3]),
-            CastItem(imageUri: casts[4].profilePath!, castModel: casts[4]),
+            CastItem(imageUri: widget.casts[0].profilePath!, castModel: widget.casts[0]),
+            CastItem(imageUri: widget.casts[1].profilePath!, castModel: widget.casts[1]),
+            CastItem(imageUri: widget.casts[2].profilePath!, castModel: widget.casts[2]),
+            CastItem(imageUri: widget.casts[3].profilePath!, castModel: widget.casts[3]),
+            CastItem(imageUri: widget.casts[4].profilePath!, castModel: widget.casts[4]),
 
             Row(
               children: [
@@ -96,7 +101,7 @@ class DetailsTabView extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return AllCastScreen(crew: crews, casts: casts);
+                          return AllCastScreen(crew: widget.crews, casts: widget.casts);
                         },
                       ));
                     },
@@ -112,11 +117,11 @@ class DetailsTabView extends StatelessWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: imagesOfMovies.backdrops!.length,
+                  itemCount: widget.imagesOfMovies.backdrops!.length,
                   itemBuilder: (context, index) {
                     return MyNetworkImage(
                       imageUrl: ApiData.largeImageSizeUri +
-                          imagesOfMovies.backdrops![index].filePath!,
+                          widget.imagesOfMovies.backdrops![index].filePath!,
                       width: 250,
                       height: 150,
                     );
@@ -135,4 +140,7 @@ class DetailsTabView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

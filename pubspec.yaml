@@ -50,6 +50,7 @@ dependencies:
   intl: ^0.18.1
   shimmer: ^3.0.0
   readmore: ^2.2.0
+  flutter_custom_clippers: ^2.1.0
 #  simple_gradient_text: ^1.2.4
 
 dev_dependencies:

@@ -24,8 +24,8 @@ class MyNetworkImage extends StatelessWidget {
         imageUrl: imageUrl,
         placeholder: (context, url) => Center(
           child: Shimmer.fromColors(
-              baseColor: Colors.grey.withOpacity(0.5),
-              highlightColor: Theme.of(context).primaryColor.withOpacity(0.8),
+              baseColor: Colors.grey.withOpacity(0.1),
+              highlightColor: Theme.of(context).primaryColor.withOpacity(0.4),
               child: Container(
                 color: Colors.grey.withOpacity(0.5),
                 height: height,

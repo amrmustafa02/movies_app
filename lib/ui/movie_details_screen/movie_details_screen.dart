@@ -6,15 +6,14 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/ui/movie_details_screen/tab_bar.dart';
-import 'package:shimmer/shimmer.dart';
-
 import '../../constants/api_data.dart';
+import '../../model/api_model/movies_details/ReviewModel.dart';
 import '../components/network_image.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   MovieDetailsModel movieDetailsModel;
-
-  MovieDetailsScreen({required this.movieDetailsModel, super.key});
+  ReviewModel reviewItem;
+  MovieDetailsScreen({required this.movieDetailsModel, required this.reviewItem,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +188,7 @@ class MovieDetailsScreen extends StatelessWidget {
               length: 3,
               initialIndex: 0,
               child: MovieDetailsTabBar(
-                movieDetailsModel: movieDetailsModel,
+                movieDetailsModel: movieDetailsModel, reviewModel: reviewItem,
               )),
         ],
       ),

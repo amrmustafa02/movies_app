@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 
+import '../../model/api_model/movies_details/ReviewModel.dart';
 import '../api/api_manager.dart';
 
 class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
@@ -10,7 +11,8 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
 
   getMovieDetails(int id) async {
     MovieDetailsModel movieDetails = await ApiManager.getMoviesDetails(id);
-    emit(SuccessMovieDetailsState(movieDetails));
+    ReviewModel reviewModel = await ApiManager.getReviewsOnMovie(id);
+    emit(SuccessMovieDetailsState(movieDetails,reviewModel));
   }
 }
 
@@ -20,6 +22,7 @@ class LoadingMovieDetailsState extends MovieDetailsState {}
 
 class SuccessMovieDetailsState extends MovieDetailsState {
   MovieDetailsModel? movieDetailsModel;
+  ReviewModel? reviewModel;
 
-  SuccessMovieDetailsState(this.movieDetailsModel);
+  SuccessMovieDetailsState(this.movieDetailsModel,this.reviewModel);
 }
