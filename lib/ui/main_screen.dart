@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home/movie_screen/home_movie_screen.dart';
+
+import 'movies/movie_screen/home_movie_screen.dart';
 
 class MainScreen extends StatefulWidget {
   static const routeName = "main-screen";

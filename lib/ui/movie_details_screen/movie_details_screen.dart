@@ -13,7 +13,9 @@ import '../components/network_image.dart';
 class MovieDetailsScreen extends StatelessWidget {
   MovieDetailsModel movieDetailsModel;
   ReviewModel reviewItem;
-  MovieDetailsScreen({required this.movieDetailsModel, required this.reviewItem,super.key});
+
+  MovieDetailsScreen(
+      {required this.movieDetailsModel, required this.reviewItem, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +43,10 @@ class MovieDetailsScreen extends StatelessWidget {
                             width: MediaQuery.of(context).size.width,
                             height: 250,
                             fit: BoxFit.fill,
-                            imageUrl: ApiData.largeImageSizeUri +
-                                movieDetailsModel.backdropPath!,
+                            imageUrl: movieDetailsModel.backdropPath == null
+                                ? ""
+                                : ApiData.largeImageSizeUri +
+                                    movieDetailsModel.backdropPath!,
                             placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
@@ -92,8 +96,9 @@ class MovieDetailsScreen extends StatelessWidget {
                 ],
               ),
               MyNetworkImage(
-                  imageUrl:
-                      ApiData.midImageSizeUrl + movieDetailsModel.posterPath!,
+                  imageUrl: movieDetailsModel.posterPath == null
+                      ? "assets/images/no-image.png"
+                      : ApiData.midImageSizeUrl + movieDetailsModel.posterPath!,
                   width: 180,
                   height: 250),
             ],
@@ -103,7 +108,7 @@ class MovieDetailsScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 12),
             child: Text(
               textAlign: TextAlign.center,
-              movieDetailsModel.title!,
+              movieDetailsModel.title ?? "No title found",
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 20, color: Colors.white),
@@ -115,7 +120,7 @@ class MovieDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  getRunTimeByHour(movieDetailsModel.runtime!),
+                  getRunTimeByHour(movieDetailsModel.runtime ?? 0),
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
@@ -129,7 +134,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  getReleaseDate(movieDetailsModel.releaseDate!),
+                  getReleaseDate(movieDetailsModel.releaseDate ?? ""),
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
@@ -159,7 +164,9 @@ class MovieDetailsScreen extends StatelessWidget {
               RatingBar(
                 ignoreGestures: true,
                 // <---- add this
-                initialRating: movieDetailsModel.voteAverage!.toDouble() / 2.0,
+                initialRating: movieDetailsModel.voteAverage == null
+                    ? 0
+                    : (movieDetailsModel.voteAverage!.toDouble() / 2.0),
                 allowHalfRating: true,
                 itemCount: 5,
                 itemSize: 30,
@@ -188,7 +195,8 @@ class MovieDetailsScreen extends StatelessWidget {
               length: 3,
               initialIndex: 0,
               child: MovieDetailsTabBar(
-                movieDetailsModel: movieDetailsModel, reviewModel: reviewItem,
+                movieDetailsModel: movieDetailsModel,
+                reviewModel: reviewItem,
               )),
         ],
       ),
@@ -202,7 +210,7 @@ class MovieDetailsScreen extends StatelessWidget {
   }
 
   getGenres() {
-    var genres = movieDetailsModel.genres!;
+    var genres = movieDetailsModel.genres ?? [];
     String result = "";
     for (int i = 0; i < genres.length - 1; i++) {
       result += "${genres[i].name!}, ";
@@ -218,5 +226,4 @@ class MovieDetailsScreen extends StatelessWidget {
     DateTime dateTime = DateTime.parse(date);
     return DateFormat('MMM d, yyyy').format(dateTime);
   }
-
 }

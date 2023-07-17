@@ -28,12 +28,8 @@ class CastItem extends StatelessWidget {
           .of(context)
           .size
           .width,
-      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-
-
-
 
           ClipRRect(
             borderRadius: BorderRadius.circular(15),

@@ -21,11 +21,11 @@ class _TabIndicatorPainter extends BoxPainter {
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
-    final double _xPos = offset.dx + cfg.size!.width / 2;
+    final double xPos = offset.dx + cfg.size!.width / 2;
 
     canvas.drawRRect(
       RRect.fromRectAndCorners(
-        Rect.fromLTRB(_xPos - 20, 0, _xPos + 20, 5),
+        Rect.fromLTRB(xPos - 20, 0, xPos + 20, 5),
         bottomLeft: const Radius.circular(5.0),
         bottomRight: const Radius.circular(5.0),
       ),

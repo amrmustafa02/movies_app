@@ -20,7 +20,7 @@ class DrawTriangle extends BoxPainter {
   }
 
   @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     final Offset triangleOffset =
         offset;
     var path = Path();

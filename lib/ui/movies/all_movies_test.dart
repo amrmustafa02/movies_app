@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies/ui/home/movie_screen/home_movie_screen.dart';
+
+import 'movie_screen/home_movie_screen.dart';
 
 class TestScreen extends StatelessWidget {
   static String routeName = "Test-Screen";
@@ -20,7 +21,7 @@ class TestScreen extends StatelessWidget {
                   floating: true,
                   pinned: true,
                   snap: true,
-                  bottom: TabBar(
+                  bottom: const TabBar(
                     tabs: <Tab>[
                       Tab(text: "T"),
                       Tab(text: "B"),
@@ -32,7 +33,7 @@ class TestScreen extends StatelessWidget {
             },
             body: TabBarView(
               children: <Widget>[
-                 HomeMovieScreen(),
+                HomeMovieScreen(),
                 HomeMovieScreen(),
                 HomeMovieScreen(),
               ],

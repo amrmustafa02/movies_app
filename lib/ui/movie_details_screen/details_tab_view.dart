@@ -84,11 +84,13 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
                     )),
               ],
             ),
-            CastItem(imageUri: widget.casts[0].profilePath!, castModel: widget.casts[0]),
-            CastItem(imageUri: widget.casts[1].profilePath!, castModel: widget.casts[1]),
-            CastItem(imageUri: widget.casts[2].profilePath!, castModel: widget.casts[2]),
-            CastItem(imageUri: widget.casts[3].profilePath!, castModel: widget.casts[3]),
-            CastItem(imageUri: widget.casts[4].profilePath!, castModel: widget.casts[4]),
+
+
+            CastItem(imageUri: widget.casts[0].profilePath??"", castModel: widget.casts[0]),
+            CastItem(imageUri: widget.casts[1].profilePath??"", castModel: widget.casts[1]),
+            CastItem(imageUri: widget.casts[2].profilePath??"", castModel: widget.casts[2]),
+            CastItem(imageUri: widget.casts[3].profilePath??"", castModel: widget.casts[3]),
+            CastItem(imageUri: widget.casts[4].profilePath??"", castModel: widget.casts[4]),
 
             Row(
               children: [
@@ -140,6 +142,8 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
       ),
     );
   }
+
+
 
   @override
   bool get wantKeepAlive => true;

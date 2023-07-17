@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/ui/home/movie_screen/all_movies_screen.dart';
 import 'package:movies/ui/components/movie_item.dart';
+
+import '../movies/movie_screen/all_movies_screen.dart';
 
 
 // ignore: must_be_immutable

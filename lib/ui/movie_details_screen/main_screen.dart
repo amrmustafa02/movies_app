@@ -29,7 +29,6 @@ class MovieDetailsMainScreen extends StatelessWidget {
             );
           }
           if (state is SuccessMovieDetailsState) {
-            print(state.reviewModel);
             return MovieDetailsScreen(
               movieDetailsModel: state.movieDetailsModel!,
               reviewItem: state.reviewModel!,

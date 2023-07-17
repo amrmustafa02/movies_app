@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
+import 'package:movies/model/api_model/movies_details/ImagesOfMovies.dart';
 
 import '../../model/api_model/movies_details/ReviewModel.dart';
 import 'reviews_tab_view.dart';
@@ -44,17 +44,18 @@ class MovieDetailsTabBar extends StatelessWidget {
                 ]),
           ),
         ),
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: 500,
+          height: 1000,
           child: TabBarView(children: [
             DetailsTabView(
-              imagesOfMovies: movieDetailsModel.imagesOfMovies!,
-              crews: movieDetailsModel.crews!,
-              overView: movieDetailsModel.overview!,
-              casts: movieDetailsModel.casts!,
+              imagesOfMovies:
+                  movieDetailsModel.imagesOfMovies ?? ImagesOfMovies(),
+              crews: movieDetailsModel.crews??[],
+              overView: movieDetailsModel.overview??"",
+              casts: movieDetailsModel.casts??[],
             ),
-            ReviewsTabView(reviewModel:reviewModel),
+            ReviewsTabView(reviewModel: reviewModel),
             Container(
               width: 100,
               height: 100,

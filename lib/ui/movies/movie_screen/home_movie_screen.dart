@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/ui/home/movie_screen/trending_movies.dart';
+import 'package:movies/ui/movies/movie_screen/trending_movies.dart';
 import '../../../controllers/viewModel/home_view_model.dart';
 import '../../components/type_movies_row.dart';
 import '../../shared/text_utils.dart';
 
 class HomeMovieScreen extends StatefulWidget{
+  const HomeMovieScreen({super.key});
+
   @override
   State<HomeMovieScreen> createState() => _HomeMovieScreenState();
 }
@@ -16,6 +18,7 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAli
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
 
    return BlocBuilder<HomeViewModel, HomeState>(
      builder: (context, state) {
@@ -26,8 +29,11 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAli
            ),
          );
        }
+
        if (state is SuccessState) {
+
          return SingleChildScrollView(
+
            child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: [
@@ -71,10 +77,12 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAli
                ),
              ],
            ),
+
          );
 
          // return
        }
+
        return const SizedBox(
          height: 200,
        );

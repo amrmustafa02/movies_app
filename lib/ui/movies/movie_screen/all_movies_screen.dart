@@ -5,6 +5,7 @@ import 'package:movies/ui/components/movie_item.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
 
+// ignore: must_be_immutable
 class AllMoviesScreen extends StatefulWidget {
   static const String routeName = "all-screen-movie";
   String apiType;
@@ -39,7 +40,6 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("${widget.movies.length}");
     return Scaffold(
         floatingActionButton: FloatingActionButton(
             onPressed: () {
