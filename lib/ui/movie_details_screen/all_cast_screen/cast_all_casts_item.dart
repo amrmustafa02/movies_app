@@ -19,7 +19,7 @@ class CastViewAllItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          imagePath.isEmpty?Image.asset("assets/images/no_image.png"):
+          imagePath.isEmpty?Image.asset("assets/images/user.png",width: 70,height: 75,fit: BoxFit.fill,):
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child:MyNetworkImage(

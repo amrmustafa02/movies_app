@@ -46,7 +46,7 @@ class MovieDetailsTabBar extends StatelessWidget {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: 1000,
+          height:  MediaQuery.of(context).size.height/2,
           child: TabBarView(children: [
             DetailsTabView(
               imagesOfMovies:

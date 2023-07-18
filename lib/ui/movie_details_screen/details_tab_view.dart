@@ -11,7 +11,7 @@ import '../../model/api_model/movies_details/Crew.dart';
 import 'cast_item.dart';
 
 // ignore: must_be_immutable
-class DetailsTabView extends StatefulWidget  {
+class DetailsTabView extends StatefulWidget {
   ImagesOfMovies imagesOfMovies;
   String overView;
   List<Cast> casts;
@@ -28,7 +28,8 @@ class DetailsTabView extends StatefulWidget  {
   State<DetailsTabView> createState() => _DetailsTabViewState();
 }
 
-class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAliveClientMixin<DetailsTabView> {
+class _DetailsTabViewState extends State<DetailsTabView>
+    with AutomaticKeepAliveClientMixin<DetailsTabView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,6 +46,7 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
             const SizedBox(
               height: 5,
             ),
+            // Text(widget.overView,style: TextStyle(fontSize: 16, color: Colors.grey)),
             ReadMoreText(
               widget.overView,
               postDataTextStyle:
@@ -74,7 +76,8 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return AllCastScreen(crew: widget.crews, casts: widget.casts);
+                          return AllCastScreen(
+                              crew: widget.crews, casts: widget.casts);
                         },
                       ));
                     },
@@ -84,14 +87,31 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
                     )),
               ],
             ),
-
-
-            CastItem(imageUri: widget.casts[0].profilePath??"", castModel: widget.casts[0]),
-            CastItem(imageUri: widget.casts[1].profilePath??"", castModel: widget.casts[1]),
-            CastItem(imageUri: widget.casts[2].profilePath??"", castModel: widget.casts[2]),
-            CastItem(imageUri: widget.casts[3].profilePath??"", castModel: widget.casts[3]),
-            CastItem(imageUri: widget.casts[4].profilePath??"", castModel: widget.casts[4]),
-
+            widget.casts.isNotEmpty
+                ? CastItem(
+                    imageUri: widget.casts[0].profilePath,
+                    castModel: widget.casts[0])
+                : Container(),
+            widget.casts.length>1
+                ? CastItem(
+                imageUri: widget.casts[1].profilePath,
+                castModel: widget.casts[1])
+                : Container(),
+            widget.casts.length>2
+                ? CastItem(
+                imageUri: widget.casts[2].profilePath,
+                castModel: widget.casts[2])
+                : Container(),
+            widget.casts.length>3
+                ? CastItem(
+                imageUri: widget.casts[3].profilePath,
+                castModel: widget.casts[3])
+                : Container(),
+            widget.casts.length>4
+                ? CastItem(
+                imageUri: widget.casts[4].profilePath,
+                castModel: widget.casts[4])
+                : Container(),
             Row(
               children: [
                 const Text(
@@ -103,7 +123,8 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return AllCastScreen(crew: widget.crews, casts: widget.casts);
+                          return AllCastScreen(
+                              crew: widget.crews, casts: widget.casts);
                         },
                       ));
                     },
@@ -113,7 +134,6 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
                     )),
               ],
             ),
-
             SizedBox(
                 height: 200,
                 child: ListView.separated(
@@ -134,16 +154,12 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
                     );
                   },
                 )),
-            const SizedBox(
-              height: 100,
-            ),
+
           ],
         ),
       ),
     );
   }
-
-
 
   @override
   bool get wantKeepAlive => true;

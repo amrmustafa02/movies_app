@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -7,9 +5,12 @@ import 'package:intl/intl.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/ui/movie_details_screen/tab_bar.dart';
 import '../../constants/api_data.dart';
+import '../../model/api_model/movies_details/ImagesOfMovies.dart';
 import '../../model/api_model/movies_details/ReviewModel.dart';
 import '../components/network_image.dart';
+import 'details_tab_view.dart';
 
+// ignore: must_be_immutable
 class MovieDetailsScreen extends StatelessWidget {
   MovieDetailsModel movieDetailsModel;
   ReviewModel reviewItem;
@@ -30,11 +31,11 @@ class MovieDetailsScreen extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(bottom: 125),
+                    padding: const EdgeInsets.only(bottom: 200),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
-                          bottomRight: Radius.circular(15),
-                          bottomLeft: Radius.circular(15)),
+                          bottomRight: Radius.circular(8),
+                          bottomLeft: Radius.circular(8)),
                       child: Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
@@ -57,8 +58,8 @@ class MovieDetailsScreen extends StatelessWidget {
                             height: 250,
                             decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15)),
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8)),
                                 gradient: LinearGradient(
                                   colors: [
                                     Colors.black.withOpacity(0.5),
@@ -95,68 +96,142 @@ class MovieDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              MyNetworkImage(
-                  imageUrl: movieDetailsModel.posterPath == null
-                      ? "assets/images/no-image.png"
-                      : ApiData.midImageSizeUrl + movieDetailsModel.posterPath!,
-                  width: 180,
-                  height: 250),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  MyNetworkImage(
+                      imageUrl: movieDetailsModel.posterPath == null
+                          ? "assets/images/no-image.png"
+                          : ApiData.midImageSizeUrl +
+                              movieDetailsModel.posterPath!,
+                      width: MediaQuery.sizeOf(context).width * 0.47,
+                      height: 250),
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width / 2) - 10,
+                    child: Column(
+
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          textAlign: TextAlign.center,
+                          movieDetailsModel.title ?? "No title found",
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
+                        ),
+                        const SizedBox(height: 10,),
+                        IntrinsicHeight(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                getRunTimeByHour(
+                                    movieDetailsModel.runtime ?? 0),
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.grey),
+                              ),
+                              Container(
+                                // ignore: prefer_const_constructors
+                                margin: EdgeInsets.symmetric(horizontal: 4),
+                                child: VerticalDivider(
+                                  width: 1,
+                                  color: Theme.of(context).primaryColor,
+                                  thickness: 1,
+                                ),
+                              ),
+                              Text(
+                                getReleaseDate(
+                                    movieDetailsModel.releaseDate ?? ""),
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 10,),
+
+                        Container(
+                          // ignore: prefer_const_constructors
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          height: 50,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Text(
+                              getGenres(),
+                              style: const TextStyle(fontSize: 14, color: Colors.grey),
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-          Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.symmetric(vertical: 12),
-            child: Text(
-              textAlign: TextAlign.center,
-              movieDetailsModel.title ?? "No title found",
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 20, color: Colors.white),
-            ),
-          ),
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  getRunTimeByHour(movieDetailsModel.runtime ?? 0),
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 14, color: Colors.grey),
-                ),
-                Container(
-                  // ignore: prefer_const_constructors
-                  margin: EdgeInsets.symmetric(horizontal: 4),
-                  child: VerticalDivider(
-                    width: 1,
-                    color: Theme.of(context).primaryColor,
-                    thickness: 1,
-                  ),
-                ),
-                Text(
-                  getReleaseDate(movieDetailsModel.releaseDate ?? ""),
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 14, color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Container(
-            // ignore: prefer_const_constructors
-            margin: EdgeInsets.symmetric(horizontal: 4),
-            height: 30,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Text(
-                getGenres(),
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 14, color: Colors.grey),
-              ),
-            ),
-          ),
+          // Container(
+          //   alignment: Alignment.center,
+          //   margin: const EdgeInsets.symmetric(vertical: 12),
+          //   child: Text(
+          //     textAlign: TextAlign.center,
+          //     movieDetailsModel.title ?? "No title found",
+          //     maxLines: 3,
+          //     overflow: TextOverflow.ellipsis,
+          //     style: const TextStyle(fontSize: 20, color: Colors.white),
+          //   ),
+          // ),
+          // IntrinsicHeight(
+          //   child: Row(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Text(
+          //         getRunTimeByHour(movieDetailsModel.runtime ?? 0),
+          //         overflow: TextOverflow.ellipsis,
+          //         style: const TextStyle(fontSize: 14, color: Colors.grey),
+          //       ),
+          //       Container(
+          //         // ignore: prefer_const_constructors
+          //         margin: EdgeInsets.symmetric(horizontal: 4),
+          //         child: VerticalDivider(
+          //           width: 1,
+          //           color: Theme.of(context).primaryColor,
+          //           thickness: 1,
+          //         ),
+          //       ),
+          //       Text(
+          //         getReleaseDate(movieDetailsModel.releaseDate ?? ""),
+          //         overflow: TextOverflow.ellipsis,
+          //         style: const TextStyle(fontSize: 14, color: Colors.grey),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 8,
+          // ),
+          // Container(
+          //   // ignore: prefer_const_constructors
+          //   margin: EdgeInsets.symmetric(horizontal: 4),
+          //   height: 30,
+          //   child: SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Text(
+          //       getGenres()+"mmmmmmmmmmmmmmmmmmmmmm",
+          //       style: const TextStyle(fontSize: 14, color: Colors.grey),
+          //     ),
+          //   ),
+          // ),
+          SizedBox( height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -191,13 +266,21 @@ class MovieDetailsScreen extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          DefaultTabController(
-              length: 3,
-              initialIndex: 0,
-              child: MovieDetailsTabBar(
-                movieDetailsModel: movieDetailsModel,
-                reviewModel: reviewItem,
-              )),
+          DetailsTabView(
+            imagesOfMovies:
+                movieDetailsModel.imagesOfMovies ?? ImagesOfMovies(),
+            crews: movieDetailsModel.crews ?? [],
+            overView: movieDetailsModel.overview ?? "",
+            casts: movieDetailsModel.casts ?? [],
+          ),
+
+          // DefaultTabController(
+          //     length: 3,
+          //     initialIndex: 0,
+          //     child: MovieDetailsTabBar(
+          //       movieDetailsModel: movieDetailsModel,
+          //       reviewModel: reviewItem,
+          //     )),
         ],
       ),
     );

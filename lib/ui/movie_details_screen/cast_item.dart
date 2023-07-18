@@ -6,40 +6,41 @@ import '../../model/api_model/movies_details/Cast.dart';
 
 // ignore: must_be_immutable
 class CastItem extends StatelessWidget {
-  String imageUri;
+  String? imageUri;
   Cast castModel;
   bool putIcon;
   double width;
   double height;
   int fontSize;
 
-  CastItem({super.key,
-    this.putIcon = true,
-    this.width = 70,
-    this.height = 75,
-    this.fontSize=16,
-    required this.castModel,
-    required this.imageUri});
+  CastItem(
+      {super.key,
+      this.putIcon = true,
+      this.width = 70,
+      this.height = 75,
+      this.fontSize = 16,
+      required this.castModel,
+      required this.imageUri});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.all(8),
       child: Row(
         children: [
-
           ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: MyNetworkImage(
-              imageUrl: ApiData.midImageSizeUrl + (castModel.profilePath ?? ""),
-              width: width,
-              height: height,
-            ),
-          ),
-
+              borderRadius: BorderRadius.circular(50),
+              child: castModel.profilePath != null
+                  ? MyNetworkImage(
+                      imageUrl:
+                        (ApiData.midImageSizeUrl + castModel.profilePath!),
+                      width: width,
+                      height: height,
+                    )
+                  : Image.asset(
+                      "assets/images/user.png",
+                    width: 70,height: 75,fit: BoxFit.fill,)),
           const SizedBox(
             width: 8,
           ),
@@ -52,7 +53,6 @@ class CastItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 16, color: Colors.white),
               ),
-
               const SizedBox(
                 height: 5,
               ),
@@ -68,21 +68,14 @@ class CastItem extends StatelessWidget {
               )
             ],
           ),
-
           const Spacer(),
-
-
-                IconButton(
+          IconButton(
               onPressed: () {},
               icon: Icon(
-                  color: Theme
-                      .of(context)
-                      .primaryColor,
+                  color: Theme.of(context).primaryColor,
                   Icons.more_horiz_rounded))
-
         ],
       ),
     );
   }
-
 }
