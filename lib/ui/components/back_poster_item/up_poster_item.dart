@@ -21,7 +21,7 @@ class UpBaseItem extends StatelessWidget {
           width: 10,
         ),
         Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           child: MyNetworkImage(
             imageUrl: ApiData.midImageSizeUrl + movieItemModel.posterPath!,
             width: 100,
@@ -88,7 +88,7 @@ class UpBaseItem extends StatelessWidget {
                       style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 4),
+                      margin: const EdgeInsets.only(left: 4),
                       alignment: Alignment.center,
                       width: 50,
                       height: 15,

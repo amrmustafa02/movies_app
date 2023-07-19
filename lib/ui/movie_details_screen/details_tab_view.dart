@@ -46,7 +46,6 @@ class _DetailsTabViewState extends State<DetailsTabView>
             const SizedBox(
               height: 5,
             ),
-            // Text(widget.overView,style: TextStyle(fontSize: 16, color: Colors.grey)),
             ReadMoreText(
               widget.overView,
               postDataTextStyle:
@@ -83,7 +82,7 @@ class _DetailsTabViewState extends State<DetailsTabView>
                     },
                     child: const Text(
                       "View all",
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.grey, fontSize: 12),
                     )),
               ],
             ),
@@ -92,25 +91,25 @@ class _DetailsTabViewState extends State<DetailsTabView>
                     imageUri: widget.casts[0].profilePath,
                     castModel: widget.casts[0])
                 : Container(),
-            widget.casts.length>1
+            widget.casts.length > 1
                 ? CastItem(
-                imageUri: widget.casts[1].profilePath,
-                castModel: widget.casts[1])
+                    imageUri: widget.casts[1].profilePath,
+                    castModel: widget.casts[1])
                 : Container(),
-            widget.casts.length>2
+            widget.casts.length > 2
                 ? CastItem(
-                imageUri: widget.casts[2].profilePath,
-                castModel: widget.casts[2])
+                    imageUri: widget.casts[2].profilePath,
+                    castModel: widget.casts[2])
                 : Container(),
-            widget.casts.length>3
+            widget.casts.length > 3
                 ? CastItem(
-                imageUri: widget.casts[3].profilePath,
-                castModel: widget.casts[3])
+                    imageUri: widget.casts[3].profilePath,
+                    castModel: widget.casts[3])
                 : Container(),
-            widget.casts.length>4
+            widget.casts.length > 4
                 ? CastItem(
-                imageUri: widget.casts[4].profilePath,
-                castModel: widget.casts[4])
+                    imageUri: widget.casts[4].profilePath,
+                    castModel: widget.casts[4])
                 : Container(),
             Row(
               children: [
@@ -150,11 +149,10 @@ class _DetailsTabViewState extends State<DetailsTabView>
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
-                      width: 10,
+                      width: 20,
                     );
                   },
                 )),
-
           ],
         ),
       ),

@@ -19,8 +19,6 @@ class ApiManager {
       "page": "$page",
       "language": 'en-US',
       "primary_release_date.gte": startDate,
-      "primary_release_date.lte": startDate,
-      "sort_by": "primary_release_date.asc"
     });
   }
 
@@ -30,9 +28,9 @@ class ApiManager {
   }
 
   static getUpcomingMovies(int page) async {
-    DateTime startDateTime = DateTime.now().subtract(const Duration(days: 30));
+    DateTime startDateTime = DateTime.now().subtract(const Duration(days: 0));
     // ignore: prefer_const_constructors
-    DateTime endDateTime = DateTime.now().add(Duration(days: 30));
+    DateTime endDateTime = DateTime.now().add(Duration(days: 60));
 
     String startDate = DateFormat("yyyy-MM-dd").format(startDateTime);
     String endDate = DateFormat("yyyy-MM-dd").format(endDateTime);

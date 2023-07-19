@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/ui/components/network_image.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../model/api_model/movies_details/Cast.dart';
 
@@ -13,24 +15,26 @@ class CastItem extends StatelessWidget {
   double height;
   int fontSize;
 
-  CastItem(
-      {super.key,
-      this.putIcon = true,
-      this.width = 70,
-      this.height = 75,
-      this.fontSize = 16,
-      required this.castModel,
-      required this.imageUri});
+  CastItem({super.key,
+    this.putIcon = true,
+    this.width = 70,
+    this.height = 75,
+    this.fontSize = 16,
+    required this.castModel,
+    required this.imageUri});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
       margin: const EdgeInsets.all(8),
       child: Row(
         children: [
           ClipRRect(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(15),
               child: castModel.profilePath != null
                   ? MyNetworkImage(
                       imageUrl:
@@ -40,7 +44,7 @@ class CastItem extends StatelessWidget {
                     )
                   : Image.asset(
                       "assets/images/user.png",
-                    width: 70,height: 75,fit: BoxFit.fill,)),
+                    width: 80,height: 80,fit: BoxFit.fill,)),
           const SizedBox(
             width: 8,
           ),
@@ -72,7 +76,9 @@ class CastItem extends StatelessWidget {
           IconButton(
               onPressed: () {},
               icon: Icon(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme
+                      .of(context)
+                      .primaryColor,
                   Icons.more_horiz_rounded))
         ],
       ),

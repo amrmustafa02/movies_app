@@ -59,7 +59,9 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
           ),
           title: Text(widget.type),
         ),
-        body: getBody());
+        body: SafeArea(
+          child: getBody(),
+        ));
   }
 
   getBody() {
@@ -71,8 +73,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
           itemCount: widget.movies.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: constraints.maxWidth < 250 ? 1 : 2,
-            childAspectRatio: 0.6
-              ),
+              childAspectRatio: 0.6),
           itemBuilder: (context, index) {
             return MovieItem(movieItemModel: widget.movies[index]);
           },
@@ -80,7 +81,6 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
       },
     );
   }
-
 
   refresh() async {
     iconLoad =
@@ -94,8 +94,8 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
   }
 
   Future<void> loadMoreItems() async {
-    print("${widget.page}");
     widget.page++;
+
     List<MovieItemModel> moreMovies =
         await ApiManager.getMoviesByType(widget.apiType, page: widget.page);
     widget.movies.addAll(moreMovies);
