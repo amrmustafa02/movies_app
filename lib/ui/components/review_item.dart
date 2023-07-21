@@ -56,7 +56,6 @@ class ReviewItem extends StatelessWidget {
                         imageUrl: review.authorDetails!.avatarPath!.substring(1),
                         width: 40,
                         height: 40),
-
               ],
             ),
           ),

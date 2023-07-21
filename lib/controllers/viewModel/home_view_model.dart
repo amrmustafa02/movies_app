@@ -26,16 +26,16 @@ class HomeViewModel extends Cubit<HomeState> {
 
     List<BackPosterItem> posterMovies = [];
 
-    for (int i = 0; i < trendingMovies.length; i++) {
-      posterMovies.add(BackPosterItem(movieItemModel: trendingMovies[i]));
+    for (int i = 0; i < topRated.length; i++) {
+      posterMovies.add(BackPosterItem(movieItemModel: topRated[i]));
     }
 
     emit(SuccessState(
-        posterMovies: posterMovies,
+        posterMovies: trendingMovies,
         upcomingMovies: upcoming,
         nowPlayingMovies: nowPlaying,
         topRatedMovies: topRated,
-        popularMovies: popular));
+        popularMovies: popular, topRatedTest: posterMovies));
   }
 
   getTrendingMovies(String type) {}
@@ -49,12 +49,14 @@ class SuccessState extends HomeState {
   List<MovieItemModel> topRatedMovies;
   List<MovieItemModel> upcomingMovies;
   List<MovieItemModel> nowPlayingMovies;
-  List<BackPosterItem> posterMovies;
+  List<MovieItemModel> posterMovies;
   List<MovieItemModel> popularMovies;
+  List<BackPosterItem> topRatedTest;
 
   SuccessState(
       {required this.popularMovies,
-      required this.posterMovies,
+      required this.topRatedTest,
+        required this.posterMovies,
       required this.upcomingMovies,
       required this.nowPlayingMovies,
       required this.topRatedMovies});

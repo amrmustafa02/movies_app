@@ -4,6 +4,7 @@ import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/movies_details/ImagesOfMovies.dart';
 import 'package:movies/ui/components/network_image.dart';
 import 'package:movies/ui/movie_details_screen/all_cast_screen/all_cast_screen.dart';
+import 'package:movies/ui/movie_details_screen/all_iamges_screen.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../model/api_model/movies_details/Cast.dart';
@@ -80,9 +81,10 @@ class _DetailsTabViewState extends State<DetailsTabView>
                         },
                       ));
                     },
-                    child: const Text(
+                    child: Text(
                       "View all",
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor, fontSize: 12),
                     )),
               ],
             ),
@@ -122,14 +124,14 @@ class _DetailsTabViewState extends State<DetailsTabView>
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return AllCastScreen(
-                              crew: widget.crews, casts: widget.casts);
+                          return AllImagesScreen(imagesOfMovies: widget.imagesOfMovies);
                         },
                       ));
                     },
-                    child: const Text(
+                    child: Text(
                       "View all",
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor, fontSize: 12),
                     )),
               ],
             ),
@@ -138,7 +140,9 @@ class _DetailsTabViewState extends State<DetailsTabView>
                 child: ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: widget.imagesOfMovies.backdrops!.length,
+                  itemCount: widget.imagesOfMovies.backdrops!.length > 20
+                      ? 20
+                      : widget.imagesOfMovies.backdrops!.length,
                   itemBuilder: (context, index) {
                     return MyNetworkImage(
                       imageUrl: ApiData.largeImageSizeUri +

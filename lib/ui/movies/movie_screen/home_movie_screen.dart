@@ -5,8 +5,9 @@ import 'package:movies/ui/movies/movie_screen/trending_movies.dart';
 import '../../../controllers/viewModel/home_view_model.dart';
 import '../../components/type_movies_row.dart';
 import '../../shared/text_utils.dart';
+import 'movies_swaps.dart';
 
-class HomeMovieScreen extends StatefulWidget{
+class HomeMovieScreen extends StatefulWidget {
   const HomeMovieScreen({super.key});
 
   @override
@@ -53,12 +54,17 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAli
                const SizedBox(
                  height: 12,
                ),
+               // Container(
+               //   margin: const EdgeInsets.all(8),
+               //   child: TrendingMovies(
+               //     movies: state.posterMovies,
+               //   ),
+               // ),
+
+               MoviesSwaps(movies: state.posterMovies,),
                Container(
-                 margin: const EdgeInsets.all(8),
-                 child: TrendingMovies(
-                   movies: state.posterMovies,
-                 ),
-               ),
+                   margin: EdgeInsets.all(8),
+                   child: TrendingMovies(movies: state.topRatedTest, type: 'Top Rated',)),
                TypeOfMovies(
                  movies: state.popularMovies,
                  type: 'Popular',
@@ -67,10 +73,10 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAli
                  movies: state.nowPlayingMovies,
                  type: 'Now Playing',
                ),
-               TypeOfMovies(
-                 movies: state.topRatedMovies,
-                 type: 'Top Rated',
-               ),
+               // TypeOfMovies(
+               //   movies: state.topRatedMovies,
+               //   type: 'Top Rated',
+               // ),
                TypeOfMovies(
                  movies: state.upcomingMovies,
                  type: 'Upcoming',

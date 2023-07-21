@@ -21,10 +21,10 @@ class CastViewAllItem extends StatelessWidget {
         children: [
           imagePath.isEmpty?Image.asset("assets/images/user.png",width: 70,height: 75,fit: BoxFit.fill,):
           ClipRRect(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(10),
             child:MyNetworkImage(
               imageUrl:ApiData.midImageSizeUrl + (imagePath),
-              width: 70,
+              width: 75,
               height: 75,
             )
           ),

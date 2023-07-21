@@ -30,7 +30,7 @@ class CastItem extends StatelessWidget {
           .of(context)
           .size
           .width,
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           ClipRRect(
@@ -75,10 +75,8 @@ class CastItem extends StatelessWidget {
           const Spacer(),
           IconButton(
               onPressed: () {},
-              icon: Icon(
-                  color: Theme
-                      .of(context)
-                      .primaryColor,
+              icon: const Icon(
+                  color: Colors.grey,
                   Icons.more_horiz_rounded))
         ],
       ),

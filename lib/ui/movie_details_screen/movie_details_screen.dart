@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:movies/main/my_theme.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
+import 'package:movies/ui/movie_details_screen/reviews_tab_view.dart';
 import '../../constants/api_data.dart';
 import '../../model/api_model/movies_details/ImagesOfMovies.dart';
 import '../../model/api_model/movies_details/ReviewModel.dart';
@@ -155,48 +156,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                      fontSize: 18, color: Colors.white),
+                                      fontSize: 20, color: Colors.white),
                                 ),
 
                                 const SizedBox(
                                   height: 15,
                                 ),
 
-                                // IntrinsicHeight(
-                                //   child: Row(
-                                //     crossAxisAlignment:
-                                //         CrossAxisAlignment.center,
-                                //     mainAxisAlignment: MainAxisAlignment.center,
-                                //     children: [
-                                //       Text(
-                                //         getRunTimeByHour(
-                                //             widget.movieDetailsModel.runtime ??
-                                //                 0),
-                                //         overflow: TextOverflow.ellipsis,
-                                //         style: const TextStyle(
-                                //             fontSize: 14, color: Colors.grey),
-                                //       ),
-                                //       Container(
-                                //         // ignore: prefer_const_constructors
-                                //         margin: const EdgeInsets.symmetric(
-                                //             horizontal: 4),
-                                //         child: VerticalDivider(
-                                //           width: 1,
-                                //           color: Theme.of(context).primaryColor,
-                                //           thickness: 1,
-                                //         ),
-                                //       ),
-                                //       Text(
-                                //         getReleaseDate(widget.movieDetailsModel
-                                //                 .releaseDate ??
-                                //             ""),
-                                //         overflow: TextOverflow.ellipsis,
-                                //         style: const TextStyle(
-                                //             fontSize: 14, color: Colors.grey),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
 
                                 Row(
                                   children: [
@@ -298,36 +264,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                     ],
                                   ),
                                 ),
-                                // Center(
-                                //   child: RatingBar(
-                                //     ignoreGestures: true,
-                                //     // <---- add this
-                                //     initialRating:
-                                //     widget.movieDetailsModel.voteAverage == null
-                                //         ? 0
-                                //         : (widget.movieDetailsModel.voteAverage!
-                                //         .toDouble() /
-                                //         2.0),
-                                //     allowHalfRating: true,
-                                //     itemCount: 5,
-                                //     itemSize: 20,
-                                //     ratingWidget: RatingWidget(
-                                //       full: const Icon(
-                                //         Icons.star_rate_rounded,
-                                //         color: Colors.amberAccent,
-                                //       ),
-                                //       half: const Icon(
-                                //         Icons.star_half_rounded,
-                                //         color: Colors.amberAccent,
-                                //       ),
-                                //       empty: const Icon(
-                                //         Icons.star_outline_rounded,
-                                //         color: Colors.amberAccent,
-                                //       ),
-                                //     ),
-                                //     onRatingUpdate: (value) {},
-                                //   ),
-                                // ),
 
 
                               ],
@@ -338,34 +274,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     ],
                   ),
                   const SizedBox(height: 10),
-                  // RatingBar(
-                  //   ignoreGestures: true,
-                  //   // <---- add this
-                  //   initialRating:
-                  //       widget.movieDetailsModel.voteAverage == null
-                  //           ? 0
-                  //           : (widget.movieDetailsModel.voteAverage!
-                  //                   .toDouble() /
-                  //               2.0),
-                  //   allowHalfRating: true,
-                  //   itemCount: 5,
-                  //   itemSize: 30,
-                  //   ratingWidget: RatingWidget(
-                  //     full: const Icon(
-                  //       Icons.star_rate_rounded,
-                  //       color: Colors.amberAccent,
-                  //     ),
-                  //     half: const Icon(
-                  //       Icons.star_half_rounded,
-                  //       color: Colors.amberAccent,
-                  //     ),
-                  //     empty: const Icon(
-                  //       Icons.star_outline_rounded,
-                  //       color: Colors.amberAccent,
-                  //     ),
-                  //   ),
-                  //   onRatingUpdate: (value) {},
-                  // ),
                   const SizedBox(
                     height: 8,
                   ),
@@ -376,6 +284,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     overView: widget.movieDetailsModel.overview ?? "",
                     casts: widget.movieDetailsModel.casts ?? [],
                   ),
+                  ReviewsTabView(reviewModel: widget.reviewItem,),
                 ],
               ),
             ),
