@@ -46,8 +46,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
   @override
   void initState() {
     _ColorAnimationController =
-        // ignore: prefer_const_constructors
-        AnimationController(vsync: this, duration: Duration(seconds: 0));
+    // ignore: prefer_const_constructors
+    AnimationController(vsync: this, duration: Duration(seconds: 0));
     _colorTween =
         ColorTween(begin: Colors.transparent, end: const Color(0xFF0F1B2B))
             .animate(_ColorAnimationController);
@@ -88,23 +88,26 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                           child: Stack(
                             alignment: Alignment.bottomCenter,
                             children: [
-                              CachedNetworkImage(
-                                width: MediaQuery.of(context).size.width,
-                                height: 250,
-                                fit: BoxFit.fill,
-                                imageUrl: widget
-                                            .movieDetailsModel.backdropPath ==
-                                        null
-                                    ? ""
-                                    : ApiData.largeImageSizeUri +
-                                        widget.movieDetailsModel.backdropPath!,
-                                placeholder: (context, url) => const Center(
-                                    child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
+                              MyNetworkImage(imageUrl: widget
+                                  .movieDetailsModel.backdropPath ==
+                                  null
+                                  ? ""
+                                  : ApiData.largeImageSizeUri +
+                                  widget.movieDetailsModel.backdropPath!,
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width - 150),
+
                               Container(
-                                width: MediaQuery.of(context).size.width,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width,
                                 height: 250,
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.only(
@@ -132,23 +135,25 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                           ),
                           MyNetworkImage(
                               imageUrl:
-                                  widget.movieDetailsModel.posterPath == null
-                                      ? "assets/images/no-image.png"
-                                      : ApiData.midImageSizeUrl +
-                                          widget.movieDetailsModel.posterPath!,
-                              width: MediaQuery.sizeOf(context).width * 0.47,
+                              widget.movieDetailsModel.posterPath == null
+                                  ? "assets/images/no-image.png"
+                                  : ApiData.midImageSizeUrl +
+                                  widget.movieDetailsModel.posterPath!,
+                              width: MediaQuery
+                                  .sizeOf(context)
+                                  .width * 0.47,
                               height: 250),
                           Container(
                             margin: const EdgeInsets.all(8),
-                            width: (MediaQuery.sizeOf(context).width / 2) - 16,
+                            width: (MediaQuery
+                                .sizeOf(context)
+                                .width / 2) - 16,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-
                                 const SizedBox(
                                   height: 20,
                                 ),
-
                                 Text(
                                   textAlign: TextAlign.start,
                                   widget.movieDetailsModel.title ??
@@ -158,12 +163,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                   style: const TextStyle(
                                       fontSize: 20, color: Colors.white),
                                 ),
-
                                 const SizedBox(
                                   height: 15,
                                 ),
-
-
                                 Row(
                                   children: [
                                     const Text("Date",
@@ -176,20 +178,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                       // ignore: prefer_interpolation_to_compose_strings
 
                                       getReleaseDate(widget
-                                              .movieDetailsModel.releaseDate ??
+                                          .movieDetailsModel.releaseDate ??
                                           ""),
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          fontSize: 14, color: Colors.white.withOpacity(0.8)),
+                                          fontSize: 14,
+                                          color: Colors.white.withOpacity(0.8)),
                                     ),
                                     const Spacer(),
                                   ],
                                 ),
-
                                 const SizedBox(
                                   height: 5,
                                 ),
-
                                 Row(
                                   children: [
                                     const Text("Time",
@@ -200,20 +201,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                     const Spacer(),
                                     Text(
                                       getRunTimeByHour(
-                                          widget.movieDetailsModel.runtime ?? 0),
+                                          widget.movieDetailsModel.runtime ??
+                                              0),
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          fontSize: 14, color: Colors.white.withOpacity(0.8)),
+                                          fontSize: 14,
+                                          color: Colors.white.withOpacity(0.8)),
                                     ),
                                     const Spacer(),
                                   ],
                                 ),
-
-
                                 const SizedBox(
                                   height: 20,
                                 ),
-
                                 Center(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -225,10 +225,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                         height: 15,
                                         decoration: BoxDecoration(
                                             color: Colors.blueAccent,
-                                            borderRadius: BorderRadius.circular(8)),
+                                            borderRadius:
+                                            BorderRadius.circular(8)),
                                         child: const Text(
                                           "TMDB",
-                                          style: TextStyle(color: Colors.white, fontSize: 10),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10),
                                         ),
                                       ),
                                       const SizedBox(
@@ -245,8 +248,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                       Text(
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
-                                       widget.movieDetailsModel.voteAverage!.toString().substring(0, 3),
-                                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                                        widget.movieDetailsModel.voteAverage!
+                                            .toString()
+                                            .substring(0, 3),
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 12),
                                       ),
                                       // Container(
                                       //   margin: const EdgeInsets.only(left: 4),
@@ -264,8 +270,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                     ],
                                   ),
                                 ),
-
-
                               ],
                             ),
                           ),
@@ -284,7 +288,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     overView: widget.movieDetailsModel.overview ?? "",
                     casts: widget.movieDetailsModel.casts ?? [],
                   ),
-                  ReviewsTabView(reviewModel: widget.reviewItem,),
+                  ReviewsTabView(
+                    reviewModel: widget.reviewItem,
+                  ),
                 ],
               ),
             ),
@@ -292,22 +298,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               height: 80,
               child: AnimatedBuilder(
                 animation: _ColorAnimationController,
-                builder: (context, child) => AppBar(
-                  backgroundColor: _colorTween.value,
-                  elevation: 0,
-                  titleSpacing: 0.0,
-                  iconTheme: IconThemeData(
-                    color: _iconColorTween.value,
-                  ),
-                  actions: <Widget>[
-                    IconButton(
-                      icon: const Icon(
-                        Icons.favorite_border_rounded,
+                builder: (context, child) =>
+                    AppBar(
+                      backgroundColor: _colorTween.value,
+                      elevation: 0,
+                      titleSpacing: 0.0,
+                      iconTheme: IconThemeData(
+                        color: _iconColorTween.value,
                       ),
-                      onPressed: () {},
+                      actions: <Widget>[
+                        IconButton(
+                          icon: const Icon(
+                            Icons.favorite_border_rounded,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ],
                     ),
-                  ],
-                ),
               ),
             ),
           ],
@@ -316,7 +323,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     );
   }
 
- static getRunTimeByHour(num runTime) {
+  static getRunTimeByHour(num runTime) {
     var hours = runTime ~/ 60;
     var min = runTime - (hours * 60);
     return "${hours}h ${min}m";
@@ -343,5 +350,3 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     return DateFormat('MMM d, yyyy').format(dateTime);
   }
 }
-
-

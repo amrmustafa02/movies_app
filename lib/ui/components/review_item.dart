@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/movies_details/ReviewModel.dart';
 import 'package:movies/ui/components/network_image.dart';
+import 'package:movies/ui/shared/text_utils.dart';
 
 // ignore: must_be_immutable
 class ReviewItem extends StatelessWidget {
@@ -53,9 +54,28 @@ class ReviewItem extends StatelessWidget {
                         child: Image.asset("assets/images/user.png"),
                       )
                     : MyNetworkImage(
-                        imageUrl: review.authorDetails!.avatarPath!.substring(1),
+                        imageUrl:( review.authorDetails!.avatarPath![0] == '/'&&review.authorDetails!.avatarPath![1]=='h')
+                            ? review.authorDetails!.avatarPath!.substring(1)
+                            : ApiData.reviewBaseUrl+ review.authorDetails!.avatarPath!,
                         width: 40,
                         height: 40),
+                const SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      review.authorDetails!.username ?? "test",
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      TextUtils.getReleaseDate(review.updatedAt) ?? "test",
+                      style: TextStyle(
+                          fontSize: 14, color: Colors.grey.withOpacity(0.5)),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

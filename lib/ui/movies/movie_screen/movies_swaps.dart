@@ -7,7 +7,7 @@ import '../../../model/api_model/movie_item_model.dart';
 import '../../movie_details_screen/main_screen.dart';
 
 // ignore: must_be_immutable
-class MoviesSwaps extends StatefulWidget  {
+class MoviesSwaps extends StatefulWidget {
   List<MovieItemModel> movies;
 
   MoviesSwaps({super.key, required this.movies});
@@ -16,7 +16,8 @@ class MoviesSwaps extends StatefulWidget  {
   State<MoviesSwaps> createState() => _MoviesSwapsState();
 }
 
-class _MoviesSwapsState extends State<MoviesSwaps>  with AutomaticKeepAliveClientMixin {
+class _MoviesSwapsState extends State<MoviesSwaps>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -44,11 +45,11 @@ class _MoviesSwapsState extends State<MoviesSwaps>  with AutomaticKeepAliveClien
             child: Hero(
               tag: movie.id!,
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                   child: MyNetworkImage(
-                    imageUrl: (ApiData.largeImageSizeUri+movie.posterPath!),
+                    imageUrl: (ApiData.largeImageSizeUri + movie.posterPath!),
                     width: size.width * 0.54,
-                    height: size.height  *78,
+                    height: size.height * 0.78,
                   )),
             ),
           );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TextUtils {
   static showText(String text, double size) {
@@ -14,5 +15,12 @@ class TextUtils {
         ),
       ),
     );
+  }
+  static getReleaseDate(String? date) {
+    if(date==null){
+      return "";
+    }
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('MMM d, yyyy').format(dateTime);
   }
 }

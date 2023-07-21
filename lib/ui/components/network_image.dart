@@ -32,7 +32,10 @@ class MyNetworkImage extends StatelessWidget {
                 width: width,
               )),
         ),
-        errorWidget: (context, url, error) =>  Icon(Icons.error,color: Theme.of(context).primaryColor,),
+        errorWidget: (context, url, error) => Icon(
+          Icons.error,
+          color: Theme.of(context).primaryColor,
+        ),
       ),
     );
   }
