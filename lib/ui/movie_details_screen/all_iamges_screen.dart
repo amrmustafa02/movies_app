@@ -12,24 +12,24 @@ class AllImagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var height = size.height *0.25;
+    var height = size.height * 0.25;
     var width = height + 50;
 
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        child:Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: const Text(
                 "Logos",
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 height: height,
                 child: ListView.separated(
                   shrinkWrap: true,
@@ -49,9 +49,8 @@ class AllImagesScreen extends StatelessWidget {
                     );
                   },
                 )),
-
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: const Text(
                 "BackDrops",
                 style: TextStyle(color: Colors.white, fontSize: 24),
@@ -78,9 +77,8 @@ class AllImagesScreen extends StatelessWidget {
                     );
                   },
                 )),
-
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: const Text(
                 "Posters",
                 style: TextStyle(color: Colors.white, fontSize: 24),
@@ -97,8 +95,8 @@ class AllImagesScreen extends StatelessWidget {
                     return MyNetworkImage(
                       imageUrl: ApiData.largeImageSizeUri +
                           imagesOfMovies.posters![index].filePath!,
-                      width: width-50,
-                      height: height+50,
+                      width: width - 50,
+                      height: height + 50,
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {

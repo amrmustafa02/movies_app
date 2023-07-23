@@ -4,20 +4,29 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:movies/main/my_theme.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
+import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/ui/movie_details_screen/reviews_tab_view.dart';
+import 'package:movies/ui/movie_details_screen/show_more_movie_details_item.dart';
 import '../../constants/api_data.dart';
 import '../../model/api_model/movies_details/ImagesOfMovies.dart';
 import '../../model/api_model/movies_details/ReviewModel.dart';
 import '../components/network_image.dart';
+import '../components/type_movies_row.dart';
 import 'details_tab_view.dart';
 
 // ignore: must_be_immutable
 class MovieDetailsScreen extends StatefulWidget {
   MovieDetailsModel movieDetailsModel;
+  List<MovieItemModel> similarMovies;
+  List<MovieItemModel> recommendationsMovies;
   ReviewModel reviewItem;
 
   MovieDetailsScreen(
-      {required this.movieDetailsModel, required this.reviewItem, super.key});
+      {required this.movieDetailsModel,
+      required this.reviewItem,
+      required this.recommendationsMovies,
+      required this.similarMovies,
+      super.key});
 
   @override
   State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
@@ -46,8 +55,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
   @override
   void initState() {
     _ColorAnimationController =
-    // ignore: prefer_const_constructors
-    AnimationController(vsync: this, duration: Duration(seconds: 0));
+        // ignore: prefer_const_constructors
+        AnimationController(vsync: this, duration: Duration(seconds: 0));
     _colorTween =
         ColorTween(begin: Colors.transparent, end: const Color(0xFF0F1B2B))
             .animate(_ColorAnimationController);
@@ -74,7 +83,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
           children: [
             SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
                     alignment: Alignment.bottomCenter,
@@ -88,27 +97,20 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                           child: Stack(
                             alignment: Alignment.bottomCenter,
                             children: [
-                              MyNetworkImage(imageUrl: widget
-                                  .movieDetailsModel.backdropPath ==
-                                  null
-                                  ? ""
-                                  : ApiData.largeImageSizeUri +
-                                  widget.movieDetailsModel.backdropPath!,
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width - 150),
-
+                              MyNetworkImage(
+                                  imageUrl:
+                                      widget.movieDetailsModel.backdropPath ==
+                                              null
+                                          ? ""
+                                          : ApiData.largeImageSizeUri +
+                                              widget.movieDetailsModel
+                                                  .backdropPath!,
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.width - 100),
                               Container(
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width,
-                                height: 250,
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.width - 100,
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.only(
                                         bottomLeft: Radius.circular(8),
@@ -135,19 +137,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                           ),
                           MyNetworkImage(
                               imageUrl:
-                              widget.movieDetailsModel.posterPath == null
-                                  ? "assets/images/no-image.png"
-                                  : ApiData.midImageSizeUrl +
-                                  widget.movieDetailsModel.posterPath!,
-                              width: MediaQuery
-                                  .sizeOf(context)
-                                  .width * 0.47,
+                                  widget.movieDetailsModel.posterPath == null
+                                      ? "assets/images/no-image.png"
+                                      : ApiData.midImageSizeUrl +
+                                          widget.movieDetailsModel.posterPath!,
+                              width: MediaQuery.sizeOf(context).width * 0.47,
                               height: 250),
                           Container(
                             margin: const EdgeInsets.all(8),
-                            width: (MediaQuery
-                                .sizeOf(context)
-                                .width / 2) - 16,
+                            width: (MediaQuery.sizeOf(context).width / 2) - 16,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -161,7 +159,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                      fontSize: 20, color: Colors.white),
+                                      fontSize: 22, color: Colors.white),
                                 ),
                                 const SizedBox(
                                   height: 15,
@@ -178,7 +176,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                       // ignore: prefer_interpolation_to_compose_strings
 
                                       getReleaseDate(widget
-                                          .movieDetailsModel.releaseDate ??
+                                              .movieDetailsModel.releaseDate ??
                                           ""),
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -226,7 +224,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                         decoration: BoxDecoration(
                                             color: Colors.blueAccent,
                                             borderRadius:
-                                            BorderRadius.circular(8)),
+                                                BorderRadius.circular(8)),
                                         child: const Text(
                                           "TMDB",
                                           style: TextStyle(
@@ -254,19 +252,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                         style: const TextStyle(
                                             color: Colors.white, fontSize: 12),
                                       ),
-                                      // Container(
-                                      //   margin: const EdgeInsets.only(left: 4),
-                                      //   alignment: Alignment.center,
-                                      //   width: 50,
-                                      //   height: 15,
-                                      //   decoration: BoxDecoration(
-                                      //       color: Colors.blueAccent,
-                                      //       borderRadius: BorderRadius.circular(8)),
-                                      //   child: const Text(
-                                      //     "TMDB",
-                                      //     style: TextStyle(color: Colors.white, fontSize: 10),
-                                      //   ),
-                                      // ),
                                     ],
                                   ),
                                 ),
@@ -277,9 +262,44 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  const SizedBox(
-                    height: 8,
+                  const SizedBox(height: 18),
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    child: const Text(
+                      "Genres",
+                      style: TextStyle(fontSize: 24, color: Colors.white),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    margin: const EdgeInsets.only(left: 8),
+                    child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 20,
+                            width: 100,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.blueGrey, width: 0.5),
+                                borderRadius: BorderRadius.circular(15)),
+                            padding: const EdgeInsets.all(4),
+                            child: Text(
+                              widget.movieDetailsModel.genres![index].name!,
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.white),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => Container(
+                              width: 10,
+                            ),
+                        itemCount: widget.movieDetailsModel.genres!.length),
                   ),
                   DetailsTabView(
                     imagesOfMovies: widget.movieDetailsModel.imagesOfMovies ??
@@ -288,9 +308,36 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     overView: widget.movieDetailsModel.overview ?? "",
                     casts: widget.movieDetailsModel.casts ?? [],
                   ),
-                  ReviewsTabView(
-                    reviewModel: widget.reviewItem,
+                  TypeOfMovies(
+                    fontSize: 24,
+                    textColorWhite: true,
+                    type: 'Similar',
+                    showAll: false,
+                    movies: widget.similarMovies,
                   ),
+                  TypeOfMovies(
+                    fontSize: 24,
+                    textColorWhite: true,
+                    showAll: false,
+                    type: 'Recommendations',
+                    movies: widget.recommendationsMovies,
+                  ),
+
+                  ShowMoreDetailsItem(
+                    iconPath: "assets/images/reviews.png",
+                    iconText: 'Reviews', onClick: () {  },
+                  ),
+                  ShowMoreDetailsItem(
+                    iconPath: "assets/images/video_marketing.png",
+                    iconText: 'Videos', onClick: () {  },
+                  ),
+
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // ReviewsTabView(
+                  //   reviewModel: widget.reviewItem,
+                  // ),
                 ],
               ),
             ),
@@ -298,23 +345,22 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               height: 80,
               child: AnimatedBuilder(
                 animation: _ColorAnimationController,
-                builder: (context, child) =>
-                    AppBar(
-                      backgroundColor: _colorTween.value,
-                      elevation: 0,
-                      titleSpacing: 0.0,
-                      iconTheme: IconThemeData(
-                        color: _iconColorTween.value,
+                builder: (context, child) => AppBar(
+                  backgroundColor: _colorTween.value,
+                  elevation: 0,
+                  titleSpacing: 0.0,
+                  iconTheme: IconThemeData(
+                    color: _iconColorTween.value,
+                  ),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: const Icon(
+                        Icons.favorite_border_rounded,
                       ),
-                      actions: <Widget>[
-                        IconButton(
-                          icon: const Icon(
-                            Icons.favorite_border_rounded,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ],
+                      onPressed: () {},
                     ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -329,24 +375,26 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     return "${hours}h ${min}m";
   }
 
-  getGenres() {
-    var genres = widget.movieDetailsModel.genres ?? [];
-
-    String result = "";
-
-    for (int i = 0; i < genres.length - 1; i++) {
-      result += "${genres[i].name!}, ";
-    }
-
-    if (genres.isNotEmpty) {
-      result += genres[genres.length - 1].name!;
-    }
-
-    return result;
-  }
-
   static getReleaseDate(String date) {
     DateTime dateTime = DateTime.parse(date);
     return DateFormat('MMM d, yyyy').format(dateTime);
+  }
+
+  Route createRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
   }
 }

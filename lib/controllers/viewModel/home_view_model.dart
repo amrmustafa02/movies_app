@@ -35,7 +35,8 @@ class HomeViewModel extends Cubit<HomeState> {
         upcomingMovies: upcoming,
         nowPlayingMovies: nowPlaying,
         topRatedMovies: topRated,
-        popularMovies: popular, topRatedTest: posterMovies));
+        popularMovies: popular,
+        topRatedTest: posterMovies));
   }
 
   getTrendingMovies(String type) {}
@@ -56,7 +57,7 @@ class SuccessState extends HomeState {
   SuccessState(
       {required this.popularMovies,
       required this.topRatedTest,
-        required this.posterMovies,
+      required this.posterMovies,
       required this.upcomingMovies,
       required this.nowPlayingMovies,
       required this.topRatedMovies});

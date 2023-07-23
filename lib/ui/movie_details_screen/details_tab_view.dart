@@ -36,129 +36,134 @@ class _DetailsTabViewState extends State<DetailsTabView>
     return Container(
       margin: const EdgeInsets.all(8),
       width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Overview",
-              style: TextStyle(color: Colors.white, fontSize: 24),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            ReadMoreText(
-              widget.overView,
-              postDataTextStyle:
-                  const TextStyle(fontSize: 16, color: Colors.grey),
-              preDataTextStyle:
-                  const TextStyle(fontSize: 16, color: Colors.grey),
-              trimLines: 3,
-              colorClickableText: Colors.red,
-              trimMode: TrimMode.Line,
-              trimCollapsedText: 'More',
-              trimExpandedText: 'Less',
-              moreStyle: TextStyle(
-                  fontSize: 16, color: Theme.of(context).primaryColor),
-              style: const TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                const Text(
-                  "Cast & Crew",
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-                const Spacer(),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return AllCastScreen(
-                              crew: widget.crews, casts: widget.casts);
-                        },
-                      ));
-                    },
-                    child: Text(
-                      "View all",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 12),
-                    )),
-              ],
-            ),
-            widget.casts.isNotEmpty
-                ? CastItem(
-                    imageUri: widget.casts[0].profilePath,
-                    castModel: widget.casts[0])
-                : Container(),
-            widget.casts.length > 1
-                ? CastItem(
-                    imageUri: widget.casts[1].profilePath,
-                    castModel: widget.casts[1])
-                : Container(),
-            widget.casts.length > 2
-                ? CastItem(
-                    imageUri: widget.casts[2].profilePath,
-                    castModel: widget.casts[2])
-                : Container(),
-            widget.casts.length > 3
-                ? CastItem(
-                    imageUri: widget.casts[3].profilePath,
-                    castModel: widget.casts[3])
-                : Container(),
-            widget.casts.length > 4
-                ? CastItem(
-                    imageUri: widget.casts[4].profilePath,
-                    castModel: widget.casts[4])
-                : Container(),
-            Row(
-              children: [
-                const Text(
-                  "Images",
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-                const Spacer(),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return AllImagesScreen(imagesOfMovies: widget.imagesOfMovies);
-                        },
-                      ));
-                    },
-                    child: Text(
-                      "View all",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 12),
-                    )),
-              ],
-            ),
-            SizedBox(
-                height: 200,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.imagesOfMovies.backdrops!.length > 20
-                      ? 20
-                      : widget.imagesOfMovies.backdrops!.length,
-                  itemBuilder: (context, index) {
-                    return MyNetworkImage(
-                      imageUrl: ApiData.largeImageSizeUri +
-                          widget.imagesOfMovies.backdrops![index].filePath!,
-                      width: 250,
-                      height: 150,
-                    );
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 20,),
+          // overview
+          const Text(
+            "Overview",
+            style: TextStyle(color: Colors.white, fontSize: 24),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          ReadMoreText(
+            widget.overView,
+            postDataTextStyle:
+                const TextStyle(fontSize: 16, color: Colors.grey),
+            preDataTextStyle:
+                const TextStyle(fontSize: 16, color: Colors.grey),
+            trimLines: 3,
+            colorClickableText: Colors.red,
+            trimMode: TrimMode.Line,
+            trimCollapsedText: 'More',
+            trimExpandedText: 'Less',
+            moreStyle: TextStyle(
+                fontSize: 16, color: Theme.of(context).primaryColor),
+            style: const TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+
+
+          const SizedBox(height: 20,),
+
+          // cast items
+          Row(
+            children: [
+              const Text(
+                "Cast & Crew",
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+              const Spacer(),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return AllCastScreen(
+                            crew: widget.crews, casts: widget.casts);
+                      },
+                    ));
                   },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      width: 20,
-                    );
+                  child: Text(
+                    "View all",
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 12),
+                  )),
+            ],
+          ),
+          widget.casts.isNotEmpty
+              ? CastItem(
+                  imageUri: widget.casts[0].profilePath,
+                  castModel: widget.casts[0])
+              : Container(),
+          widget.casts.length > 1
+              ? CastItem(
+                  imageUri: widget.casts[1].profilePath,
+                  castModel: widget.casts[1])
+              : Container(),
+          widget.casts.length > 2
+              ? CastItem(
+                  imageUri: widget.casts[2].profilePath,
+                  castModel: widget.casts[2])
+              : Container(),
+          widget.casts.length > 3
+              ? CastItem(
+                  imageUri: widget.casts[3].profilePath,
+                  castModel: widget.casts[3])
+              : Container(),
+          widget.casts.length > 4
+              ? CastItem(
+                  imageUri: widget.casts[4].profilePath,
+                  castModel: widget.casts[4])
+              : Container(),
+
+          // images
+          Row(
+            children: [
+              const Text(
+                "Images",
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+              const Spacer(),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return AllImagesScreen(imagesOfMovies: widget.imagesOfMovies);
+                      },
+                    ));
                   },
-                )),
-          ],
-        ),
+                  child: Text(
+                    "View all",
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 12),
+                  )),
+            ],
+          ),
+          SizedBox(
+              height: 200,
+              child: ListView.separated(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.imagesOfMovies.backdrops!.length > 20
+                    ? 20
+                    : widget.imagesOfMovies.backdrops!.length,
+                itemBuilder: (context, index) {
+                  return MyNetworkImage(
+                    imageUrl: ApiData.largeImageSizeUri +
+                        widget.imagesOfMovies.backdrops![index].filePath!,
+                    width: 250,
+                    height: 150,
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    width: 20,
+                  );
+                },
+              )),
+          const SizedBox(height: 20,),
+        ],
       ),
     );
   }

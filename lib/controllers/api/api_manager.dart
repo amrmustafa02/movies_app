@@ -84,6 +84,14 @@ class ApiManager {
     return Uri.https(ApiData.baseUrl, "/3/movie/$id/reviews");
   }
 
+  static getSimilarMoviesUri(int id) {
+    return Uri.https(ApiData.baseUrl, "/3/movie/$id/similar");
+  }
+
+  static getRecommendationsMoviesUri(int id) {
+    return Uri.https(ApiData.baseUrl, "/3/movie/$id/recommendations");
+  }
+
   static getMoviesDetailsUri(int id) {
     return Uri.https(ApiData.baseUrl, "/3/movie/$id",
         {"append_to_response": "credits,images"});
@@ -165,11 +173,7 @@ class ApiManager {
     var response =
         await http.get(uri, headers: {'Authorization': ApiData.token});
 
-    print(response.body);
-
     var jsonResponse = jsonDecode(response.body);
-
-    print(jsonResponse);
 
     // get all movies images
     ReviewModel imagesOfMovies = ReviewModel.fromJson(jsonResponse);
@@ -184,15 +188,47 @@ class ApiManager {
     var response =
         await http.get(uri, headers: {'Authorization': ApiData.token});
 
-    print(response.body);
-
     var jsonResponse = jsonDecode(response.body);
-
-    print(jsonResponse);
 
     // get all movies images
     ImagesOfMovies imagesOfMovies = ImagesOfMovies.fromJson(jsonResponse);
 
     return imagesOfMovies;
+  }
+
+  static getMoviesSimilarForMovie(int id) async {
+    Uri uri = getSimilarMoviesUri(id);
+
+    var response =
+        await http.get(uri, headers: {'Authorization': ApiData.token});
+
+    var jsonResponse = jsonDecode(response.body);
+
+    List<dynamic> similarMoviesTest = jsonResponse["results"];
+    List<MovieItemModel> similarMovies = [];
+    for (int i = 0; i < similarMoviesTest.length; i++) {
+      similarMovies.add(MovieItemModel.fromJson(similarMoviesTest[i]));
+    }
+
+    return similarMovies;
+  }
+
+  static getMoviesRecommendationsForMovie(int id) async {
+    Uri uri = getRecommendationsMoviesUri(id);
+
+    var response =
+        await http.get(uri, headers: {'Authorization': ApiData.token});
+
+    var jsonResponse = jsonDecode(response.body);
+
+    List<dynamic> recommendationsMoviesTest = jsonResponse["results"];
+    List<MovieItemModel> recommendationsMovies = [];
+
+    for (int i = 0; i < recommendationsMoviesTest.length; i++) {
+      recommendationsMovies
+          .add(MovieItemModel.fromJson(recommendationsMoviesTest[i]));
+    }
+
+    return recommendationsMovies;
   }
 }

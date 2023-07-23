@@ -9,8 +9,10 @@ import '../movies/movie_screen/all_movies_screen.dart';
 class TypeOfMovies extends StatelessWidget {
   List<MovieItemModel> movies;
   String type;
-
-  TypeOfMovies({required this.type, required this.movies, super.key});
+  bool showAll;
+  bool textColorWhite;
+  double fontSize;
+  TypeOfMovies({this.fontSize = 28,this.textColorWhite=false,this.showAll=true,required this.type, required this.movies, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +20,22 @@ class TypeOfMovies extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 type,
-                style: TextStyle(color: Theme
+                style: TextStyle(color:
+                textColorWhite?Colors.white:
+                Theme
                     .of(context)
-                    .primaryColor, fontSize: 28),
+                    .primaryColor, fontSize: fontSize),
               ),
               // TextUtils.showText(type, 28),
               const Spacer(),
-              TextButton(
+             showAll? TextButton(
                 onPressed: () async {
                   String apiType = convertTypeToApiHint(type);
                   // Navigator.pushNamed(
@@ -68,7 +72,7 @@ class TypeOfMovies extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ):Container()
             ],
           ),
         ),

@@ -31,7 +31,7 @@ class MovieDetailsMainScreen extends StatelessWidget {
           if (state is SuccessMovieDetailsState) {
             return MovieDetailsScreen(
               movieDetailsModel: state.movieDetailsModel!,
-              reviewItem: state.reviewModel!,
+              reviewItem: state.reviewModel!, recommendationsMovies: state.recommendationsMovies, similarMovies: state.similarMovies,
             );
           }
           return const Text(
