@@ -1,17 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:movies/main/my_theme.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/ui/movie_details_screen/reviews_tab_view.dart';
+import 'package:movies/ui/movie_details_screen/reviews_screen.dart';
 import 'package:movies/ui/movie_details_screen/show_more_movie_details_item.dart';
 import '../../constants/api_data.dart';
 import '../../model/api_model/movies_details/ImagesOfMovies.dart';
 import '../../model/api_model/movies_details/ReviewModel.dart';
 import '../components/network_image.dart';
 import '../components/type_movies_row.dart';
+import '../shared/page_route.dart';
 import 'details_tab_view.dart';
 
 // ignore: must_be_immutable
@@ -67,7 +66,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     _TextAnimationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 0));
 
-    _transTween = Tween(begin: const Offset(-10, 40), end: const Offset(-10, 0))
+    _transTween = Tween(begin: const Offset(-5, 10), end: const Offset(-5, 0))
         .animate(_TextAnimationController);
 
     super.initState();
@@ -166,12 +165,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                 ),
                                 Row(
                                   children: [
-                                    const Text("Date",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.grey,
-                                        )),
-                                    const Spacer(),
+                                    const ImageIcon(
+                                      AssetImage(
+                                          "assets/images/calendar(2).png"),
+                                      size: 17,
+                                      color: Colors.blueGrey,
+                                      // color: Theme.of(context).primaryColor,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
                                     Text(
                                       // ignore: prefer_interpolation_to_compose_strings
 
@@ -187,16 +190,18 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 5,
+                                  height: 10,
                                 ),
                                 Row(
                                   children: [
-                                    const Text("Time",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.grey,
-                                        )),
-                                    const Spacer(),
+                                    const ImageIcon(
+                                      AssetImage("assets/images/clock.png"),
+                                      size: 17,
+                                      color: Colors.blueGrey,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
                                     Text(
                                       getRunTimeByHour(
                                           widget.movieDetailsModel.runtime ??
@@ -308,36 +313,44 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     overView: widget.movieDetailsModel.overview ?? "",
                     casts: widget.movieDetailsModel.casts ?? [],
                   ),
-                  TypeOfMovies(
-                    fontSize: 24,
-                    textColorWhite: true,
-                    type: 'Similar',
-                    showAll: false,
-                    movies: widget.similarMovies,
+                  widget.similarMovies.length > 0
+                      ? TypeOfMovies(
+                          fontSize: 24,
+                          textColorWhite: true,
+                          type: 'Similar',
+                          showAll: false,
+                          movies: widget.similarMovies,
+                        )
+                      : Container(),
+                  widget.recommendationsMovies.length > 0
+                      ? TypeOfMovies(
+                          fontSize: 24,
+                          textColorWhite: true,
+                          showAll: false,
+                          type: 'Recommendations',
+                          movies: widget.recommendationsMovies,
+                        )
+                      : Container(),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      ShowMoreDetailsItem(
+                        iconPath: "assets/images/reviews.png",
+                        iconText: 'Reviews',
+                        onClick: clickOnReviewItem,
+                      ),
+                      const Spacer(),
+                      ShowMoreDetailsItem(
+                        iconPath: "assets/images/video_marketing.png",
+                        iconText: 'Videos',
+                        onClick: () {},
+                      ),
+                      const Spacer(),
+                    ],
                   ),
-                  TypeOfMovies(
-                    fontSize: 24,
-                    textColorWhite: true,
-                    showAll: false,
-                    type: 'Recommendations',
-                    movies: widget.recommendationsMovies,
-                  ),
-
-                  ShowMoreDetailsItem(
-                    iconPath: "assets/images/reviews.png",
-                    iconText: 'Reviews', onClick: () {  },
-                  ),
-                  ShowMoreDetailsItem(
-                    iconPath: "assets/images/video_marketing.png",
-                    iconText: 'Videos', onClick: () {  },
-                  ),
-
                   const SizedBox(
                     height: 20,
                   ),
-                  // ReviewsTabView(
-                  //   reviewModel: widget.reviewItem,
-                  // ),
                 ],
               ),
             ),
@@ -369,6 +382,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     );
   }
 
+  void clickOnReviewItem() {
+    Navigator.push(
+        context,
+        PageRouteUtils.createRoute(
+            ReviewScreen(reviewModel: widget.reviewItem), 0.0, 1.0));
+  }
+
   static getRunTimeByHour(num runTime) {
     var hours = runTime ~/ 60;
     var min = runTime - (hours * 60);
@@ -380,15 +400,18 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     return DateFormat('MMM d, yyyy').format(dateTime);
   }
 
-  Route createRoute(Widget page) {
+  Route createRoute(Widget page, double x, double y) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0.0);
+        // const begin = Offset(0.0, 1.0); bottom
+        // const begin = Offset(1.0, 0.0);  left
+        var begin = Offset(x, y);
         const end = Offset.zero;
         const curve = Curves.ease;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),

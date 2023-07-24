@@ -16,6 +16,7 @@ class TypeOfMovies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -76,6 +77,7 @@ class TypeOfMovies extends StatelessWidget {
             ],
           ),
         ),
+
         SizedBox(
           height: 300,
           child: ListView.builder(

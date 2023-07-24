@@ -15,9 +15,10 @@ class AllCastScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cast & Crew",style: TextStyle(
-          color: Colors.white,fontSize: 22
-        ),),
+        title: const Text(
+          "Cast & Crew",
+          style: TextStyle(color: Colors.white, fontSize: 22),
+        ),
       ),
       body: SafeArea(
         child: Expanded(
@@ -65,9 +66,9 @@ class AllCastScreen extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           return Expanded(
                             child: CastViewAllItem(
-                              name: crew[index].name??"",
-                              secondTitle: crew[index].job??"",
-                              imagePath: crew[index].profilePath??"",
+                              name: crew[index].name ?? "",
+                              secondTitle: crew[index].job ?? "",
+                              imagePath: crew[index].profilePath ?? "",
                             ),
                           );
                         },

@@ -4,6 +4,7 @@ import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/movies_details/ReviewModel.dart';
 import 'package:movies/ui/components/network_image.dart';
 import 'package:movies/ui/shared/text_utils.dart';
+import 'package:readmore/readmore.dart';
 
 // ignore: must_be_immutable
 class ReviewItem extends StatelessWidget {
@@ -16,20 +17,62 @@ class ReviewItem extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+
           Container(
             decoration: BoxDecoration(
                 color: const Color(0xFF2B3543),
                 borderRadius: BorderRadius.circular(8)),
             margin: const EdgeInsets.only(left: 10, right: 10, top: 8),
             width: double.infinity,
+
             child: Container(
               padding: const EdgeInsets.all(8),
-              child: Text(
-                "${review.content}",
-                // ignore: prefer_const_constructors
-                style: TextStyle(color: Colors.white),
+              child: Column(
+                children: [
+                  review.authorDetails!.rating != null
+                      ? RatingBar(
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    ignoreGestures: true,
+                    initialRating: review.authorDetails!.rating!.toDouble() / 2,
+                    itemSize: 25,
+                    ratingWidget: RatingWidget(
+                        full: const Icon(
+                          Icons.star_rate_rounded,
+                          color: Colors.yellow,
+                        ),
+                        half: const Icon(Icons.star_half_rounded,
+                            color: Colors.yellow),
+                        empty: const Icon(Icons.star_border_rounded,
+                            color: Colors.yellow)),
+                    onRatingUpdate: (value) {},
+                  )
+                      : Container(),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  ReadMoreText(
+                    review.content!,
+                    trimLines: 5,
+                    colorClickableText: Colors.red,
+                    trimMode: TrimMode.Line,
+                    trimCollapsedText: 'More',
+                    trimExpandedText: 'Less',
+                    moreStyle: TextStyle(
+                        fontSize: 16, color: Theme.of(context).primaryColor),
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ],
               ),
             ),
+            // Container(
+            //   padding: const EdgeInsets.all(8),
+            //   child: Text(
+            //     "${review.content}",
+            //     // ignore: prefer_const_constructors
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            // ),
           ),
           Row(
             children: [
@@ -53,12 +96,17 @@ class ReviewItem extends StatelessWidget {
                     ? CircleAvatar(
                         child: Image.asset("assets/images/user.png"),
                       )
-                    : MyNetworkImage(
-                        imageUrl:( review.authorDetails!.avatarPath![0] == '/'&&review.authorDetails!.avatarPath![1]=='h')
-                            ? review.authorDetails!.avatarPath!.substring(1)
-                            : ApiData.reviewBaseUrl+ review.authorDetails!.avatarPath!,
-                        width: 40,
-                        height: 40),
+                    : ClipOval(
+                      child: MyNetworkImage(
+                          imageUrl:
+                              (review.authorDetails!.avatarPath![0] == '/' &&
+                                      review.authorDetails!.avatarPath![1] == 'h')
+                                  ? review.authorDetails!.avatarPath!.substring(1)
+                                  : ApiData.reviewBaseUrl +
+                                      review.authorDetails!.avatarPath!,
+                          width: 40,
+                          height: 40),
+                    ),
                 const SizedBox(
                   width: 10,
                 ),

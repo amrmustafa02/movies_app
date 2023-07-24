@@ -9,7 +9,7 @@ import 'network_image.dart';
 
 // ignore: must_be_immutable
 class MovieItem extends StatefulWidget {
-  MovieItem({required this.movieItemModel, super.key});
+  MovieItem({required this.movieItemModel});
 
   MovieItemModel movieItemModel;
 
@@ -20,6 +20,23 @@ class MovieItem extends StatefulWidget {
 class _MovieItemState extends State<MovieItem> {
   bool scroll = false;
   int speedFactor = 20;
+  late String year;
+
+  @override
+  void initState() {
+    print(widget.movieItemModel.releaseDate);
+    if (widget.movieItemModel.releaseDate != "") {
+      if (widget.movieItemModel.releaseDate!.length > 3) {
+        year = "(${widget.movieItemModel.releaseDate.toString().substring(0, 4)})";
+      } else {
+        year = "";
+      }
+    } else {
+      year = "";
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,31 +51,19 @@ class _MovieItemState extends State<MovieItem> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        MovieDetailsMainScreen(movieId: widget.movieItemModel.id),
+                    builder: (context) => MovieDetailsMainScreen(
+                        movieId: widget.movieItemModel.id),
                   ));
             },
-            child: MyNetworkImage(
-              imageUrl:
-                  "${ApiData.midImageSizeUrl}${widget.movieItemModel.posterPath}",
-              width: 150,
-              height: 200,
-            ),
-            // child: ClipRRect(
-            //   borderRadius: BorderRadius.circular(15),
-            //   child: CachedNetworkImage(
-            //     width: 150,
-            //     height: 200,
-            //     fit: BoxFit.fill,
-            //     imageUrl:
-            //         "${ApiData.baseImageUrl}${widget.movieItemModel.posterPath}",
-            //     placeholder: (context, url) => Center(
-            //         child: CircularProgressIndicator(
-            //       color: Theme.of(context).primaryColor,
-            //     )),
-            //     errorWidget: (context, url, error) => const Icon(Icons.error),
-            //   ),
-            // ),
+            child: widget.movieItemModel.posterPath != null
+                ? MyNetworkImage(
+                    imageUrl:
+                        "${ApiData.midImageSizeUrl}${widget.movieItemModel.posterPath}",
+                    width: 150,
+                    height: 200,
+                  )
+                : Image.asset("assets/images/no-photo.png",
+                    width: 150, height: 200, fit: BoxFit.fill),
           ),
 
           //--------------------------------------
@@ -72,14 +77,13 @@ class _MovieItemState extends State<MovieItem> {
             child: Text(
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
-              "${widget.movieItemModel.title!} (${(widget.movieItemModel.releaseDate).toString().substring(0, 4)})",
+              "${widget.movieItemModel.title!} $year",
               style: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
                   fontWeight: FontWeight.w300),
             ),
           ),
-          //-----------------------------------------
         ],
       ),
     );

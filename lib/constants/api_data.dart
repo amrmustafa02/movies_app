@@ -8,5 +8,4 @@ class ApiData {
   static const apiKey = "1ece442674a614d9ae77d3c6ddea054c";
   static const String trendingPath = "/3/trending/movie/";
   static const reviewBaseUrl = "https://secure.gravatar.com/avatar";
-  // static const
 }

@@ -39,7 +39,9 @@ class _DetailsTabViewState extends State<DetailsTabView>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           // overview
           const Text(
             "Overview",
@@ -52,20 +54,20 @@ class _DetailsTabViewState extends State<DetailsTabView>
             widget.overView,
             postDataTextStyle:
                 const TextStyle(fontSize: 16, color: Colors.grey),
-            preDataTextStyle:
-                const TextStyle(fontSize: 16, color: Colors.grey),
+            preDataTextStyle: const TextStyle(fontSize: 16, color: Colors.grey),
             trimLines: 3,
             colorClickableText: Colors.red,
             trimMode: TrimMode.Line,
             trimCollapsedText: 'More',
             trimExpandedText: 'Less',
-            moreStyle: TextStyle(
-                fontSize: 16, color: Theme.of(context).primaryColor),
+            moreStyle:
+                TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
             style: const TextStyle(fontSize: 16, color: Colors.grey),
           ),
 
-
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
 
           // cast items
           Row(
@@ -93,26 +95,32 @@ class _DetailsTabViewState extends State<DetailsTabView>
           ),
           widget.casts.isNotEmpty
               ? CastItem(
+              id: widget.casts[0].id!.toInt(),
                   imageUri: widget.casts[0].profilePath,
                   castModel: widget.casts[0])
               : Container(),
           widget.casts.length > 1
               ? CastItem(
+              id: widget.casts[1].id!.toInt(),
                   imageUri: widget.casts[1].profilePath,
                   castModel: widget.casts[1])
               : Container(),
           widget.casts.length > 2
               ? CastItem(
                   imageUri: widget.casts[2].profilePath,
-                  castModel: widget.casts[2])
+                  castModel: widget.casts[2],
+                  id: widget.casts[2].id!.toInt(),
+                )
               : Container(),
           widget.casts.length > 3
               ? CastItem(
+              id: widget.casts[3].id!.toInt(),
                   imageUri: widget.casts[3].profilePath,
                   castModel: widget.casts[3])
               : Container(),
           widget.casts.length > 4
               ? CastItem(
+              id: widget.casts[4].id!.toInt(),
                   imageUri: widget.casts[4].profilePath,
                   castModel: widget.casts[4])
               : Container(),
@@ -129,7 +137,8 @@ class _DetailsTabViewState extends State<DetailsTabView>
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
-                        return AllImagesScreen(imagesOfMovies: widget.imagesOfMovies);
+                        return AllImagesScreen(
+                            imagesOfMovies: widget.imagesOfMovies);
                       },
                     ));
                   },
@@ -162,7 +171,9 @@ class _DetailsTabViewState extends State<DetailsTabView>
                   );
                 },
               )),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 
 typedef onClickFunction = void Function();
+
 class ShowMoreDetailsItem extends StatelessWidget {
   String iconPath;
   String iconText;
   onClickFunction onClick;
-  ShowMoreDetailsItem({required this.onClick,required this.iconPath,required this.iconText});
+
+  ShowMoreDetailsItem(
+      {required this.onClick, required this.iconPath, required this.iconText});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onClick,
       child: Container(
         margin: const EdgeInsets.all(8),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               iconPath,
@@ -21,16 +26,13 @@ class ShowMoreDetailsItem extends StatelessWidget {
               height: 70,
               fit: BoxFit.fill,
             ),
-            const Spacer(),
-             Text(
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
               "$iconText ",
               style: const TextStyle(color: Colors.white, fontSize: 14),
             ),
-            Icon(
-              Icons.arrow_forward_ios_sharp,
-              color: Theme.of(context).primaryColor,
-              size: 15,
-            )
           ],
         ),
       ),
@@ -45,7 +47,8 @@ class ShowMoreDetailsItem extends StatelessWidget {
         const end = Offset.zero;
         const curve = Curves.ease;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -54,6 +57,4 @@ class ShowMoreDetailsItem extends StatelessWidget {
       },
     );
   }
-
 }
-

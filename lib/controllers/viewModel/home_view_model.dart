@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/controllers/api/api_manager.dart';
+import 'package:movies/controllers/api/api_movie_manager.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 
 import '../../ui/components/back_poster_item/back_poster_item.dart';
@@ -10,19 +10,19 @@ class HomeViewModel extends Cubit<HomeState> {
   }
 
   getMovies() async {
-    List<MovieItemModel> popular = await ApiManager.getMoviesByType("popular");
+    List<MovieItemModel> popular = await ApiMovieManager.getMoviesByType("popular");
 
     List<MovieItemModel> upcoming =
-        await ApiManager.getMoviesByType("upcoming");
+        await ApiMovieManager.getMoviesByType("upcoming");
 
     List<MovieItemModel> nowPlaying =
-        await ApiManager.getMoviesByType("now_playing");
+        await ApiMovieManager.getMoviesByType("now_playing");
 
     List<MovieItemModel> topRated =
-        await ApiManager.getMoviesByType("top_rated");
+        await ApiMovieManager.getMoviesByType("top_rated");
 
     List<MovieItemModel> trendingMovies =
-        await ApiManager.getTrendingMovies("day");
+        await ApiMovieManager.getTrendingMovies("day");
 
     List<BackPosterItem> posterMovies = [];
 

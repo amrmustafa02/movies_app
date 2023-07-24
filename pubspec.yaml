@@ -101,7 +101,15 @@ flutter:
      - family: IndieFlower
        fonts:
          - asset: assets/fonts/IndieFlower-Regular.ttf
-
+     - family: BungeeSpice
+       fonts:
+         - asset: assets/fonts/BungeeSpice-Regular.ttf
+     - family: AntonRegular
+       fonts:
+         - asset: assets/fonts/Anton-Regular.ttf
+     - family: LobsterRegular
+       fonts:
+         - asset: assets/fonts/Lobster-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

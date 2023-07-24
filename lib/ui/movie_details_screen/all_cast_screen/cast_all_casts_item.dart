@@ -10,7 +10,11 @@ class CastViewAllItem extends StatelessWidget {
   String name;
   String secondTitle;
 
-  CastViewAllItem({required this.name,required this.secondTitle,required this.imagePath, super.key});
+  CastViewAllItem(
+      {required this.name,
+      required this.secondTitle,
+      required this.imagePath,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,32 +23,38 @@ class CastViewAllItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          imagePath.isEmpty?Image.asset("assets/images/user.png",width: 70,height: 75,fit: BoxFit.fill,):
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child:MyNetworkImage(
-              imageUrl:ApiData.midImageSizeUrl + (imagePath),
-              width: 75,
-              height: 75,
-            )
+          ClipOval(
+            child: imagePath.isEmpty
+                ? Image.asset(
+                    "assets/images/user.png",
+                    width: 70,
+                    height: 70,
+                    fit: BoxFit.fill,
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: MyNetworkImage(
+                      imageUrl: ApiData.midImageSizeUrl + (imagePath),
+                      width: 75,
+                      height: 75,
+                    )),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                name.isNotEmpty? name:"No name found!!",
+                name.isNotEmpty ? name : "No name found!!",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 16, color: Colors.white),
               ),
-
               const SizedBox(
                 height: 5,
               ),
-               SizedBox(
+              SizedBox(
                 child: Text(
-                  secondTitle.isNotEmpty? secondTitle:"No name found!!",
+                  secondTitle.isNotEmpty ? secondTitle : "No name found!!",
                   softWrap: true,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,

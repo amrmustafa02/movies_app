@@ -8,7 +8,7 @@ import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/movies_details/ImagesOfMovies.dart';
 import 'package:movies/model/api_model/movies_details/ReviewModel.dart';
 
-class ApiManager {
+class ApiMovieManager {
   static getMoviesTypeUri(int page, String type) {
     return Uri.https(ApiData.baseUrl, "/3/movie/$type",
         {"page": "$page", "language": 'en-US'});

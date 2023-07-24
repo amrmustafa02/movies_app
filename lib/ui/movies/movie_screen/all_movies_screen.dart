@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/controllers/api/api_manager.dart';
+import 'package:movies/controllers/api/api_movie_manager.dart';
 import 'package:movies/ui/components/movie_item.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
@@ -97,7 +97,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
     widget.page++;
 
     List<MovieItemModel> moreMovies =
-        await ApiManager.getMoviesByType(widget.apiType, page: widget.page);
+        await ApiMovieManager.getMoviesByType(widget.apiType, page: widget.page);
     widget.movies.addAll(moreMovies);
   }
 }

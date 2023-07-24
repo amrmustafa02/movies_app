@@ -32,8 +32,8 @@ class MyNetworkImage extends StatelessWidget {
                 width: width,
               )),
         ),
-        errorWidget: (context, url, error) => Icon(
-          Icons.error,
+        errorWidget: (context, url, error) => ImageIcon(
+          const AssetImage("assets/images/no-photo.png"),
           color: Theme.of(context).primaryColor,
         ),
       ),
