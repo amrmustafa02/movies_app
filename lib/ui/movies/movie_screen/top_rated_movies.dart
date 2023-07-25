@@ -6,12 +6,12 @@ import '../../components/back_poster_item/back_poster_item.dart';
 import 'all_movies_screen.dart';
 
 // ignore: must_be_immutable
-class TrendingMovies extends StatelessWidget {
+class TopRatedMovies extends StatelessWidget {
   final PageController controller = PageController();
   List<BackPosterItem> movies = [];
   String type;
 
-  TrendingMovies({super.key,required this.type, required this.movies});
+  TopRatedMovies({super.key,required this.type, required this.movies});
   @override
   Widget build(BuildContext context) {
     return Column(

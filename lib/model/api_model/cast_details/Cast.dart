@@ -2,61 +2,60 @@ import 'dart:convert';
 
 class Cast {
   Cast({
-      this.adult, 
-      this.backdropPath, 
-      this.genreIds, 
-      this.id, 
-      this.originCountry, 
-      this.originalLanguage, 
-      this.originalName, 
-      this.overview, 
-      this.popularity, 
-      this.posterPath, 
-      this.firstAirDate, 
-      this.name, 
-      this.voteAverage, 
-      this.voteCount, 
-      this.character, 
-      this.creditId, 
-      this.episodeCount,});
+    this.adult,
+    this.backdropPath,
+    this.genreIds,
+    this.id,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.popularity,
+    this.posterPath,
+    this.releaseDate,
+    this.title,
+    this.video,
+    this.voteAverage,
+    this.voteCount,
+    this.creditId,
+    this.department,
+    this.job,
+  });
 
   Cast.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<num>() : [];
     id = json['id'];
-    originCountry = json['origin_country'] != null ? json['origin_country'].cast<String>() : [];
     originalLanguage = json['original_language'];
-    originalName = json['original_name'];
+    originalTitle = json['original_title'];
     overview = json['overview'];
     popularity = json['popularity'];
     posterPath = json['poster_path'];
-    firstAirDate = json['first_air_date'];
-    name = json['name'];
+    releaseDate = json['release_date'];
+    title = json['title'];
+    video = json['video'];
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
-    character = json['character'];
     creditId = json['credit_id'];
-    episodeCount = json['episode_count'];
+    department = json['department'];
+    job = json['job'];
   }
+
   bool? adult;
   String? backdropPath;
   List<num>? genreIds;
   num? id;
-  List<String>? originCountry;
   String? originalLanguage;
-  String? originalName;
+  String? originalTitle;
   String? overview;
   num? popularity;
   String? posterPath;
-  String? firstAirDate;
-  String? name;
+  String? releaseDate;
+  String? title;
+  bool? video;
   num? voteAverage;
   num? voteCount;
-  String? character;
   String? creditId;
-  num? episodeCount;
-
-
-
+  String? department;
+  String? job;
 }

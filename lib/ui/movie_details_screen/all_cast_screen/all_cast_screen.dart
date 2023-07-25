@@ -40,6 +40,7 @@ class AllCastScreen extends StatelessWidget {
                               imagePath: casts[index].profilePath ?? "",
                               name: casts[index].name ?? "",
                               secondTitle: casts[index].character ?? "",
+                              id: casts[index].id!.toInt(),
                             ),
                           );
                         },
@@ -68,7 +69,7 @@ class AllCastScreen extends StatelessWidget {
                             child: CastViewAllItem(
                               name: crew[index].name ?? "",
                               secondTitle: crew[index].job ?? "",
-                              imagePath: crew[index].profilePath ?? "",
+                              imagePath: crew[index].profilePath ?? "", id: crew[index].id!.toInt(),
                             ),
                           );
                         },

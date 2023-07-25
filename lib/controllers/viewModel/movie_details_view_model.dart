@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
+import 'package:movies/model/api_model/video_data_model.dart';
 
 import '../../model/api_model/movies_details/ReviewModel.dart';
 import '../api/api_movie_manager.dart';
@@ -18,9 +19,11 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
         await ApiMovieManager.getMoviesSimilarForMovie(id);
     List<MovieItemModel> recommendationsMovies =
         await ApiMovieManager.getMoviesRecommendationsForMovie(id);
+    List<VideoDataModel> moviesVideos =
+        await ApiMovieManager.getVideosOnMovie(id);
 
     emit(SuccessMovieDetailsState(
-        movieDetails, reviewModel, similarMovies, recommendationsMovies));
+        movieDetails, reviewModel, similarMovies, recommendationsMovies,moviesVideos));
   }
 }
 
@@ -33,7 +36,7 @@ class SuccessMovieDetailsState extends MovieDetailsState {
   ReviewModel? reviewModel;
   List<MovieItemModel> recommendationsMovies;
   List<MovieItemModel> similarMovies;
-
+   List<VideoDataModel> movieVideos;
   SuccessMovieDetailsState(this.movieDetailsModel, this.reviewModel,
-      this.similarMovies, this.recommendationsMovies);
+      this.similarMovies, this.recommendationsMovies,this.movieVideos);
 }

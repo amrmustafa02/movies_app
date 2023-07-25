@@ -27,7 +27,25 @@ class CastDetailsMainScreen extends StatelessWidget {
             );
           }
           if (state is SuccessCastState) {
-            return CastDetailsScreen(castDetailsModel: state.castDetailsModel,);
+            var crewMovies = state.castDetailsModel.movieCredits!.crew!;
+            var castMovies = state.castDetailsModel.movieCredits!.cast!;
+
+            for (int i = 0; i < crewMovies.length; i++) {
+              if (crewMovies[i].posterPath == null) {
+                crewMovies.removeAt(i);
+                i--;
+              }
+            }
+            for (int i = 0; i < castMovies.length; i++) {
+              if (castMovies[i].posterPath == null) {
+                castMovies.removeAt(i);
+                i--;
+              }
+            }
+
+            return CastDetailsScreen(
+              castDetailsModel: state.castDetailsModel,
+            );
           }
           return const Text(
             "Hello",

@@ -7,6 +7,7 @@ import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/movies_details/ImagesOfMovies.dart';
 import 'package:movies/model/api_model/movies_details/ReviewModel.dart';
+import 'package:movies/model/api_model/video_data_model.dart';
 
 class ApiMovieManager {
   static getMoviesTypeUri(int page, String type) {
@@ -164,7 +165,26 @@ class ApiMovieManager {
     return movieDetailsModel;
   }
 
-  static getVideosOnMovie() {}
+  static getVideosOnMovie(int id) async {
+    // create uri
+
+    Uri uri = getVideosUri(id);
+
+    // run request
+    var response =
+        await http.get(uri, headers: {'Authorization': ApiData.token});
+
+    // convert string to map
+    var jsonResponse = jsonDecode(response.body);
+
+    // get  all movies
+    List<dynamic> videos = jsonResponse["results"];
+    List<VideoDataModel> videoResult = [];
+    for (int i = 0; i < videos.length; i++) {
+      videoResult.add(VideoDataModel.fromJson(videos[i]));
+    }
+    return videoResult;
+  }
 
   static getReviewsOnMovie(int id) async {
     Uri uri = getReviewUri(id);

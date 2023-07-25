@@ -29,9 +29,32 @@ class MovieDetailsMainScreen extends StatelessWidget {
             );
           }
           if (state is SuccessMovieDetailsState) {
+            // get all videos from youtube
+            var videos = state.movieVideos;
+            for (int i = 0; i < videos.length; i++) {
+              if (videos[i].site != "YouTube") {
+                videos.removeAt(i);
+                i--;
+              }
+            }
+
+            // sort by trails
+            int startIndex = 0;
+            for (int i = 0; i < videos.length; i++) {
+              if (videos[i].type!.toLowerCase().contains("trailer")) {
+                var temp = videos[i];
+                videos[i] = videos[startIndex];
+                videos[startIndex] = temp;
+                startIndex++;
+              }
+            }
+
             return MovieDetailsScreen(
+              moviesVideo: videos,
               movieDetailsModel: state.movieDetailsModel!,
-              reviewItem: state.reviewModel!, recommendationsMovies: state.recommendationsMovies, similarMovies: state.similarMovies,
+              reviewItem: state.reviewModel!,
+              recommendationsMovies: state.recommendationsMovies,
+              similarMovies: state.similarMovies,
             );
           }
           return const Text(

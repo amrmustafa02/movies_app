@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/ui/movies/movie_screen/trending_movies.dart';
+import 'package:movies/ui/movies/movie_screen/top_rated_movies.dart';
 import '../../../controllers/viewModel/home_view_model.dart';
 import '../../components/type_movies_row.dart';
 import '../../shared/text_utils.dart';
@@ -64,7 +64,7 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> with AutomaticKeepAli
                MoviesSwaps(movies: state.posterMovies,),
                Container(
                    margin: EdgeInsets.all(8),
-                   child: TrendingMovies(movies: state.topRatedTest, type: 'Top Rated',)),
+                   child: TopRatedMovies(movies: state.topRatedTest, type: 'Top Rated',)),
                TypeOfMovies(
                  movies: state.popularMovies,
                  type: 'Popular',

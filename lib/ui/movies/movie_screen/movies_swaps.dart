@@ -24,7 +24,7 @@ class _MoviesSwapsState extends State<MoviesSwaps>
 
     return SizedBox(
       width: double.infinity,
-      height: size.height * 0.58,
+      height: size.height * 0.54,
       child: Swiper(
         itemCount: widget.movies.length,
         layout: SwiperLayout.STACK,
@@ -48,8 +48,8 @@ class _MoviesSwapsState extends State<MoviesSwaps>
                   borderRadius: BorderRadius.circular(10),
                   child: MyNetworkImage(
                     imageUrl: (ApiData.largeImageSizeUri + movie.posterPath!),
-                    width: size.width * 0.54,
-                    height: size.height * 0.78,
+                    width: double.infinity,
+                    height: size.height * 0.54,
                   )),
             ),
           );

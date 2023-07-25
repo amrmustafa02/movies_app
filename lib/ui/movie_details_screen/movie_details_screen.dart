@@ -3,8 +3,10 @@ import 'package:intl/intl.dart';
 import 'package:movies/main/my_theme.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
+import 'package:movies/model/api_model/video_data_model.dart';
 import 'package:movies/ui/movie_details_screen/reviews_screen.dart';
 import 'package:movies/ui/movie_details_screen/show_more_movie_details_item.dart';
+import 'package:movies/ui/movie_details_screen/videos_screen/videos_screen.dart';
 import '../../constants/api_data.dart';
 import '../../model/api_model/movies_details/ImagesOfMovies.dart';
 import '../../model/api_model/movies_details/ReviewModel.dart';
@@ -18,6 +20,7 @@ class MovieDetailsScreen extends StatefulWidget {
   MovieDetailsModel movieDetailsModel;
   List<MovieItemModel> similarMovies;
   List<MovieItemModel> recommendationsMovies;
+  List<VideoDataModel> moviesVideo;
   ReviewModel reviewItem;
 
   MovieDetailsScreen(
@@ -25,7 +28,7 @@ class MovieDetailsScreen extends StatefulWidget {
       required this.reviewItem,
       required this.recommendationsMovies,
       required this.similarMovies,
-      super.key});
+      super.key, required this.moviesVideo});
 
   @override
   State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
@@ -343,7 +346,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                       ShowMoreDetailsItem(
                         iconPath: "assets/images/video_marketing.png",
                         iconText: 'Videos',
-                        onClick: () {},
+                        onClick: clickOnVideoItem,
                       ),
                       const Spacer(),
                     ],
@@ -387,6 +390,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
         context,
         PageRouteUtils.createRoute(
             ReviewScreen(reviewModel: widget.reviewItem), 0.0, 1.0));
+  }
+
+  void clickOnVideoItem(){
+    Navigator.push(
+        context,
+        PageRouteUtils.createRoute(
+            VideosScreen(videos: widget.moviesVideo,), 0.0, 1.0));
   }
 
   static getRunTimeByHour(num runTime) {
