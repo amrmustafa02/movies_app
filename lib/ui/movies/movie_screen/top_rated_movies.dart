@@ -16,56 +16,53 @@ class TopRatedMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                type,
-                style: TextStyle(color: Theme
-                    .of(context)
-                    .primaryColor, fontSize: 28),
-              ),
-              // TextUtils.showText(type, 28),
-              const Spacer(),
-              TextButton(
-                onPressed: () async {
-                  String apiType = convertTypeToApiHint(type);
-                  List<MovieItemModel> newList = [];
-                  for(int i=0;i<movies.length;i++){
-                    newList.add(movies[i].movieItemModel);
-                  }
-                  await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            AllMoviesScreen(
-                                type: type, apiType: apiType, movies: newList),
-                      ));
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              type,
+              style: TextStyle(color: Theme
+                  .of(context)
+                  .primaryColor, fontSize: 28),
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: () async {
+                String apiType = convertTypeToApiHint(type);
+                List<MovieItemModel> newList = [];
+                for(int i=0;i<movies.length;i++){
+                  newList.add(movies[i].movieItemModel);
+                }
+                await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          AllMoviesScreen(
+                              type: type, apiType: apiType, movies: newList),
+                    ));
 
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "View All ",
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 10,
-                      color: Theme
-                          .of(context)
-                          .primaryColor,
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "View All ",
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 10,
+                    color: Theme
+                        .of(context)
+                        .primaryColor,
+                  )
+                ],
+              ),
+            )
+          ],
         ),
         SizedBox(
           height: 200,

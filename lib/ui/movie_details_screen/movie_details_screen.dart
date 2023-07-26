@@ -28,7 +28,8 @@ class MovieDetailsScreen extends StatefulWidget {
       required this.reviewItem,
       required this.recommendationsMovies,
       required this.similarMovies,
-      super.key, required this.moviesVideo});
+      super.key,
+      required this.moviesVideo});
 
   @override
   State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
@@ -392,11 +393,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
             ReviewScreen(reviewModel: widget.reviewItem), 0.0, 1.0));
   }
 
-  void clickOnVideoItem(){
+  void clickOnVideoItem() {
     Navigator.push(
         context,
         PageRouteUtils.createRoute(
-            VideosScreen(videos: widget.moviesVideo,), 0.0, 1.0));
+            VideosScreen(
+              videos: widget.moviesVideo,
+            ),
+            0.0,
+            1.0));
   }
 
   static getRunTimeByHour(num runTime) {
