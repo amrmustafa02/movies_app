@@ -24,10 +24,10 @@ class _MovieItemState extends State<MovieItem> {
 
   @override
   void initState() {
-    print(widget.movieItemModel.releaseDate);
     if (widget.movieItemModel.releaseDate != "") {
       if (widget.movieItemModel.releaseDate!.length > 3) {
-        year = "(${widget.movieItemModel.releaseDate.toString().substring(0, 4)})";
+        year =
+            "(${widget.movieItemModel.releaseDate.toString().substring(0, 4)})";
       } else {
         year = "";
       }

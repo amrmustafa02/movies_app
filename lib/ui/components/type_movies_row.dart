@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/ui/components/movie_item.dart';
 
-import '../movies/movie_screen/all_movies_screen.dart';
+import '../home/movie_screen/all_movies_screen.dart';
 
 
 // ignore: must_be_immutable
@@ -39,15 +39,10 @@ class TypeOfMovies extends StatelessWidget {
              showAll? TextButton(
                 onPressed: () async {
                   String apiType = convertTypeToApiHint(type);
-                  // Navigator.pushNamed(
-                  //     context, AllMoviesScreen.routeName, arguments: [
-                  //   "type": type,
-                  //   "apiType": apiType,
-                  //   "movies": movies
-                  // ]);
+
                   List<MovieItemModel> newList = [];
                   newList.addAll(movies);
-                 await Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>

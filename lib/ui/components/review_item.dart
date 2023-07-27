@@ -65,14 +65,7 @@ class ReviewItem extends StatelessWidget {
                 ],
               ),
             ),
-            // Container(
-            //   padding: const EdgeInsets.all(8),
-            //   child: Text(
-            //     "${review.content}",
-            //     // ignore: prefer_const_constructors
-            //     style: TextStyle(color: Colors.white),
-            //   ),
-            // ),
+
           ),
           Row(
             children: [

@@ -45,12 +45,18 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   anim_search_bar: ^2.0.3
   skeletons: ^0.0.3
-  intl: ^0.18.1
+#  intl: ^0.18.1
   shimmer: ^3.0.0
   readmore: ^2.2.0
   card_swiper: ^2.0.4
   flutter_custom_clippers: ^2.1.0
   get: ^4.6.5
+  device_preview: ^1.1.0
+  infinite_scroll_pagination: ^3.2.0
+  flutter_floating_bottom_bar: ^1.1.0
+  firebase_auth: ^4.7.2
+  firebase_core: ^2.15.0
+
 #  simple_gradient_text: ^1.2.4
 
 dev_dependencies:

@@ -16,11 +16,16 @@ class TextUtils {
       ),
     );
   }
+
   static getReleaseDate(String? date) {
-    if(date==null){
+    try {
+      if (date == null) {
+        return "";
+      }
+      DateTime dateTime = DateTime.parse(date);
+      return DateFormat('MMM d, yyyy').format(dateTime);
+    } catch (_) {
       return "";
     }
-    DateTime dateTime = DateTime.parse(date);
-    return DateFormat('MMM d, yyyy').format(dateTime);
   }
 }
