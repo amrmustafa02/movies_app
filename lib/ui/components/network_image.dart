@@ -23,7 +23,7 @@ class MyNetworkImage extends StatelessWidget {
         fit: BoxFit.fill,
         imageUrl: imageUrl,
         placeholder: (context, url) => Center(
-          child: Shimmer.fromColors(
+          child:  Shimmer.fromColors(
               baseColor: Colors.grey.withOpacity(0.1),
               highlightColor: Theme.of(context).primaryColor.withOpacity(0.4),
               child: Container(

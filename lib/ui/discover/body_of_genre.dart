@@ -47,7 +47,7 @@ class _BodyOfGenreState extends State<BodyOfGenre> {
               child: MyNetworkImage(
                   imageUrl: ApiData.midImageSizeUrl +
                       widget.movieItemModels[index].posterPath!,
-                  width: 0,
+                  width: 00,
                   height: 100),
             ),
           );

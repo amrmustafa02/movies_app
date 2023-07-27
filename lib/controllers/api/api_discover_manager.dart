@@ -76,7 +76,6 @@ class ApiDiscoverManager {
     // get all movies
 
     List<dynamic> list = jsonResponse["results"];
-       print(list);
     List<MovieItemModel> movies = [];
 
     for (int i = 0; i < list.length; i++) {

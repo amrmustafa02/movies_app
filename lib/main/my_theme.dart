@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class MyTheme {
   static const Color primeColor = Color(0xFFE51937);
-  // static const Color primeColor = Color(0xFF9B2121);
 
-  static var myTheme = ThemeData(
+  // static const Color primeColor = Color(0xFF9B2121);
+  static const secondColor = Color(0xFF243554);
+
+ static var myTheme = ThemeData(
     canvasColor: Colors.transparent,
     textTheme: const TextTheme(),
     appBarTheme: const AppBarTheme(
