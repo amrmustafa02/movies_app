@@ -9,16 +9,16 @@ import 'package:movies/main/splash_screen.dart';
 import '../ui/search_screen/main_screen.dart';
 
 void main() {
-  // runApp(
-  //    DevicePreview(
-  //     enabled: true,
-  //     tools: const [
-  //       ...DevicePreview.defaultTools
-  //     ],
-  //     builder: (context) => const MyApp(),
-  //   ),
-  // );
-  runApp(const MyApp());
+  runApp(
+     DevicePreview(
+      enabled: true,
+      tools: const [
+        ...DevicePreview.defaultTools
+      ],
+      builder: (context) => const MyApp(),
+    ),
+  );
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => const SplashScreen(),
         MainScreen.routeName: (context) => const MainScreen(),
       },
-      initialRoute: LoginScreen.routeName,
+      initialRoute: SplashScreen.routeName,
     );
   }
 }

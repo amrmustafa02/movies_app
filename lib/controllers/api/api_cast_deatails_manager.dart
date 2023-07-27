@@ -6,6 +6,7 @@ import '../../constants/api_data.dart';
 import 'package:http/http.dart' as http;
 
 class ApiCastManager {
+
   static getCastDetailsTypeUri(int id) {
     return Uri.https(ApiData.baseUrl, "/3/person/$id",
         {"append_to_response": "movie_credits,tv_credits,images"});
@@ -26,4 +27,5 @@ class ApiCastManager {
     print(castDetailsModel);
     return castDetailsModel;
   }
+
 }
