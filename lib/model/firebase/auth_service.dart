@@ -8,28 +8,33 @@ import 'package:movies/model/firebase/models/user_model.dart';
 class AuthService {
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  static signInWithFacebook() async {
+  static Future<int> signInWithFacebook() async {
     try {
-      await FacebookAuth.instance.logOut();
+      // await FacebookAuth.instance.logOut();
       final LoginResult result = await FacebookAuth.instance.login(
         permissions: ['public_profile', 'email'],
       );
 
+      print("catttttttttttttttt1");
+
       if (result.status == LoginStatus.success) {
         // you are logged
-        var accessToken = result.accessToken!.token;
 
+        var accessToken = result.accessToken!.token;
         var credential = FacebookAuthProvider.credential(accessToken);
 
         var user = await FirebaseAuth.instance.signInWithCredential(credential);
 
         await FireBaseCollection.addUser(
             UserModel(email: user.user!.email, id: user.user!.uid));
+        return 0;
       } else {
-        print(result.status);
-        print(result.message);
+        return 1;
       }
-    } catch (_) {}
+    } catch (e) {
+      print("Wwwwwwwww ${e}");
+      return 2;
+    }
   }
 
   static Future<bool> signInWithGoogle() async {
@@ -47,7 +52,6 @@ class AuthService {
       await FireBaseCollection.addUser(
           UserModel(email: user.user!.email, id: user.user!.uid));
       return true;
-
     } catch (error) {
       return false;
     }

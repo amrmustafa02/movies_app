@@ -10,19 +10,30 @@ class HomeViewModel extends Cubit<HomeState> {
   }
 
   getMovies() async {
-    List<MovieItemModel> popular = await ApiMovieManager.getMoviesByType("popular");
+    List<MovieItemModel> popular =
+        await ApiMovieManager.getMoviesByType("popular");
+    popular.removeWhere(
+        (item) => item.posterPath == null || item.backdropPath == null);
 
     List<MovieItemModel> upcoming =
         await ApiMovieManager.getMoviesByType("upcoming");
+    upcoming.removeWhere(
+            (item) => item.posterPath == null || item.backdropPath == null);
 
     List<MovieItemModel> nowPlaying =
         await ApiMovieManager.getMoviesByType("now_playing");
+    nowPlaying.removeWhere(
+            (item) => item.posterPath == null || item.backdropPath == null);
 
     List<MovieItemModel> topRated =
         await ApiMovieManager.getMoviesByType("top_rated");
+    topRated.removeWhere(
+            (item) => item.posterPath == null || item.backdropPath == null);
 
     List<MovieItemModel> trendingMovies =
         await ApiMovieManager.getTrendingMovies("day");
+    trendingMovies.removeWhere(
+            (item) => item.posterPath == null || item.backdropPath == null);
 
     List<BackPosterItem> posterMovies = [];
 
@@ -39,7 +50,6 @@ class HomeViewModel extends Cubit<HomeState> {
         topRatedTest: posterMovies));
   }
 
-  getTrendingMovies(String type) {}
 }
 
 abstract class HomeState {}

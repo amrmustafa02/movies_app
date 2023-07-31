@@ -45,11 +45,7 @@ class SearchScreen extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(
-          onPressed: () {
-            buildResults(context);
-          },
-          icon: const Icon(Icons.search_rounded))
+
     ];
   }
 
@@ -60,7 +56,7 @@ class SearchScreen extends SearchDelegate {
           query = "";
           Navigator.pop(context);
         },
-        icon: ImageIcon(AssetImage("assets/images/cancel.png"),size: 14,));
+        icon: const ImageIcon(AssetImage("assets/images/cancel.png"),size: 14,));
   }
 
   @override

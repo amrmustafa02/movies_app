@@ -24,7 +24,6 @@ class ApiCastManager {
     // get all movies images
     CastDetailsModel castDetailsModel = CastDetailsModel.fromJson(jsonResponse);
 
-    print(castDetailsModel);
     return castDetailsModel;
   }
 

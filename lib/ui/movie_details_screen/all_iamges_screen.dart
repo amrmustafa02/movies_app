@@ -16,7 +16,17 @@ class AllImagesScreen extends StatelessWidget {
     var width = height + 50;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_sharp,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

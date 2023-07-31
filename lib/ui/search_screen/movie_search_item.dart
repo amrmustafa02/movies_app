@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/ui/components/network_image.dart';
+import 'package:movies/ui/shared/page_route.dart';
 import 'package:movies/ui/shared/text_utils.dart';
 
 import '../movie_details_screen/main_screen.dart';
@@ -26,10 +27,10 @@ class MovieSearchItem extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => MovieDetailsMainScreen(
-                              movieId: movieItemModel.id),
-                        ));
+                        PageRouteUtils.createRoute(
+                            MovieDetailsMainScreen(movieId: movieItemModel.id),
+                            1.0,
+                            0.0));
                   },
                   child: MyNetworkImage(
                       imageUrl:

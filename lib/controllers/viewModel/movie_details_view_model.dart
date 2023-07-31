@@ -19,8 +19,13 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
 
     List<MovieItemModel> similarMovies =
         await ApiMovieManager.getMoviesSimilarForMovie(id);
+    similarMovies.removeWhere(
+            (item) => item.posterPath == null || item.backdropPath == null);
+
     List<MovieItemModel> recommendationsMovies =
         await ApiMovieManager.getMoviesRecommendationsForMovie(id);
+    recommendationsMovies.removeWhere(
+            (item) => item.posterPath == null || item.backdropPath == null);
     List<VideoDataModel> moviesVideos =
         await ApiMovieManager.getVideosOnMovie(id);
 

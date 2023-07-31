@@ -23,7 +23,10 @@ class ReviewScreen extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
         ),
-        title: Text("$resultString Reviews",style: const TextStyle(fontSize: 26),),
+        title: Text(
+          "$resultString Reviews",
+          style: const TextStyle(fontSize: 26),
+        ),
       ),
       body: reviewModel.results!.isEmpty
           ? Center(

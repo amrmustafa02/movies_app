@@ -12,7 +12,12 @@ class MyTextForm extends StatefulWidget {
   @override
   State<MyTextForm> createState() => _MyTextFormState();
 
-  MyTextForm({required this.validator,required this.controller,required this.icon,required this.hintName});
+  MyTextForm(
+      {super.key,
+      required this.validator,
+      required this.controller,
+      required this.icon,
+      required this.hintName});
 }
 
 class _MyTextFormState extends State<MyTextForm> {

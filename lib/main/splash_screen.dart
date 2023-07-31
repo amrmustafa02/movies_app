@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/controllers/remember_me_ctrl.dart';
 import 'package:movies/ui/main_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatelessWidget {
   static const routeName = "splash-screen";
@@ -10,8 +13,13 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(
       const Duration(seconds: 3),
-      () {
+      () async {
+        var state = await RememberMeCtrl.getRememberMeState();
+        if (state == false || state == null) {
+          await FirebaseAuth.instance.signOut();
+        }
 
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, MainScreen.routeName);
       },
     );

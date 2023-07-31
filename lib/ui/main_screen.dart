@@ -87,53 +87,7 @@ class _MainScreenState extends State<MainScreen>
                     ))),
       );
 
-      Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (value) {
-            currentBottomIndex = value;
-            setState(() {});
-          },
-          elevation: 0,
-          currentIndex: currentBottomIndex,
-          backgroundColor: Colors.transparent,
-          // backgroundColor: Color(0xFF243554).withOpacity(0.4),
-          selectedItemColor: Theme.of(context).primaryColor,
-          type: BottomNavigationBarType.fixed,
-          unselectedItemColor: Colors.white,
-          selectedIconTheme: const IconThemeData(size: 24),
-          unselectedLabelStyle: const TextStyle(color: Colors.orange),
-          unselectedIconTheme:
-              const IconThemeData(size: 22, color: Colors.white),
-          items: [
-            BottomNavigationBarItem(
-              label: "Home",
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              // icon: const Icon(Icons.movie_rounded)
-              icon: const ImageIcon(AssetImage("assets/images/home.png")),
-            ),
-            //assets/images/tv-show.png
-            BottomNavigationBarItem(
-                label: "Discover",
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                icon:
-                    const ImageIcon(AssetImage("assets/images/discover.png"))),
-            BottomNavigationBarItem(
-                label: "Likes",
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                // assets/images/profile.png
-                icon: const ImageIcon(AssetImage("assets/images/love.png"))),
-            BottomNavigationBarItem(
-                label: "Profile",
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                icon: const ImageIcon(AssetImage("assets/images/profile.png"))),
-          ],
-        ),
 
-        body: SafeArea(
-            child: IndexedStack(
-      index: currentBottomIndex,
-      children: bottomNavigationBarScreens,
-    )));
   }
 
   @override

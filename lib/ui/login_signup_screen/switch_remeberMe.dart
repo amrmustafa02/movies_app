@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/controllers/remember_me_ctrl.dart';
 import 'package:movies/main/my_theme.dart';
 
 class SwitchRememberMe extends StatefulWidget {
@@ -13,7 +14,7 @@ class _SwitchRememberMeState extends State<SwitchRememberMe> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       child: Row(
         children: [
           Transform.scale(
@@ -28,8 +29,13 @@ class _SwitchRememberMeState extends State<SwitchRememberMe> {
               // boolean variable value
               value: isSelected,
               // changes the state of the switch
-              onChanged: (_) {
+              onChanged: (_) async {
                 isSelected = !isSelected;
+                if (isSelected == true) {
+                  await RememberMeCtrl.setRememberMeState(true);
+                } else {
+                  await RememberMeCtrl.setRememberMeState(false);
+                }
                 setState(() {});
               },
             ),

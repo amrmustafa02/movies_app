@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movies/model/firebase/auth_service.dart';
 import 'package:movies/main/my_theme.dart';
 import 'package:movies/model/firebase/firebase_collection.dart';
@@ -8,6 +9,7 @@ import 'package:movies/ui/login_signup_screen/switch_remeberMe.dart';
 import 'package:movies/ui/shared/page_route.dart';
 import 'package:movies/ui/shared/text_utils.dart';
 
+import '../../controllers/remember_me_ctrl.dart';
 import '../main_screen.dart';
 import '../shared/dialogs.dart';
 import 'my_password_form.dart';
@@ -41,11 +43,13 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: 10,),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.asset(
-                      "assets/images/moviecoo-logo.png",
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      // "assets/images/moviecoo-logo.png",
+                      "assets/images/logo_no_background.png",
+                      width: MediaQuery.of(context).size.width * 0.4,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -211,6 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
     DialogUtils.showLoadingDialog(context);
 
     if (formKey.currentState?.validate() == false) {
+      Navigator.pop(context);
       return;
     }
     var check = await AuthService.signInWithEmailAndPassword(
@@ -226,8 +231,9 @@ class _LoginScreenState extends State<LoginScreen> {
       //     context, PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0));
       // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
-          context,  PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0), (route) => false );
-
+          context,
+          PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0),
+          (route) => false);
     } else if (check == 1) {
       // ignore: use_build_context_synchronously
       var alert = DialogUtils.getShowMessage("User Not Found", context, () {
@@ -248,18 +254,38 @@ class _LoginScreenState extends State<LoginScreen> {
   clickOnSignInWithGoogle() async {
     var check = await AuthService.signInWithGoogle();
     if (check) {
+      await RememberMeCtrl.setRememberMeState(true);
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
           context, PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0));
+    } else {
+      Fluttertoast.showToast(
+          msg: "Some thing went wrong",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 
-  clickOnSignInWithFacebook() {
-    var check = AuthService.signInWithFacebook();
-    if (check) {
+  clickOnSignInWithFacebook() async {
+    var check = await AuthService.signInWithFacebook();
+    if (check == 0) {
+      await RememberMeCtrl.setRememberMeState(true);
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
           context, PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0));
+    } else {
+      Fluttertoast.showToast(
+          msg: "This email already Existing with different method",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 }

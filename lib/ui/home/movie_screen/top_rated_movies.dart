@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/ui/shared/page_route.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
@@ -11,7 +12,8 @@ class TopRatedMovies extends StatelessWidget {
   List<BackPosterItem> movies = [];
   String type;
 
-  TopRatedMovies({super.key,required this.type, required this.movies});
+  TopRatedMovies({super.key, required this.type, required this.movies});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,26 +25,24 @@ class TopRatedMovies extends StatelessWidget {
           children: [
             Text(
               type,
-              style: TextStyle(color: Theme
-                  .of(context)
-                  .primaryColor, fontSize: 28),
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor, fontSize: 28),
             ),
             const Spacer(),
             TextButton(
               onPressed: () async {
                 String apiType = convertTypeToApiHint(type);
                 List<MovieItemModel> newList = [];
-                for(int i=0;i<movies.length;i++){
+                for (int i = 0; i < movies.length; i++) {
                   newList.add(movies[i].movieItemModel);
                 }
                 await Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          AllMoviesScreen(
-                              type: type, apiType: apiType, movies: newList),
-                    ));
-
+                    PageRouteUtils.createRoute(
+                        AllMoviesScreen(
+                            type: type, apiType: apiType, movies: newList),
+                        1.0,
+                        1.0));
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,9 +55,7 @@ class TopRatedMovies extends StatelessWidget {
                   Icon(
                     Icons.arrow_forward_ios,
                     size: 10,
-                    color: Theme
-                        .of(context)
-                        .primaryColor,
+                    color: Theme.of(context).primaryColor,
                   )
                 ],
               ),
@@ -82,7 +80,7 @@ class TopRatedMovies extends StatelessWidget {
           margin: const EdgeInsets.all(16),
           child: SmoothPageIndicator(
               controller: controller, // PageController
-              count: movies.length~/2,
+              count: movies.length ~/ 2,
               effect: ExpandingDotsEffect(
                   spacing: 8.0,
                   radius: 4.0,
@@ -97,8 +95,8 @@ class TopRatedMovies extends StatelessWidget {
       ],
     );
   }
+
   String convertTypeToApiHint(String type) {
     return type.toLowerCase().replaceAll(" ", "_");
   }
-
 }

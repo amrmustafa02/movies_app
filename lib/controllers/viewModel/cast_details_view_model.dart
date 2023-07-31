@@ -25,9 +25,16 @@ class CastDetailsViewModel extends Cubit<CastDetailsState> {
   getCastDetails(int castId) async {
     CastDetailsModel castDetailsModel =
         await ApiCastManager.getCastDetails(castId);
+    castDetailsModel.movieCredits!.cast!.removeWhere(
+            (item) => item.posterPath == null && item.backdropPath == null);
+
+    castDetailsModel.movieCredits!.crew!.removeWhere(
+            (item) => item.posterPath == null && item.backdropPath == null);
 
     String? userId = FirebaseAuth.instance.currentUser?.uid;
+
     var isFavorite = false;
+
     if (userId != null) {
       isFavorite = await FireBaseCollection.getCastById(userId, "$castId");
     }

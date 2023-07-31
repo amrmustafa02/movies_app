@@ -9,6 +9,7 @@ class LikesMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body:  Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -16,21 +17,25 @@ class LikesMainScreen extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        PageRouteUtils.createRoute(CastLikes(), 0.0, 1.0));
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(30),
-                    margin: const EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                        color: MyTheme.secondColor.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Image.asset(
-                      "assets/images/casting (1).png",
-                      width: MediaQuery.sizeOf(context).width / 2,
+                Theme(
+                  data: ThemeData(   splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          PageRouteUtils.createRoute(CastLikes(), 0.0, 1.0));
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(30),
+                      margin: const EdgeInsets.all(30),
+                      decoration: BoxDecoration(
+                          color: MyTheme.secondColor.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Image.asset(
+                        "assets/images/casting (1).png",
+                        width: MediaQuery.sizeOf(context).width * 0.40,
+                      ),
                     ),
                   ),
                 ),
@@ -44,21 +49,25 @@ class LikesMainScreen extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        PageRouteUtils.createRoute(MoviesLikes(), 0.0, 1.0));
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(30),
-                    margin: const EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                        color: MyTheme.secondColor.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Image.asset(
-                      "assets/images/film_reel.png",
-                      width: MediaQuery.sizeOf(context).width / 2,
+                Theme(
+                  data: ThemeData(   splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          PageRouteUtils.createRoute(MoviesLikes(), 0.0, 1.0));
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(30),
+                      margin: const EdgeInsets.all(30),
+                      decoration: BoxDecoration(
+                          color: MyTheme.secondColor.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Image.asset(
+                        "assets/images/film_reel.png",
+                        width: MediaQuery.sizeOf(context).width *0.40,
+                      ),
                     ),
                   ),
                 ),
@@ -69,7 +78,7 @@ class LikesMainScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 30,),
+          const SizedBox(height: 50,),
         ],
       ),
     );

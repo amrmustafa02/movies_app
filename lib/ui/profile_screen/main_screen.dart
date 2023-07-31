@@ -6,6 +6,7 @@ import 'package:movies/main/splash_screen.dart';
 import 'package:movies/ui/components/no_user_item.dart';
 import 'package:movies/ui/profile_screen/change_password_screen.dart';
 import 'package:movies/ui/shared/dialogs.dart';
+import 'package:movies/ui/shared/page_route.dart';
 
 class ProfileMainScreen extends StatelessWidget {
   var user = FirebaseAuth.instance.currentUser;
@@ -34,7 +35,7 @@ class ProfileMainScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.all(8),
+                          margin: const EdgeInsets.all(8),
                           child: ElevatedButton(
                               style: ButtonStyle(
                                   backgroundColor:
@@ -54,8 +55,8 @@ class ProfileMainScreen extends StatelessWidget {
                               onPressed: () async {
                                 FirebaseAuth.instance.signOut();
                                 // ignore: use_build_context_synchronously
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    SplashScreen.routeName, (route) => false);
+                                Navigator.pushAndRemoveUntil(context,
+                                   PageRouteUtils.createRoute(SplashScreen(), 0.0, 1.0), (route) => false);
                               },
                               child: const Text("Logout")),
                         ),

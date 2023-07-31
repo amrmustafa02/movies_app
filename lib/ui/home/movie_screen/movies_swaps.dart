@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/ui/components/network_image.dart';
+import 'package:movies/ui/shared/page_route.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
 import '../../movie_details_screen/main_screen.dart';
@@ -35,12 +36,10 @@ class _MoviesSwapsState extends State<MoviesSwaps>
 
           return InkWell(
             onTap: () {
+
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MovieDetailsMainScreen(
-                        movieId: widget.movies[index].id),
-                  ));
+                  context,PageRouteUtils.createRoute(MovieDetailsMainScreen(
+                  movieId: widget.movies[index].id), 1.0,0.0));
             },
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),

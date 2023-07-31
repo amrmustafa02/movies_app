@@ -18,15 +18,26 @@ class CastLikes extends StatelessWidget {
     var user = FirebaseAuth.instance.currentUser;
     // LikesProvider().getAllLikesMovies()
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_sharp,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        title: const Text("Casting"),
+      ),
       body:user==null? NoUserItem():FutureBuilder(
         future: provider.getAllLikesCasts(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: LoadingAnimationWidget.threeRotatingDots(
+              child: LoadingAnimationWidget.dotsTriangle(
                   color: Theme.of(context).primaryColor,
-                  size: MediaQuery.of(context).size.width / 2),
+                  size: MediaQuery.of(context).size.width /4),
             );
           }
           if (snapshot.hasData) {

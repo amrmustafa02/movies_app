@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
+import 'package:movies/ui/shared/page_route.dart';
 
 import '../../../../constants/api_data.dart';
 import '../../movie_details_screen/main_screen.dart';
@@ -27,19 +28,6 @@ class UpBaseItem extends StatelessWidget {
             width: 100,
             height: 150,
           ),
-
-          // child: ClipRRect(
-          //   borderRadius: BorderRadius.circular(10),
-          //   child: CachedNetworkImage(
-          //     width: 100,
-          //     height: 150,
-          //     fit: BoxFit.fill,
-          //     imageUrl: ,
-          //     placeholder: (context, url) =>
-          //         const Center(child: CircularProgressIndicator()),
-          //     errorWidget: (context, url, error) => const Icon(Icons.error),
-          //   ),
-          // ),
         ),
         const SizedBox(
           width: 10,
@@ -50,7 +38,6 @@ class UpBaseItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-
               Text(
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -61,7 +48,6 @@ class UpBaseItem extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-
               IntrinsicHeight(
                 child: Row(
                   children: [
@@ -106,19 +92,6 @@ class UpBaseItem extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              // Container(
-              //   alignment: Alignment.center,
-              //   width: 60,
-              //   height: 20,
-              //   decoration: BoxDecoration(
-              //     color: Colors.blueAccent,
-              //    borderRadius: BorderRadius.circular(8)
-              //   ),
-              //   child: Text("TMDB",style: TextStyle(
-              //     color: Colors.white,fontSize: 12
-              //   ),),
-              // ),
-
               SizedBox(
                 width: 100,
                 height: 30,
@@ -126,10 +99,10 @@ class UpBaseItem extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => MovieDetailsMainScreen(
-                              movieId: movieItemModel.id),
-                        ));
+                        PageRouteUtils.createRoute(
+                            MovieDetailsMainScreen(movieId: movieItemModel.id),
+                            1.0,
+                            0.0));
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(

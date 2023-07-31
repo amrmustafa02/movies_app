@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/controllers/api/api_discover_manager.dart';
+import 'package:movies/ui/shared/page_route.dart';
 
 import '../../constants/api_data.dart';
 import '../../model/api_model/GenreModel.dart';
@@ -39,16 +40,17 @@ class _BodyOfGenreState extends State<BodyOfGenre> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => MovieDetailsMainScreen(
-                          movieId: widget.movieItemModels[index].id),
-                    ));
+                    PageRouteUtils.createRoute(
+                        MovieDetailsMainScreen(
+                            movieId: widget.movieItemModels[index].id),
+                        1.0,
+                        0.0));
               },
               child: MyNetworkImage(
                   imageUrl: ApiData.midImageSizeUrl +
                       widget.movieItemModels[index].posterPath!,
-                  width: 00,
-                  height: 100),
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: MediaQuery.of(context).size.width + 50),
             ),
           );
         },

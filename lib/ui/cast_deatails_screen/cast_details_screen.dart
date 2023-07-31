@@ -79,6 +79,7 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+
                   Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
@@ -123,6 +124,7 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                       )
                     ],
                   ),
+
                   Row(
                     children: [
                       (widget.castDetailsModel.birthday != " " &&
@@ -174,13 +176,16 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  Text(
-                                    widget.castDetailsModel.placeOfBirth ?? "",
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 14),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                      widget.castDetailsModel.placeOfBirth ?? "",
+                                      textAlign: TextAlign.center,
+                                      // maxLines: 1,
+                                      // overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 14),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -188,9 +193,11 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                           : Container(),
                     ],
                   ),
+
                   const SizedBox(
                     height: 10,
                   ),
+
                   widget.castDetailsModel.biography != null &&
                           widget.castDetailsModel.biography!.isNotEmpty
                       ? Container(
@@ -226,93 +233,111 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                           ),
                         )
                       : Container(),
+
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Images",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width + 70,
-                          child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return MyNetworkImage(
-                                  imageUrl: ApiData.largeImageSizeUri +
-                                      widget.castDetailsModel.images!
-                                          .profiles![index].filePath!,
-                                  width: MediaQuery.of(context).size.width - 50,
-                                  height:
+
+                  widget.castDetailsModel.movieCredits!.cast!.isNotEmpty?Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Images",
+                              style: TextStyle(fontSize: 24, color: Colors.white),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.width + 70,
+                              child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return MyNetworkImage(
+                                      imageUrl: ApiData.largeImageSizeUri +
+                                          widget.castDetailsModel.images!
+                                              .profiles![index].filePath!,
+                                      width: MediaQuery.of(context).size.width - 50,
+                                      height:
                                       MediaQuery.of(context).size.width + 70,
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return Container(
-                                  width: 20,
-                                );
-                              },
-                              itemCount: widget
-                                  .castDetailsModel.images!.profiles!.length),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Container(
+                                      width: 20,
+                                    );
+                                  },
+                                  itemCount: widget
+                                      .castDetailsModel.images!.profiles!.length),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    child: const Text(
-                      "Movies in which he participated as an cast member",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 250 + 20,
-                    child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          var movie = widget
-                              .castDetailsModel.movieCredits!.cast![index];
-                          return movie.posterPath != null
-                              ? Container(
-                                  margin: const EdgeInsets.all(8),
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) {
-                                          return MovieDetailsMainScreen(
-                                              movieId: movie.id!.toInt());
-                                        },
-                                      ));
-                                    },
-                                    child: MyNetworkImage(
-                                        imageUrl: ApiData.midImageSizeUrl +
-                                            movie.posterPath!,
-                                        width: 200,
-                                        height: 250),
-                                  ),
-                                )
-                              : Container();
-                        },
-                        separatorBuilder: (context, index) {
-                          return Container(
-                            width: 0,
-                          );
-                        },
-                        itemCount:
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ):Container(),
+
+
+                  widget.castDetailsModel.movieCredits!.cast!.isNotEmpty
+                      ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(8),
+                        child: const Text(
+                          "Participated as a cast member",
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 250 + 20,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              var movie = widget
+                                  .castDetailsModel.movieCredits!.cast![index];
+                              return movie.posterPath != null
+                                  ? Container(
+                                margin: const EdgeInsets.all(8),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return MovieDetailsMainScreen(
+                                            movieId: movie.id!.toInt());
+                                      },
+                                    ));
+                                  },
+                                  child: MyNetworkImage(
+                                      imageUrl: ApiData.midImageSizeUrl +
+                                          movie.posterPath!,
+                                      width: 200,
+                                      height: 250),
+                                ),
+                              )
+                                  : Container();
+                            },
+                            separatorBuilder: (context, index) {
+                              return Container(
+                                width: 0,
+                              );
+                            },
+                            itemCount:
                             widget.castDetailsModel.movieCredits!.cast!.length),
-                  ),
+                      ),
+                    ],
+                  )
+                      : Container(),
                   const SizedBox(height: 20),
                   widget.castDetailsModel.movieCredits!.crew!.isNotEmpty
                       ? Column(
@@ -322,7 +347,7 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                             Container(
                               margin: const EdgeInsets.all(8),
                               child: const Text(
-                                "Movies in which he participated as an crew member",
+                                "Participated as a crew member",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 24),
                               ),
@@ -408,7 +433,7 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
     var provider = Provider.of<LikesProvider>(context, listen: false);
 
     var user = FirebaseAuth.instance.currentUser;
-    if(user==null){
+    if (user == null) {
       Fluttertoast.showToast(
           msg: "Please Sign In First",
           toastLength: Toast.LENGTH_SHORT,
@@ -416,8 +441,7 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
           timeInSecForIosWeb: 1,
           backgroundColor: MyTheme.primeColor,
           textColor: Colors.white,
-          fontSize: 14.0
-      );
+          fontSize: 14.0);
       return;
     }
 

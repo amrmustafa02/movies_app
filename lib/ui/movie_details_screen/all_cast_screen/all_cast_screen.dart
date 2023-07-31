@@ -15,71 +15,74 @@ class AllCastScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_sharp,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
         title: const Text(
           "Cast & Crew",
           style: TextStyle(color: Colors.white, fontSize: 22),
         ),
       ),
       body: SafeArea(
-        child: Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Cast",
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  const Text(
+                    "Cast",
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: casts.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CastViewAllItem(
+                          imagePath: casts[index].profilePath ?? "",
+                          name: casts[index].name ?? "",
+                          secondTitle: casts[index].character ?? "",
+                          id: casts[index].id!.toInt(),
+                        );
+                      },
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: casts.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Expanded(
-                            child: CastViewAllItem(
-                              imagePath: casts[index].profilePath ?? "",
-                              name: casts[index].name ?? "",
-                              secondTitle: casts[index].character ?? "",
-                              id: casts[index].id!.toInt(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              VerticalDivider(
-                width: 1,
-                thickness: 1,
-                color: Theme.of(context).primaryColor,
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Crew",
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+            VerticalDivider(
+              width: 1,
+              thickness: 1,
+              color: Theme.of(context).primaryColor,
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  const Text(
+                    "Crew",
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: casts.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CastViewAllItem(
+                          name: crew[index].name ?? "",
+                          secondTitle: crew[index].job ?? "",
+                          imagePath: crew[index].profilePath ?? "", id: crew[index].id!.toInt(),
+                        );
+                      },
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: casts.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Expanded(
-                            child: CastViewAllItem(
-                              name: crew[index].name ?? "",
-                              secondTitle: crew[index].job ?? "",
-                              imagePath: crew[index].profilePath ?? "", id: crew[index].id!.toInt(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

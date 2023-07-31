@@ -44,6 +44,15 @@ class _VideosScreenState extends State<VideosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_sharp,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
         title: Text("${index + 1} of ${widget.videos.length} videos"),
       ),
       body: Column(
@@ -92,80 +101,82 @@ class _VideosScreenState extends State<VideosScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    video.name!,
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      const ImageIcon(
-                        AssetImage("assets/images/world_wide_web.png"),
-                        color: Colors.blueGrey,
-                        size: 20,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "${video.site}",
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      const ImageIcon(
-                        AssetImage("assets/images/calendar(2).png"),
-                        color: Colors.blueGrey,
-                        size: 20,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "${TextUtils.getReleaseDate(video.publishedAt)}",
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      const ImageIcon(
-                        AssetImage("assets/images/types.png"),
-                        color: Colors.blueGrey,
-                        size: 20,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "${video.type}",
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  getButtons(),
-                ],),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      video.name!,
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const ImageIcon(
+                          AssetImage("assets/images/world_wide_web.png"),
+                          color: Colors.blueGrey,
+                          size: 20,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "${video.site}",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const ImageIcon(
+                          AssetImage("assets/images/calendar(2).png"),
+                          color: Colors.blueGrey,
+                          size: 20,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "${TextUtils.getReleaseDate(video.publishedAt)}",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const ImageIcon(
+                          AssetImage("assets/images/types.png"),
+                          color: Colors.blueGrey,
+                          size: 20,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "${video.type}",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    getButtons(),
+                  ],
+                ),
               )
             ],
           ),
-
         ],
       ),
     );
@@ -179,23 +190,20 @@ class _VideosScreenState extends State<VideosScreen> {
           child: getButtonNextButton(),
         ),
       );
-    }
-    else if (index > 0 && index < widget.videos.length-1) {
+    } else if (index > 0 && index < widget.videos.length - 1) {
       return Row(
         children: [
           Expanded(child: getButtonBackButton()),
           Expanded(child: getButtonNextButton()),
         ],
       );
-    }
-    else if(index==widget.videos.length-1){
+    } else if (index == widget.videos.length - 1) {
       return Center(
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,
           child: getButtonBackButton(),
         ),
       );
-
     }
   }
 

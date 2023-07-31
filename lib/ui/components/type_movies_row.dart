@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/ui/components/movie_item.dart';
+import 'package:movies/ui/shared/page_route.dart';
 
 import '../home/movie_screen/all_movies_screen.dart';
 
@@ -42,13 +43,12 @@ class TypeOfMovies extends StatelessWidget {
 
                   List<MovieItemModel> newList = [];
                   newList.addAll(movies);
+
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            AllMoviesScreen(
-                                type: type, apiType: apiType, movies: newList),
-                      ));
+                    PageRouteUtils.createRoute(AllMoviesScreen(
+                        type: type, apiType: apiType, movies: newList), 1.0, 1.0)
+                  );
 
                 },
                 child: Row(

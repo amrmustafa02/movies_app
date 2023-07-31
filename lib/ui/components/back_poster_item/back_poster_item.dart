@@ -44,16 +44,6 @@ class _BackPosterItemState extends State<BackPosterItem> {
                   imageUrl: ApiData.midImageSizeUrl + widget.movieItemModel.backdropPath!,
                   width: MediaQuery.of(context).size.width, height: 200,
                 ),
-                // child: CachedNetworkImage(
-                //   width: MediaQuery.of(context).size.width,
-                //   height: 200,
-                //   fit: BoxFit.fill,
-                //   imageUrl:
-                //       ApiData.basePosterUrl + widget.movieItemModel.backdropPath!,
-                //   placeholder: (context, url) =>
-                //       const Center(child: CircularProgressIndicator()),
-                //   errorWidget: (context, url, error) => const Icon(Icons.error),
-                // ),
               ),
             ),
             Container(
@@ -76,15 +66,8 @@ class _BackPosterItemState extends State<BackPosterItem> {
           movieItemModel: widget.movieItemModel,
         ),
 
-        // Container(
-        //   margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-        //   child: Text(
-        //     widget.movieItemModel.title!,
-        //     style: const TextStyle(color: Colors.white, fontSize: 16),
-        //   ),
-        // ),
 
-        // IconPlayVideo(),
+
       ],
     );
   }
