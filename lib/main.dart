@@ -16,6 +16,7 @@ Future<void> main() async {
       create: (BuildContext context) => LikesProvider(), child: const MyApp()));
 }
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
