@@ -1,12 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:movies/controllers/viewModel/likes_provider.dart';
 import 'package:movies/main/my_theme.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/video_data_model.dart';
+import 'package:movies/model/firebase/firebase_collection.dart';
 import 'package:movies/ui/movie_details_screen/reviews_screen.dart';
 import 'package:movies/ui/movie_details_screen/show_more_movie_details_item.dart';
 import 'package:movies/ui/movie_details_screen/videos_screen/videos_screen.dart';
+import 'package:provider/provider.dart';
 import '../../constants/api_data.dart';
 import '../../model/api_model/movies_details/ImagesOfMovies.dart';
 import '../../model/api_model/movies_details/ReviewModel.dart';
@@ -18,6 +23,7 @@ import 'details_tab_view.dart';
 // ignore: must_be_immutable
 class MovieDetailsScreen extends StatefulWidget {
   MovieDetailsModel movieDetailsModel;
+  bool isFavorite;
   List<MovieItemModel> similarMovies;
   List<MovieItemModel> recommendationsMovies;
   List<VideoDataModel> moviesVideo;
@@ -25,6 +31,7 @@ class MovieDetailsScreen extends StatefulWidget {
 
   MovieDetailsScreen(
       {required this.movieDetailsModel,
+      required this.isFavorite,
       required this.reviewItem,
       required this.recommendationsMovies,
       required this.similarMovies,
@@ -141,7 +148,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                           MyNetworkImage(
                               imageUrl:
                                   widget.movieDetailsModel.posterPath == null
-                                      ? "assets/images/no-image.png"
+                                      ? "assets/images/no-photo.png"
                                       : ApiData.midImageSizeUrl +
                                           widget.movieDetailsModel.posterPath!,
                               width: MediaQuery.sizeOf(context).width * 0.47,
@@ -371,10 +378,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                   ),
                   actions: <Widget>[
                     IconButton(
-                      icon: const Icon(
-                        Icons.favorite_border_rounded,
-                      ),
-                      onPressed: () {},
+                      icon: widget.isFavorite
+                          ? const Icon(
+                              Icons.favorite_rounded,
+                            )
+                          : const Icon(
+                              Icons.favorite_border_rounded,
+                            ),
+                      onPressed: () {
+                        clickOnLove();
+                      },
                     ),
                   ],
                 ),
@@ -434,5 +447,53 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
         );
       },
     );
+  }
+
+  clickOnLove() {
+    var provider = Provider.of<LikesProvider>(context, listen: false);
+
+    var user = FirebaseAuth.instance.currentUser;
+     if(user==null){
+       Fluttertoast.showToast(
+           msg: "Please Sign In First",
+           toastLength: Toast.LENGTH_SHORT,
+           gravity: ToastGravity.BOTTOM,
+           timeInSecForIosWeb: 1,
+           backgroundColor: MyTheme.primeColor,
+           textColor: Colors.white,
+           fontSize: 14.0
+       );
+       return;
+     }
+
+
+    if (widget.isFavorite) {
+      provider.deleteMovieToLikeList("${widget.movieDetailsModel.id}");
+
+    } else {
+      provider.addMovieToLikeList(prepareMovieModel());
+
+    }
+    widget.isFavorite = !widget.isFavorite;
+    setState(() {});
+  }
+
+  MovieItemModel prepareMovieModel() {
+    MovieItemModel movieItemModel = MovieItemModel();
+    movieItemModel.id = widget.movieDetailsModel.id;
+    movieItemModel.voteCount = widget.movieDetailsModel.voteCount;
+    movieItemModel.voteAverage = widget.movieDetailsModel.voteAverage;
+    movieItemModel.video = false;
+    movieItemModel.title = widget.movieDetailsModel.title;
+    movieItemModel.posterPath = widget.movieDetailsModel.posterPath;
+    movieItemModel.overview = widget.movieDetailsModel.overview;
+    movieItemModel.originalTitle = widget.movieDetailsModel.originalTitle;
+    movieItemModel.releaseDate = widget.movieDetailsModel.releaseDate;
+    movieItemModel.backdropPath = widget.movieDetailsModel.backdropPath;
+    movieItemModel.popularity = widget.movieDetailsModel.popularity;
+    movieItemModel.adult = widget.movieDetailsModel.adult;
+    movieItemModel.originalLanguage = widget.movieDetailsModel.originalLanguage;
+
+    return movieItemModel;
   }
 }

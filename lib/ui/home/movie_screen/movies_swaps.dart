@@ -42,16 +42,13 @@ class _MoviesSwapsState extends State<MoviesSwaps>
                         movieId: widget.movies[index].id),
                   ));
             },
-            child: Hero(
-              tag: movie.id!,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: MyNetworkImage(
-                    imageUrl: (ApiData.largeImageSizeUri + movie.posterPath!),
-                    width: double.infinity,
-                    height: size.height * 0.54,
-                  )),
-            ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: MyNetworkImage(
+                  imageUrl: (ApiData.largeImageSizeUri + movie.posterPath!),
+                  width: double.infinity,
+                  height: size.height * 0.54,
+                )),
           );
         },
       ),

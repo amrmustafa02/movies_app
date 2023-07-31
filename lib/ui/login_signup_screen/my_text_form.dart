@@ -1,49 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:movies/ui/login_signup_screen/my_password_form.dart';
 
 import '../../main/my_theme.dart';
 
-class MyTextForm extends StatelessWidget {
-  bool isPassword = false;
-  Icon icon = const Icon(
-    Icons.visibility_off_outlined,
-    color: Colors.grey,
-  );
+class MyTextForm extends StatefulWidget {
+  vaild validator;
+  TextEditingController controller = TextEditingController();
+  IconData icon;
+  String hintName;
 
+  @override
+  State<MyTextForm> createState() => _MyTextFormState();
+
+  MyTextForm({required this.validator,required this.controller,required this.icon,required this.hintName});
+}
+
+class _MyTextFormState extends State<MyTextForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           color: MyTheme.secondColor.withOpacity(0.5),
           borderRadius: BorderRadius.circular(15)),
-      child: Expanded(
-        child: TextFormField(
-          // ignore: prefer_const_constructors
-          style: TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-              labelStyle: TextStyle(color: Colors.white),
-              border: InputBorder.none,
-              hintText: "Enter your email",
-              hintStyle:
-                  TextStyle(color: Colors.grey.withOpacity(0.2), fontSize: 12),
-              prefixIcon: const Icon(
-                Icons.email_rounded,
-                color: Colors.grey,
-              ),
-              suffixIcon: IconButton(
-                  onPressed: () {
-                    if (isPassword) {
-                      icon = const Icon(Icons.visibility);
-                    } else if (!isPassword) {
-                      icon = const Icon(Icons.visibility_off_outlined);
-                    }
-                    isPassword = !isPassword;
-                    // setState(() {
-                    // });
-                  },
-                  icon: icon),
-              suffixIconColor: Colors.black),
+      child: TextFormField(
+        controller: widget.controller,
+        validator: widget.validator,
+        // ignore: prefer_const_constructors
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelStyle: const TextStyle(color: Colors.white, fontSize: 16),
+          border: InputBorder.none,
+          hintText: widget.hintName,
+          hintStyle:
+              TextStyle(color: Colors.grey.withOpacity(0.2), fontSize: 12),
+          prefixIcon: Icon(
+            widget.icon,
+            color: Colors.grey.withOpacity(0.5),
+          ),
         ),
       ),
     );

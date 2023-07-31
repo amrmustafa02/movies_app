@@ -3,7 +3,8 @@ import 'dart:convert';
 
 class Images {
   Images({
-      this.profiles,});
+    this.profiles,
+  });
 
   Images.fromJson(dynamic json) {
     if (json['profiles'] != null) {
@@ -15,7 +16,8 @@ class Images {
   }
 
   List<ProfileImage>? profiles;
-
-
-
+  toJson(){
+    return {
+    };
+  }
 }

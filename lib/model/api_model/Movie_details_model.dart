@@ -60,8 +60,50 @@ class MovieDetailsModel {
         _crews?.add(Crew.fromJson(v));
       });
     }
-
   }
+  //
+  // Map<String, dynamic> toJson() {
+  //   final map = <String, dynamic>{};
+  //   map['adult'] = adult;
+  //   map['backdrop_path'] = backdropPath;
+  //   map['belongs_to_collection'] = belongsToCollection;
+  //   if (genres != null) {
+  //     map['genres'] = genres?.map((v) => v.toJson()).toList();
+  //   }
+  //   map['homepage'] = homepage;
+  //   map['id'] = id;
+  //   map['imdb_id'] = imdbId;
+  //   map['original_language'] = originalLanguage;
+  //   map['original_title'] = originalTitle;
+  //   map['overview'] = overview;
+  //   map['popularity'] = popularity;
+  //   map['poster_path'] = posterPath;
+  //   if (productionCompanies != null) {
+  //     map['production_companies'] =
+  //         productionCompanies?.map((v) => v.toJson()).toList();
+  //   }
+  //   if (productionCountries != null) {
+  //     map['production_countries'] =
+  //         productionCountries?.map((v) => v.toJson()).toList();
+  //   }
+  //   map['release_date'] = releaseDate;
+  //   map['revenue'] = revenue;
+  //   map['runtime'] = runtime;
+  //   map['status'] = status;
+  //   map['tagline'] = tagline;
+  //   map['title'] = title;
+  //   map['vote_average'] = voteAverage;
+  //   map['vote_count'] = voteCount;
+  //   if (_casts != null) {
+  //     map['cast'] = _casts?.map((v) => v.toJson()).toList();
+  //   }
+  //   if (_crews != null) {
+  //     map['crew'] = _crews?.map((v) => v.toJson()).toList();
+  //   }
+  //   map['images'] = imagesOfMovies;
+  //
+  //   return map;
+  // }
 
   bool? _adult;
   String? _backdropPath;
@@ -90,7 +132,6 @@ class MovieDetailsModel {
   ImagesOfMovies? imagesOfMovies;
 
   bool? get adult => _adult;
-
 
   String? get backdropPath => _backdropPath;
 

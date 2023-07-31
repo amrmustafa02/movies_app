@@ -28,5 +28,11 @@ class MovieCredits {
   List<Cast>? cast;
   List<Crew>? crew;
 
+  toJson() {
+    return {
+
+    };
+  }
+
 
 }

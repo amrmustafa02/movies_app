@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="fb_login_protocol_scheme">fbf5417cf04655e7a5ce0f3baaeeee9ef2</string>
+    <string name="app_name">moviecoo</string>
+
+    <string name="facebook_app_id">261253759959178</string>
+    <string name="facebook_client_token">8bbf216d1997a748d6d023bd6ad66768</string>
+</resources>

@@ -1,34 +1,34 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/firebase/auth_service.dart';
 import 'package:movies/main/my_theme.dart';
-import 'package:movies/model/firebase/firebase_collection.dart';
-import 'package:movies/ui/login_signup_screen/register_screen.dart';
+import 'package:movies/ui/home/movie_screen/home_movie_screen.dart';
+import 'package:movies/ui/login_signup_screen/login_screen.dart';
 import 'package:movies/ui/login_signup_screen/switch_remeberMe.dart';
-import 'package:movies/ui/shared/page_route.dart';
+import 'package:movies/ui/main_screen.dart';
+import 'package:movies/ui/shared/dialogs.dart';
 import 'package:movies/ui/shared/text_utils.dart';
-
-import '../main_screen.dart';
-import '../shared/dialogs.dart';
+import '../shared/page_route.dart';
 import 'my_password_form.dart';
 import 'my_text_form.dart';
 
-class LoginScreen extends StatefulWidget {
-  static String routeName = "Register-screen";
+class RegisterScreen extends StatefulWidget {
+  static String routeName = "login-screen";
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool isPassword = false;
+  var formKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   Icon icon = const Icon(
     Icons.visibility_off_outlined,
     color: Colors.grey,
   );
-  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +50,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 10),
                   MyTextForm(
+                    validator: (text) {
+                      if (text!.isEmpty) {
+                        return "Please Enter your name";
+                      }
+                    },
+                    icon: Icons.person_rounded,
+                    hintName: 'Full Name',
+                    controller: nameController,
+                  ),
+                  MyTextForm(
                     validator: (email) {
                       return TextUtils.checkEmail(email!);
                     },
                     icon: Icons.email_rounded,
-                    hintName: 'Enter your email',
+                    hintName: 'Email',
                     controller: emailController,
                   ),
                   MyPasswordForm(
@@ -85,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: MediaQuery.of(context).size.width / 2,
                       child: ElevatedButton(
                         onPressed: () {
-                          clickOnSignIn();
+                          clickOnRegister();
                         },
                         style: ButtonStyle(
                             backgroundColor:
@@ -101,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     side: BorderSide.none))),
-                        child: const Text("LOGIN"),
+                        child: const Text("REGISTER"),
                       )),
                   Container(
                     margin: const EdgeInsets.all(16),
@@ -144,7 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             splashColor: Colors.transparent,
                           ),
                           child: InkWell(
-                            onTap: () => clickOnSignInWithGoogle(),
+                            onTap: () {
+                              clickOnSignInWithGoogle();
+                            },
                             child: Container(
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
@@ -179,15 +191,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don’t have an account? ",
+                        "Already have account? ",
                         style: TextStyle(color: Colors.white, fontSize: 14),
                       ),
                       TextButton(
                           onPressed: () {
-                            clickOnRegisterScreen();
+                            clickOnLoginScreen();
                           },
                           child: Text(
-                            "Register now",
+                            "Login",
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor),
                           ))
@@ -202,42 +214,37 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  clickOnRegisterScreen() {
+  clickOnLoginScreen() {
     Navigator.pushReplacement(
-        context, PageRouteUtils.createRoute(RegisterScreen(), 1.0, 0.0));
+        context, PageRouteUtils.createRoute(LoginScreen(), 1.0, 0.0));
   }
 
-  clickOnSignIn() async {
+  clickOnRegister() async {
     DialogUtils.showLoadingDialog(context);
-
-    if (formKey.currentState?.validate() == false) {
+    if (formKey.currentState!.validate() == false) {
+      Navigator.pop(context);
       return;
     }
-    var check = await AuthService.signInWithEmailAndPassword(
-        emailController.text, passwordController.text);
 
-    // ignore: use_build_context_synchronously
+    var check = await AuthService.signUpWithEmailAndPassword(
+        emailController.text, passwordController.text);
     // ignore: use_build_context_synchronously
     Navigator.pop(context);
 
     if (check == 0) {
       // ignore: use_build_context_synchronously
-      // Navigator.pushReplacement(
-      //     context, PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0));
-      // ignore: use_build_context_synchronously
-      Navigator.pushAndRemoveUntil(
-          context,  PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0), (route) => false );
-
+      Navigator.pushReplacement(
+          context, PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0));
     } else if (check == 1) {
       // ignore: use_build_context_synchronously
-      var alert = DialogUtils.getShowMessage("User Not Found", context, () {
+      var alert = DialogUtils.getShowMessage("Week Password", context, () {
         Navigator.pop(context);
       }, () {});
       // ignore: use_build_context_synchronously
       showDialog(context: context, builder: (context) => alert);
     } else if (check == 2) {
       // ignore: use_build_context_synchronously
-      var alert = DialogUtils.getShowMessage("Wrong Password", context, () {
+      var alert = DialogUtils.getShowMessage("User already exit", context, () {
         Navigator.pop(context);
       }, () {});
       // ignore: use_build_context_synchronously

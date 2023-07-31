@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movies/controllers/viewModel/movie_details_view_model.dart';
+import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/ui/movie_details_screen/movie_details_screen.dart';
 
 // ignore: must_be_immutable
@@ -54,7 +55,7 @@ class MovieDetailsMainScreen extends StatelessWidget {
               movieDetailsModel: state.movieDetailsModel!,
               reviewItem: state.reviewModel!,
               recommendationsMovies: state.recommendationsMovies,
-              similarMovies: state.similarMovies,
+              similarMovies: state.similarMovies, isFavorite: state.isFavorite,
             );
           }
           return const Text(

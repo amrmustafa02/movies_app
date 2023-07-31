@@ -28,4 +28,25 @@ class TextUtils {
       return "";
     }
   }
+  static String? checkEmail(String text) {
+    if (text.isEmpty) {
+      return "Please enter your email";
+    }
+    if (!RegExp(
+        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(text)) {
+      return "please enter valid email";
+    }
+    return null;
+  }
+  static String? checkPassword(String text) {
+    if (text.isEmpty) {
+      return "Please enter your password";
+    }
+    if (text.length < 6) {
+      return "please enter at least 6 character";
+    }
+    return null;
+  }
+
 }

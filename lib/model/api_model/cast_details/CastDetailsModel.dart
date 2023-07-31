@@ -3,7 +3,6 @@ import 'TvCredits.dart';
 import 'Images.dart';
 import 'dart:convert';
 
-
 class CastDetailsModel {
   CastDetailsModel({
     this.adult,
@@ -21,7 +20,6 @@ class CastDetailsModel {
     this.popularity,
     this.profilePath,
     this.movieCredits,
-    this.tvCredits,
     this.images,
   });
 
@@ -45,10 +43,32 @@ class CastDetailsModel {
     movieCredits = json['movie_credits'] != null
         ? MovieCredits.fromJson(json['movie_credits'])
         : null;
-    tvCredits = json['tv_credits'] != null
-        ? TvCredits.fromJson(json['tv_credits'])
-        : null;
+
     images = json['images'] != null ? Images.fromJson(json['images']) : null;
+  }
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['adult'] = adult;
+    map['also_known_as'] = alsoKnownAs;
+    map['biography'] = biography;
+    map['birthday'] = birthday;
+    map['deathday'] = deathday;
+    map['gender'] = gender;
+    map['homepage'] = homepage;
+    map['id'] = id;
+    map['imdb_id'] = imdbId;
+    map['known_for_department'] = knownForDepartment;
+    map['name'] = name;
+    map['place_of_birth'] = placeOfBirth;
+    map['popularity'] = popularity;
+    map['profile_path'] = profilePath;
+    if (images != null) {
+      map['images'] = images?.toJson();
+    }
+    if (movieCredits != null) {
+      map['movie_credits'] = movieCredits?.toJson();
+    }
+    return map;
   }
 
   bool? adult;
@@ -66,8 +86,5 @@ class CastDetailsModel {
   num? popularity;
   String? profilePath;
   MovieCredits? movieCredits;
-  TvCredits? tvCredits;
   Images? images;
-
-
 }

@@ -45,6 +45,7 @@ class CastDetailsMainScreen extends StatelessWidget {
 
             return CastDetailsScreen(
               castDetailsModel: state.castDetailsModel,
+              isFavorite: state.isFavorite,
             );
           }
           return const Text(

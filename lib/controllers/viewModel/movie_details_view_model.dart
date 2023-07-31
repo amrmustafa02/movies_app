@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/video_data_model.dart';
+import 'package:movies/model/firebase/firebase_collection.dart';
 
 import '../../model/api_model/movies_details/ReviewModel.dart';
 import '../api/api_movie_manager.dart';
@@ -22,8 +24,14 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
     List<VideoDataModel> moviesVideos =
         await ApiMovieManager.getVideosOnMovie(id);
 
-    emit(SuccessMovieDetailsState(
-        movieDetails, reviewModel, similarMovies, recommendationsMovies,moviesVideos));
+    String? userId = FirebaseAuth.instance.currentUser?.uid;
+    var isFavorite = false;
+    if (userId != null) {
+      isFavorite = await FireBaseCollection.getMovieById(userId, "$id");
+    }
+
+    emit(SuccessMovieDetailsState(movieDetails, reviewModel, similarMovies,
+        recommendationsMovies, moviesVideos, isFavorite));
   }
 }
 
@@ -36,7 +44,14 @@ class SuccessMovieDetailsState extends MovieDetailsState {
   ReviewModel? reviewModel;
   List<MovieItemModel> recommendationsMovies;
   List<MovieItemModel> similarMovies;
-   List<VideoDataModel> movieVideos;
-  SuccessMovieDetailsState(this.movieDetailsModel, this.reviewModel,
-      this.similarMovies, this.recommendationsMovies,this.movieVideos);
+  bool isFavorite;
+  List<VideoDataModel> movieVideos;
+
+  SuccessMovieDetailsState(
+      this.movieDetailsModel,
+      this.reviewModel,
+      this.similarMovies,
+      this.recommendationsMovies,
+      this.movieVideos,
+      this.isFavorite);
 }

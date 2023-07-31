@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/ui/movie_details_screen/main_screen.dart';
+import 'package:movies/ui/shared/page_route.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
 import 'network_image.dart';
@@ -50,10 +51,10 @@ class _MovieItemState extends State<MovieItem> {
             onTap: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => MovieDetailsMainScreen(
-                        movieId: widget.movieItemModel.id),
-                  ));
+                  PageRouteUtils.createRoute(
+                      MovieDetailsMainScreen(movieId: widget.movieItemModel.id),
+                      1.0,
+                      0.0));
             },
             child: widget.movieItemModel.posterPath != null
                 ? MyNetworkImage(

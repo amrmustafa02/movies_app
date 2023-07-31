@@ -1,18 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api_model/cast_details/CastDetailsModel.dart';
 import 'package:movies/ui/components/network_image.dart';
 import 'package:movies/ui/components/type_movies_row.dart';
 import 'package:movies/ui/movie_details_screen/main_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../controllers/viewModel/likes_provider.dart';
 import '../../main/my_theme.dart';
+import '../../model/firebase/firebase_collection.dart';
 import '../shared/text_utils.dart';
 
 class CastDetailsScreen extends StatefulWidget {
   CastDetailsModel castDetailsModel;
+  bool isFavorite;
 
-  CastDetailsScreen({required this.castDetailsModel});
+  CastDetailsScreen({required this.castDetailsModel, required this.isFavorite});
 
   @override
   State<CastDetailsScreen> createState() => _CastDetailsScreenState();
@@ -379,10 +385,14 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                   ),
                   actions: <Widget>[
                     IconButton(
-                      icon: const Icon(
-                        Icons.favorite_border_rounded,
+                      icon: Icon(
+                        widget.isFavorite
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border_rounded,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        clickOnLove();
+                      },
                     ),
                   ],
                 ),
@@ -392,5 +402,31 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
         ),
       ),
     );
+  }
+
+  clickOnLove() {
+    var provider = Provider.of<LikesProvider>(context, listen: false);
+
+    var user = FirebaseAuth.instance.currentUser;
+    if(user==null){
+      Fluttertoast.showToast(
+          msg: "Please Sign In First",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: MyTheme.primeColor,
+          textColor: Colors.white,
+          fontSize: 14.0
+      );
+      return;
+    }
+
+    if (widget.isFavorite) {
+      provider.deleteCastToLikeList("${widget.castDetailsModel.id}");
+    } else {
+      provider.addCastToLikeList(widget.castDetailsModel);
+    }
+    widget.isFavorite = !widget.isFavorite;
+    setState(() {});
   }
 }

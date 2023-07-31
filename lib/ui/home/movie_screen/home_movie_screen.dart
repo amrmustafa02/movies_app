@@ -84,6 +84,7 @@ class _HomeMovieScreenState extends State<HomeMovieScreen>
                   movies: state.upcomingMovies,
                   type: 'Upcoming',
                 ),
+                SizedBox(height: 50),
               ],
             ),
           );
