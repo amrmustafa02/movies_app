@@ -11,6 +11,7 @@ import 'package:movies/ui/shared/text_utils.dart';
 
 import '../../controllers/remember_me_ctrl.dart';
 import '../main_screen.dart';
+import '../profile_screen/change_password_screen.dart';
 import '../shared/dialogs.dart';
 import 'my_password_form.dart';
 import 'my_text_form.dart';
@@ -58,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return TextUtils.checkEmail(email!);
                     },
                     icon: Icons.email_rounded,
-                    hintName: 'Enter your email',
+                    hintName: 'Email',
                     controller: emailController,
                   ),
                   MyPasswordForm(
@@ -74,7 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         margin: const EdgeInsets.all(16),
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              DialogUtils.showBottomSheet(
+                                  context, ChangePasswordScreen());
+                            },
                             child: Text(
                               "Forget Password?",
                               style: TextStyle(

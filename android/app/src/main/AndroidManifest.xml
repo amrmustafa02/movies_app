@@ -4,7 +4,7 @@
     </queries>
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="movies"
+        android:label="Moviecoo"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
 

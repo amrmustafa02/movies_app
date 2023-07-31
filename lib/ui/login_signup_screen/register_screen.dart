@@ -9,6 +9,7 @@ import 'package:movies/ui/main_screen.dart';
 import 'package:movies/ui/shared/dialogs.dart';
 import 'package:movies/ui/shared/text_utils.dart';
 import '../../controllers/remember_me_ctrl.dart';
+import '../profile_screen/change_password_screen.dart';
 import '../shared/page_route.dart';
 import 'my_password_form.dart';
 import 'my_text_form.dart';
@@ -53,16 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  MyTextForm(
-                    validator: (text) {
-                      if (text!.isEmpty) {
-                        return "Please Enter your name";
-                      }
-                    },
-                    icon: Icons.person_rounded,
-                    hintName: 'Full Name',
-                    controller: nameController,
-                  ),
+
                   MyTextForm(
                     validator: (email) {
                       return TextUtils.checkEmail(email!);
@@ -84,7 +76,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                         margin: const EdgeInsets.all(16),
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              DialogUtils.showBottomSheet(
+                                  context, ChangePasswordScreen());
+                            },
                             child: Text(
                               "Forget Password?",
                               style: TextStyle(

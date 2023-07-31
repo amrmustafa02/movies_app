@@ -10,7 +10,7 @@ class NoUserItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          "Please Sign In First",
+          "Login First",
           style: TextStyle(color: Colors.white, fontSize: 26),
         ),
         const SizedBox(height: 10),

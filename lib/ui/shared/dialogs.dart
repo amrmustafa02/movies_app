@@ -40,7 +40,7 @@ class DialogUtils {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       title: Text(text),
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+      titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18),
       actions: [
         TextButton(
           onPressed: () {
