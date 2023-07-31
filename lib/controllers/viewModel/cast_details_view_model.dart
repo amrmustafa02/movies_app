@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/controllers/api/api_cast_deatails_manager.dart';
 import 'package:movies/model/api_model/cast_details/CastDetailsModel.dart';
 import 'package:movies/model/firebase/firebase_collection.dart';
 
+import '../../model/api/api_cast_deatails_manager.dart';
 abstract class CastDetailsState {}
 
 class LoadingState extends CastDetailsState {}

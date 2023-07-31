@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../controllers/viewModel/likes_provider.dart';
-import '../../main/my_theme.dart';
+import '../../my_theme.dart';
 import '../../model/firebase/firebase_collection.dart';
 import '../shared/text_utils.dart';
 

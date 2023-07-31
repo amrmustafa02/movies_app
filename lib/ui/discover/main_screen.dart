@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/constants/api_data.dart';
-import 'package:movies/controllers/api/api_discover_manager.dart';
 import 'package:movies/controllers/viewModel/discover_screen_view_model.dart';
-import 'package:movies/ui/components/network_image.dart';
 import 'package:movies/ui/search_screen/search_bar_item.dart';
 
 import 'body_of_genre.dart';

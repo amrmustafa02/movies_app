@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:movies/controllers/viewModel/likes_provider.dart';
 import 'package:movies/ui/login_signup_screen/login_screen.dart';
 import 'package:movies/ui/main_screen.dart';
-import 'package:movies/main/my_theme.dart';
-import 'package:movies/main/splash_screen.dart';
+import 'package:movies/my_theme.dart';
+import 'package:movies/ui/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

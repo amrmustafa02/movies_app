@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/controllers/remember_me_ctrl.dart';
-import 'package:movies/main/my_theme.dart';
+import 'package:movies/my_theme.dart';
 
 class SwitchRememberMe extends StatefulWidget {
   @override

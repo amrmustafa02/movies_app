@@ -5,8 +5,8 @@ import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/video_data_model.dart';
 import 'package:movies/model/firebase/firebase_collection.dart';
 
+import '../../model/api/api_movie_manager.dart';
 import '../../model/api_model/movies_details/ReviewModel.dart';
-import '../api/api_movie_manager.dart';
 
 class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
   MovieDetailsViewModel(int id) : super(LoadingMovieDetailsState()) {

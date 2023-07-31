@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:movies/main/splash_screen.dart';
+import 'package:movies/ui/splash_screen.dart';
 import 'package:movies/ui/components/no_user_item.dart';
 import 'package:movies/ui/profile_screen/change_password_screen.dart';
 import 'package:movies/ui/shared/dialogs.dart';

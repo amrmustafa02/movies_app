@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
-import 'package:movies/main/my_theme.dart';
+import 'package:movies/my_theme.dart';
 import 'package:movies/ui/profile_screen/main_screen.dart';
 import 'package:movies/ui/search_screen/search_bar_item.dart';
 

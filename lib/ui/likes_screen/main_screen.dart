@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies/main/my_theme.dart';
+import 'package:movies/my_theme.dart';
 import 'package:movies/ui/likes_screen/cast_likes_screen.dart';
 import 'package:movies/ui/likes_screen/movies_likes.dart';
 import 'package:movies/ui/shared/page_route.dart';

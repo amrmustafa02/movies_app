@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/main/my_theme.dart';
+import 'package:movies/my_theme.dart';
 
 class DialogUtils {
   static void showLoadingDialog(BuildContext context) {

@@ -1,9 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/controllers/api/api_discover_manager.dart';
-import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/model/api_model/movies_details/Genre.dart';
 import 'package:movies/model/movie_genre_model.dart';
-import 'package:movies/ui/search_screen/movie_search_item.dart';
+
+import '../../model/api/api_discover_manager.dart';
 
 class DiscoverScreenViewModel extends Cubit<DiscoverScreenState> {
   DiscoverScreenViewModel() : super(DiscoverScreenLoadingState()) {

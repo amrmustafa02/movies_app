@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/controllers/api/api_discover_manager.dart';
+import 'package:movies/model/api/api_discover_manager.dart';
 import 'package:movies/ui/shared/page_route.dart';
 
 import '../../constants/api_data.dart';

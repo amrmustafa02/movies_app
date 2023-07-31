@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movies/model/firebase/auth_service.dart';
-import 'package:movies/main/my_theme.dart';
+import 'package:movies/my_theme.dart';
 import 'package:movies/ui/home/movie_screen/home_movie_screen.dart';
 import 'package:movies/ui/login_signup_screen/login_screen.dart';
 import 'package:movies/ui/login_signup_screen/switch_remeberMe.dart';

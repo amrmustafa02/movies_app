@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../main/my_theme.dart';
+import '../../my_theme.dart';
 
 class TabIndicator extends BoxDecoration {
   final BoxPainter _painter;

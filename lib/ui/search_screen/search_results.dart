@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-import '../../controllers/api/api_discover_manager.dart';
+import '../../model/api/api_discover_manager.dart';
 import '../../model/api_model/movie_item_model.dart';
 import 'movie_search_item.dart';
 

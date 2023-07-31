@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../main/my_theme.dart';
+import '../../my_theme.dart';
 
 typedef vaild = String? Function(String?);
 

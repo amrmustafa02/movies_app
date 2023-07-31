@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:movies/controllers/viewModel/likes_provider.dart';
-import 'package:movies/main/my_theme.dart';
+import 'package:movies/my_theme.dart';
 import 'package:movies/model/api_model/Movie_details_model.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/model/api_model/video_data_model.dart';

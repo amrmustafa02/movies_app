@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movies/controllers/api/api_discover_manager.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
 import 'package:movies/ui/search_screen/movie_search_item.dart';
 import 'package:movies/ui/search_screen/search_results.dart';
 
+import '../../model/api/api_discover_manager.dart';
 import '../components/no_results_found.dart';
 
 class SearchScreen extends SearchDelegate {

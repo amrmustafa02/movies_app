@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/ui/login_signup_screen/my_password_form.dart';
 
-import '../../main/my_theme.dart';
+import '../../my_theme.dart';
 
 class MyTextForm extends StatefulWidget {
   vaild validator;
