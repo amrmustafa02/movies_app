@@ -9,20 +9,11 @@ import 'package:movies/main/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  // runApp(
-  //    DevicePreview(
-  //     enabled: true,
-  //     tools: const [
-  //       ...DevicePreview.defaultTools
-  //     ],
-  //     builder: (context) => const MyApp(),
-  //   ),
-  // );
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(ChangeNotifierProvider(
       create: (BuildContext context) => LikesProvider(), child: const MyApp()));
-  // runApp(ChangeNotifier(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
