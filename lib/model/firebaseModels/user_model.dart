@@ -1,6 +1,6 @@
 import 'package:movies/model/api_model/movies_details/Cast.dart';
 
-import '../../api_model/movie_item_model.dart';
+import '../api_model/movie_item_model.dart';
 
 class UserModel {
   String? id;
@@ -8,7 +8,8 @@ class UserModel {
   List<MovieItemModel>? favouriteMovie;
   List<Cast>? favouriteCasts;
 
-  UserModel({required this.email,required this.id});
+  UserModel({required this.email, required this.id});
+
   UserModel.fromJson(var data) {
     id = data["id"];
     email = data["email"];
@@ -18,7 +19,7 @@ class UserModel {
 
   toJson() {
     return {
-      "id":id,
+      "id": id,
       "email": email,
     };
   }

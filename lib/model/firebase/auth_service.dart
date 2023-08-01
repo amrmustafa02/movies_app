@@ -3,19 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies/model/firebase/firebase_collection.dart';
-import 'package:movies/model/firebase/models/user_model.dart';
+
+import '../firebaseModels/user_model.dart';
 
 class AuthService {
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   static Future<int> signInWithFacebook() async {
     try {
-      // await FacebookAuth.instance.logOut();
       final LoginResult result = await FacebookAuth.instance.login(
         permissions: ['public_profile', 'email'],
       );
-
-      print("catttttttttttttttt1");
 
       if (result.status == LoginStatus.success) {
         // you are logged
@@ -32,7 +30,6 @@ class AuthService {
         return 1;
       }
     } catch (e) {
-      print("Wwwwwwwww ${e}");
       return 2;
     }
   }

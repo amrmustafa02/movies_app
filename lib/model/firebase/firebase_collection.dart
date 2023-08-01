@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movies/model/api_model/cast_details/CastDetailsModel.dart';
 import 'package:movies/model/api_model/movie_item_model.dart';
-import 'package:movies/model/firebase/models/user_model.dart';
+import 'package:movies/model/firebaseModels/user_model.dart';
 
 class FireBaseCollection {
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
