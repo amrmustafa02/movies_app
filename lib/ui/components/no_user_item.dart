@@ -9,11 +9,6 @@ class NoUserItem extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          "Login First",
-          style: TextStyle(color: Colors.white, fontSize: 26),
-        ),
-        const SizedBox(height: 10),
         Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
             width: MediaQuery.of(context).size.width / 2,
