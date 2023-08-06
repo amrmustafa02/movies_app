@@ -35,6 +35,7 @@ class _MainScreenState extends State<MainScreen>
     return Scaffold(
         body: BottomBar(
           barColor:Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
+          // barColor: Color(0xFF205375).withOpacity(0.5),
             borderRadius: BorderRadius.circular(500),
             hideOnScroll: true,
             scrollOpposite: false,

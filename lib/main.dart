@@ -8,14 +8,15 @@ import 'package:movies/my_theme.dart';
 import 'package:movies/ui/splash_screen.dart';
 import 'package:provider/provider.dart';
 
-Future<void> main() async {
+import 'model/firebase_options.dart';
 
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(ChangeNotifierProvider(
       create: (BuildContext context) => LikesProvider(), child: const MyApp()));
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

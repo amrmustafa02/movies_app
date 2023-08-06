@@ -16,86 +16,89 @@ class ProfileMainScreen extends StatelessWidget {
     return user == null
         ? Center(child: NoUserItem())
         : Center(
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/images/man.png",
-                  width: MediaQuery.of(context).size.width / 2,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  "${user!.email}",
-                  style: const TextStyle(color: Colors.white, fontSize: 24),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.resolveWith<Color?>(
-                                  (Set<MaterialState> states) {
-                                    //<-- SEE HERE
-                                    return Theme.of(context)
-                                        .primaryColor; // Defer to the widget's default.
-                                  },
-                                ),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15),
-                                        side: BorderSide.none))),
-                            onPressed: () async {
-                              FirebaseAuth.instance.signOut();
-                              // ignore: use_build_context_synchronously
-                              Navigator.pushAndRemoveUntil(context,
-                                 PageRouteUtils.createRoute(const SplashScreen(), 0.0, 1.0), (route) => false);
-                            },
-                            child: const Text("Logout")),
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/man.png",
+                    width: MediaQuery.of(context).size.width / 2,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "${user!.email}",
+                    style: const TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.all(8),
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color?>(
+                                    (Set<MaterialState> states) {
+                                      //<-- SEE HERE
+                                      return Theme.of(context)
+                                          .primaryColor; // Defer to the widget's default.
+                                    },
+                                  ),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          side: BorderSide.none))),
+                              onPressed: () async {
+                                FirebaseAuth.instance.signOut();
+                                // ignore: use_build_context_synchronously
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    PageRouteUtils.createRoute(
+                                        const SplashScreen(), 0.0, 1.0),
+                                    (route) => false);
+                              },
+                              child: const Text("Logout")),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.resolveWith<Color?>(
-                                  (Set<MaterialState> states) {
-                                    //<-- SEE HERE
-                                    return Theme.of(context)
-                                        .primaryColor; // Defer to the widget's default.
-                                  },
-                                ),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15),
-                                        side: BorderSide.none))),
-                            onPressed: () async {
-                              DialogUtils.showBottomSheet(
-                                  context, ChangePasswordScreen());
-                              // // ignore: use_build_context_synchronously
-                              // Navigator.pushNamedAndRemoveUntil(
-                              //     context, SplashScreen.routeName, (route) => false);
-                            },
-                            child: const Text("Forget Password")),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.all(8),
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color?>(
+                                    (Set<MaterialState> states) {
+                                      //<-- SEE HERE
+                                      return Theme.of(context)
+                                          .primaryColor; // Defer to the widget's default.
+                                    },
+                                  ),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          side: BorderSide.none))),
+                              onPressed: () async {
+                                DialogUtils.showBottomSheet(
+                                    context, ChangePasswordScreen());
+                                // // ignore: use_build_context_synchronously
+                                // Navigator.pushNamedAndRemoveUntil(
+                                //     context, SplashScreen.routeName, (route) => false);
+                              },
+                              child: const Text("Forget Password")),
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        );
+          );
   }
 }

@@ -44,7 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.asset(
@@ -260,8 +262,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (check) {
       await RememberMeCtrl.setRememberMeState(true);
       // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(
-          context, PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0));
+      Navigator.pushAndRemoveUntil(
+          context,
+          PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0),
+              (route) => false);
     } else {
       Fluttertoast.showToast(
           msg: "Some thing went wrong",
@@ -279,8 +283,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (check == 0) {
       await RememberMeCtrl.setRememberMeState(true);
       // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(
-          context, PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0));
+      Navigator.pushAndRemoveUntil(
+          context,
+          PageRouteUtils.createRoute(const MainScreen(), 1.0, 0.0),
+              (route) => false);
     } else {
       Fluttertoast.showToast(
           msg: "This email already Existing with different method",

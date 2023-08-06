@@ -212,23 +212,9 @@ class _CastDetailsScreenState extends State<CastDetailsScreen>
                                     color: Colors.white, fontSize: 24),
                               ),
                               const SizedBox(height: 5),
-                              ReadMoreText(
-                                widget.castDetailsModel.biography!,
-                                postDataTextStyle: const TextStyle(
-                                    fontSize: 16, color: Colors.grey),
-                                preDataTextStyle: const TextStyle(
-                                    fontSize: 16, color: Colors.grey),
-                                trimLines: 5,
-                                colorClickableText: Colors.red,
-                                trimMode: TrimMode.Line,
-                                trimCollapsedText: 'More',
-                                trimExpandedText: 'Less',
-                                moreStyle: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).primaryColor),
-                                style: const TextStyle(
-                                    fontSize: 16, color: Colors.grey),
-                              ),
+                              Text(widget.castDetailsModel.biography!,style:const TextStyle(
+                                  fontSize: 16, color: Colors.grey) ,),
+
                             ],
                           ),
                         )
