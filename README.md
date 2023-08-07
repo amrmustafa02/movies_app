@@ -12,11 +12,11 @@ A Flutter app to show trending, popular,top rated movies and them information
 <img src="https://github.com/amrmustafa02/movies_app/assets/78182930/d3024acf-da89-4a6a-9493-a6d8ca2ccd56" width="300">
 <img src="https://github.com/amrmustafa02/movies_app/assets/78182930/1cfccb8d-9ae6-4aca-9954-cf25c809186f" width="300">
 <img src="https://github.com/amrmustafa02/movies_app/assets/78182930/1dc47587-e99d-485c-9b6d-e6429aac7893" width="300">
-<img src="https://github.com/amrmustafa02/movies_app/assets/78182930/912948ad-da90-47e3-967d-eb5bd9d2a2d2" width="300">
-<img src="https://github.com/amrmustafa02/movies_app/assets/78182930/4c01d27f-34df-4e25-9cb8-b628a288219e" width="300">
+<img src="https://github.com/amrmustafa02/movies_app/assets/78182930/07819109-295b-4987-8b6e-9e2883dd4308" width="300">
+<img src="https://github.com/amrmustafa02/movies_app/assets/78182930/2fdb1d57-b8cb-4e31-a9dc-bbf2c809b39f" width="300">
+<img src="https://github.com/amrmustafa02/movies_app/assets/78182930/e3e1b2b1-ddfe-49f9-9912-704075855fca" width="300">
 
 ## Demo
-
 https://www.linkedin.com/posts/amr-mustafa-58a80320b_flutter-github-mobileapp-activity-7091641142085062656-sA_m?utm_source=share&utm_medium=member_desktop
 
 
