@@ -1,6 +1,6 @@
 
 # Moviecoo ♥️♥️
-A Flutter app to show trending, popular,top rated movies and them information
+A Flutter app to show trending, popular,top rated movies and their information
 
 <img src="https://github.com/amrmustafa02/movies_app/assets/78182930/ccd767d8-28e9-4071-a4ab-92fdd0bbdc8b" width="300">
 
