@@ -21,7 +21,7 @@ https://www.linkedin.com/posts/amr-mustafa-58a80320b_flutter-github-mobileapp-ac
 
 
 ## Features
-
+- Can sign in with google account ,facebook account and email & password
 - Show trending movies
 - Show movie details
 - Show videos for movies 
@@ -29,14 +29,19 @@ https://www.linkedin.com/posts/amr-mustafa-58a80320b_flutter-github-mobileapp-ac
 - Can add moview to your favourite list
 - Show actor details
 - Can search on any movie
-   
+  
+## About project
+- Using firebase as database
+- Applying MVVM archticture pattern
+- Using bloc as statemanagment
+- Using http package to call API 
 
 
 ## 🚀 About Me
 Hi, 👋👋 I’m Amr Mustafa, Flutter developer with +1 year of experience. I have completed many projects that prove my ability to provide creative and high-quality solutions."
 
 
-## 🔗 Links
+## Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://amr-mustafa-mysite.vercel.app/#/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/amr-mustafa-58a80320b/)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/amrmust33458502)
