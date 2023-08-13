@@ -25,7 +25,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+      builder: (context, child) {
+        final mediaQueryData = MediaQuery.of(context);
+        final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.0);
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+            child: child!);
+      },
+      initialRoute:  SplashScreen.routeName,
       theme: MyTheme.myTheme,
       debugShowCheckedModeBanner: false,
       routes: {
@@ -33,7 +40,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => const SplashScreen(),
         MainScreen.routeName: (context) => const MainScreen(),
       },
-      initialRoute: SplashScreen.routeName,
+      // initialRoute: SplashScreen.routeName,
     );
   }
 }

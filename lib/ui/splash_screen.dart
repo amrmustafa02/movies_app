@@ -39,7 +39,7 @@ class SplashScreen extends StatelessWidget {
               Text(
                 "Moviecoo",
                 style: TextStyle(
-                    fontFamily: 'Romanesco', color: Colors.white, fontSize: 96),
+                    fontFamily: 'Romanesco', color: Colors.white, fontSize: 70),
               )
             ],
           ),

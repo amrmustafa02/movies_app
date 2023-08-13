@@ -50,6 +50,7 @@ class AuthService {
           UserModel(email: user.user!.email, id: user.user!.uid));
       return true;
     } catch (error) {
+      print(error.toString());
       return false;
     }
   }

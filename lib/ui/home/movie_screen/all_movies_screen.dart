@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:movies/constants/api_data.dart';
 import 'package:movies/model/api/api_movie_manager.dart';
 import 'package:movies/ui/components/movie_item.dart';
+import 'package:movies/ui/components/network_image.dart';
 
 import '../../../model/api_model/movie_item_model.dart';
+import '../../movie_details_screen/main_screen.dart';
+import '../../shared/page_route.dart';
 
 // ignore: must_be_immutable
 class AllMoviesScreen extends StatefulWidget {
@@ -40,28 +44,40 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              refresh();
-            },
-            backgroundColor: Theme.of(context).primaryColor,
-            child: iconLoad),
-        appBar: AppBar(
-          leading: TextButton(
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).primaryColor,
+    return NotificationListener<ScrollNotification>(
+      onNotification: (scrollNotification) {
+        if (scrollNotification.metrics.pixels ==
+            scrollNotification.metrics.maxScrollExtent) {
+          refresh();
+          setState(() {});
+        }
+        return false;
+      },
+      child: Scaffold(
+          // floatingActionButton: FloatingActionButton(
+          //     onPressed: () {
+          //       refresh();
+          //     },
+          //     backgroundColor: Theme
+          //         .of(context)
+          //         .primaryColor,
+          //     child: iconLoad),
+          appBar: AppBar(
+            leading: TextButton(
+              child: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: Theme.of(context).primaryColor,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            title: Text(widget.type),
           ),
-          title: Text(widget.type),
-        ),
-        body: SafeArea(
-          child: getBody(),
-        ));
+          body: SafeArea(
+            child: getBody(),
+          )),
+    );
   }
 
   getBody() {
@@ -71,11 +87,31 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemCount: widget.movies.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: constraints.maxWidth < 250 ? 1 : 2,
-              childAspectRatio: 0.6),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 16,
+              childAspectRatio: 0.8),
           itemBuilder: (context, index) {
-            return MovieItem(movieItemModel: widget.movies[index]);
+            return Container(
+              margin: const EdgeInsets.all(8),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageRouteUtils.createRoute(
+                          MovieDetailsMainScreen(
+                              movieId: widget.movies[index].id),
+                          1.0,
+                          0.0));
+                },
+                child: MyNetworkImage(
+                    width: MediaQuery.of(context).size.width,
+                    imageUrl: ApiData.midImageSizeUrl +
+                        (widget.movies[index].posterPath ?? ""),
+                    height: MediaQuery.of(context).size.width),
+              ),
+            );
           },
         );
       },
@@ -83,21 +119,20 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
   }
 
   refresh() async {
-    iconLoad =
-        LoadingAnimationWidget.halfTriangleDot(color: Colors.white, size: 25);
     setState(() {});
 
     await loadMoreItems();
     await Future.delayed(const Duration(seconds: 1));
-    iconLoad = const Icon(Icons.refresh_rounded);
+
     setState(() {});
   }
 
   Future<void> loadMoreItems() async {
     widget.page++;
 
-    List<MovieItemModel> moreMovies =
-        await ApiMovieManager.getMoviesByType(widget.apiType, page: widget.page);
+    List<MovieItemModel> moreMovies = await ApiMovieManager.getMoviesByType(
+        widget.apiType,
+        page: widget.page);
     widget.movies.addAll(moreMovies);
   }
 }

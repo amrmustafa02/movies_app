@@ -33,7 +33,6 @@ class _BodyOfGenreState extends State<BodyOfGenre> {
         return false;
       },
       child: GridView.builder(
-
         itemBuilder: (context, index) {
           return Container(
             margin: const EdgeInsets.all(8),
@@ -56,11 +55,10 @@ class _BodyOfGenreState extends State<BodyOfGenre> {
             ),
           );
         },
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 0.8, crossAxisCount: 2),
         itemCount: widget.movieItemModels.length,
-        shrinkWrap: true
-        ,
+        shrinkWrap: true,
       ),
     );
   }
