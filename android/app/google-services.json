@@ -7,14 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:881051501862:android:19462a170e30087cb8ade7",
+        "mobilesdk_app_id": "1:881051501862:android:5ed9fc71833a0cc4b8ade7",
         "android_client_info": {
-          "package_name": "com.example.movies"
+          "package_name": "com.moviecoo.movies"
         }
       },
       "oauth_client": [
         {
-          "client_id": "881051501862-8qoem4fegqi6fgbn998pr6fiqgolbsjh.apps.googleusercontent.com",
+          "client_id": "881051501862-99g8q5pojlh7hq05leb0er52flc9rknn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moviecoo.movies",
+            "certificate_hash": "a26b2ece42e207d7f3fb8c7e8cb29133c097790d"
+          }
+        },
+        {
+          "client_id": "881051501862-9rhg2lk4e538ftvgqrg7c6f0fmop8p3g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
